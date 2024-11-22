@@ -3,7 +3,7 @@ const products = [
   {
     id: '1',
     name: 'Bellagio 3 seater sofa',
-    price: '89,950,000 ₫',
+    price: '89,950,000',
     type: 'Sofa',
     color: [
       {
@@ -22,7 +22,7 @@ const products = [
   {
     id: '2',
     name: 'Amsterdam corner sofa',
-    price: '182,490,000 ₫',
+    price: '182,490,000',
     type: 'Sofa',
     color: [
       {
@@ -41,7 +41,7 @@ const products = [
   {
     id: '3',
     name: 'Salamanca corner sofa',
-    price: '188,600,000 ₫',
+    price: '188,600,000',
     type: 'Sofa',
     color: [
       {
@@ -60,7 +60,7 @@ const products = [
   {
     id: '4',
     name: 'Southampton 2,5 seater sofa',
-    price: '141,140,000 ₫',
+    price: '141,140,000',
     type: 'Sofa',
     color: [
       {
@@ -74,7 +74,7 @@ const products = [
   {
     id: '5',
     name: 'Carmo corner sofa',
-    price: '94,490,000 ₫',
+    price: '94,490,000',
     type: 'Sofa',
     color: [
       {
@@ -360,6 +360,88 @@ const products = [
       }
     ],
     detail: 'Grounded in principles of simplicity and craftsmanship, Seoul’s clean lines and understated elegance pay homage to the timeless design traditions that have defined Danish design for generations – yet with a modern and contemporary touch. With its A-frame-style shape, short armrests and angled legs, it invites you to sit back and dine in comfort.',
+  },
+
+  // Storage products
+  {
+    id: '21',
+    name: 'Lund glass cabinet',
+    price: '46,911,500',
+    type: 'Storage',
+    color: [
+      {
+        color_id: '1',
+        color_name: 'brown',
+        picture: require('../productPicture/lund_glass_cabinet.jpg')
+      }
+    ],
+    detail: 'A new interpretation of a classic, the Lund cabinet is a contemporary yet timeless storage solution with a light, airy and personal expression. Designed by Morten Georgsen, this elegant design allows you to showcase your favourite books, ornaments or more in an organised and exclusive manner.',
+  },
+  {
+    id: '22',
+    name: 'Fermo sideboard',
+    price: '33,056,500',
+    type: 'Storage',
+    color: [
+      {
+        color_id: '1',
+        color_name: 'beige',
+        picture: require('../productPicture/fermo_sideboard.jpg')
+      }
+    ],
+    detail: 'Let Fermo work its magic. Watch as the clean lines and minimalist look of the Fermo extend to your entire home, when your clutter is neatly hidden away. Whether you\'re watching the game, listening to music or showing your holiday photos, this TV unit will hide your electronics seamlessly, so you can concentrate on being entertained.',
+  },
+  {
+    id: '23',
+    name: 'Bordeaux console table',
+    price: '14,951,500',
+    type: 'Storage',
+    color: [
+      {
+        color_id: '1',
+        color_name: 'black',
+        picture: require('../productPicture/bordeaux_console_table.jpg')
+      }
+    ],
+    detail: 'The Bordeaux console table - simple, minimalist design with a twist. Characterised by clean lines and a light structure, Bordeaux makes functionality and flexibility a thing of beauty. Utilise the space in your hallway with this console table, place it behind your sofa or let it store your books, papers and devices in your home office.',
+  },
+  {
+    id: '24',
+    name: 'Lugano sideboard',
+    price: '52,181,500',
+    type: 'Storage',
+    color: [
+      {
+        color_id: '1',
+        color_name: 'brown',
+        picture: require('../productPicture/lugano_sideboard_brown.jpg')
+      },
+      {
+        color_id: '2',
+        color_name: 'white',
+        picture: require('../productPicture/lugano_sideboard_white.jpg')
+      }
+    ],
+    detail: 'Looking sleek, elegant and exclusive, Lugano will solve all your storage needs without breaking a sweat. Low, classy and with great functionality, this stylish sideboard will bring a luxurious look to your home.',
+  },
+  {
+    id: '25',
+    name: 'Bordeaux wall system',
+    price: '15,291,500',
+    type: 'Storage',
+    color: [
+      {
+        color_id: '1',
+        color_name: 'dimgrey',
+        picture: require('../productPicture/bordeaux_wall_system_grey.jpg')
+      },
+      {
+        color_id: '2',
+        color_name: 'floralwhite',
+        picture: require('../productPicture/bordeaux_wall_system_white.jpg')
+      }
+    ],
+    detail: 'Characterised by clean lines and a light structure, Bordeaux makes functionality and flexibility a thing of beauty.',
   }
 ];
 
