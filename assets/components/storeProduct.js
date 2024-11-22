@@ -1,37 +1,63 @@
 const products = [
   // Sofa products
   {
-    id: '1',
+    id: 1,
     name: 'Bellagio 3 seater sofa',
     price: '89,950,000',
     type: 'Sofa',
     color: [
       {
-        color_id: '1',
+        color_id: 1,
         color_name: 'brown',
         picture: require('../productPicture/bellagio_brown.jpg')
       },
       {
-        color_id: '2',
+        color_id: 2,
         color_name: 'green',
         picture: require('../productPicture/bellagio_green.jpg')
       }
     ],
     detail: 'The Bellagio 3-seater sofa is a statement piece that commands attention – compelling you to sit and experience its comfort. With its low-back design, clean lines and minimalist aesthetic, this modern sofa offers a tactile experience like no other.',
+    comment: [
+      {
+        reviewId: 1,
+        profilePic: 'https://media.wired.com/photos/598e35fb99d76447c4eb1f28/master/pass/phonepicutres-TA.jpg',
+        rating: 4,
+        userName: 'John Doe',
+        date: '30 May, 2022',
+        reviewDetail: 'Great product! Really enjoyed using it.',
+      },
+      {
+        reviewId: 2,
+        profilePic: 'https://png.pngtree.com/thumb_back/fw800/background/20230817/pngtree-lotus-flower-jpg-pink-lotus-flower-image_13023952.jpg',
+        rating: 5,
+        userName: 'Jane Smith',
+        date: '18 Nov, 2022',
+        reviewDetail: 'Absolutely loved it! Highly recommend.',
+      },
+      {
+        reviewId: 3,
+        profilePic: 'https://png.pngtree.com/thumb_back/fh260/background/20230519/pngtree-landscape-jpg-wallpapers-free-download-image_2573540.jpg',
+        rating: 4,
+        userName: 'Mike Johnson',
+        date: '17 Nov, 2022',
+        reviewDetail: 'It was okay, could be better.',
+      },
+    ]
   },
   {
-    id: '2',
+    id: 2,
     name: 'Amsterdam corner sofa',
     price: '182,490,000',
     type: 'Sofa',
     color: [
       {
-        color_id: '1',
+        color_id: 1,
         color_name: 'green',
         picture: require('../productPicture/amsterdam_green.jpg')
       },
       {
-        color_id: '2',
+        color_id: 2,
         color_name: 'blue',
         picture: require('../productPicture/amsterdam_blue.jpg')
       }
@@ -39,18 +65,18 @@ const products = [
     detail: 'The Amsterdam 3 seater sofa is your choice for the perfect, luxurious sofa statement.',
   },
   {
-    id: '3',
+    id: 3,
     name: 'Salamanca corner sofa',
     price: '188,600,000',
     type: 'Sofa',
     color: [
       {
-        color_id: '1',
+        color_id: 1,
         color_name: 'tan',
         picture: require('../productPicture/salamanca_sand.jpg')
       },
       {
-        color_id: '2',
+        color_id: 2,
         color_name: 'dimgrey',
         picture: require('../productPicture/salamanca_grey.jpg')
       }
@@ -58,13 +84,13 @@ const products = [
     detail: 'Embrace the art of lounging with Salamanca. A low \'floating\' sofa with a 1970s bohemian feel, this family lounge style is crafted with oversized proportions for serious comfort. Designed by Henrik Pedersen, it’s complete with super soft foam seats for great depth and moveable back cushions for modern flexibility. Available as a modular and freestanding design, add a sense of warmth to your living room with Salamanca.',
   },
   {
-    id: '4',
+    id: 4,
     name: 'Southampton 2,5 seater sofa',
     price: '141,140,000',
     type: 'Sofa',
     color: [
       {
-        color_id: '1',
+        color_id: 1,
         color_name: 'white',
         picture: require('../productPicture/southampton_white.jpg')
       }
@@ -72,23 +98,23 @@ const products = [
     detail: 'The Southampton 2.5-seater sofa bed is the ultimate spot for relaxation and recreation, effortlessly combining esthetics and function to ensure that your guests feel at home. In addition to its modern quilted look and convenient storage provision, it features a small fabric skirt that hides the mechanism, for a flawless finish.',
   },
   {
-    id: '5',
+    id: 5,
     name: 'Carmo corner sofa',
     price: '94,490,000',
     type: 'Sofa',
     color: [
       {
-        color_id: '1',
+        color_id: 1,
         color_name: 'lightskyblue',
         picture: require('../productPicture/carmo_blue.jpg')
       },
       {
-        color_id: '2',
+        color_id: 2,
         color_name: 'saddlebrown',
         picture: require('../productPicture/carmo_brown.jpg')
       },
       {
-        color_id: '3',
+        color_id: 3,
         color_name: 'darkblue',
         picture: require('../productPicture/carmo_dblue.jpg')
       }
@@ -98,18 +124,18 @@ const products = [
 
   // Bed products
   {
-    id: '6',
+    id: 6,
     name: 'Lugano bed',
     price: '25,590,000',
     type: 'Bed',
     color: [
       {
-        color_id: '1',
+        color_id: 1,
         color_name: 'white',
         picture: require('../productPicture/lugano_white.jpg')
       },
       {
-        color_id: '2',
+        color_id: 2,
         color_name: 'grey',
         picture: require('../productPicture/lugano_grey.jpg')
       }
@@ -117,13 +143,13 @@ const products = [
     detail: 'Let your body sink down and feel relaxation wash over you. Sleep like an angel in the elegant Lugano bed. Keeping a minimalist look with a clean wooden frame, this modern bed will bring a sense of calm and serenity to your bedroom.',
   },
   {
-    id: '7',
+    id: 7,
     name: 'Lugano storage bed',
     price: '38,490,000',
     type: 'Bed',
     color: [
       {
-        color_id: '1',
+        color_id: 1,
         color_name: 'white',
         picture: require('../productPicture/lugano_storage_white.jpg')
       }
@@ -131,23 +157,23 @@ const products = [
     detail: 'Let your body sink down and feel relaxation wash over you. Sleep like an angel in the elegant Lugano bed. Keeping a minimalist look with a clean wooden frame, this modern bed will bring a sense of calm and serenity to your bedroom.',
   },
   {
-    id: '8',
+    id: 8,
     name: 'Arlington bed',
     price: '34,990,000',
     type: 'Bed',
     color: [
       {
-        color_id: '1',
+        color_id: 1,
         color_name: 'saddlebrown',
         picture: require('../productPicture/arlington_bed_brown.jpg')
       },
       {
-        color_id: '2',
+        color_id: 2,
         color_name: 'lightgrey',
         picture: require('../productPicture/arlington_bed_grey.jpg')
       },
       {
-        color_id: '3',
+        color_id: 3,
         color_name: 'black',
         picture: require('../productPicture/arlington_bed_black.jpg')
       }
@@ -155,13 +181,13 @@ const products = [
     detail: 'Great support when sitting against the headboard and a soft landing make the Arlington bed an amazing addition to the bedroom. Just like the extension of a pillow, the soft headboard invites you in for a good night sleep.',
   },
   {
-    id: '9',
+    id: 9,
     name: 'Fusion day bed',
     price: '25,000,000',
     type: 'Bed',
     color: [
       {
-        color_id: '1',
+        color_id: 1,
         color_name: 'white',
         picture: require('../productPicture/fusionday_white.jpg')
       }
@@ -169,18 +195,18 @@ const products = [
     detail: 'The fusion daybed is a beautiful and iconic piece of design furniture, mixing Japanese aesthetics with Danish functionality. The loose pillows can be arranged freely, giving you the opportunity to change the look according to usage situation, while slim legs and clean lines keep the style light.',
   },
   {
-    id: '10',
+    id: 10,
     name: 'Austin bed',
     price: '56,030,000',
     type: 'Bed',
     color: [
       {
-        color_id: '1',
+        color_id: 1,
         color_name: 'indianred',
         picture: require('../productPicture/austin_bed_red.jpg')
       },
       {
-        color_id: '2',
+        color_id: 2,
         color_name: 'goldenrod',
         picture: require('../productPicture/austin_bed_gold.jpg')
       }
@@ -190,13 +216,13 @@ const products = [
 
   // Table products
   {
-    id: '11',
+    id: 11,
     name: 'Ottawa table',
     price: '75,490,000',
     type: 'Table',
     color: [
       {
-        color_id: '1',
+        color_id: 1,
         color_name: 'saddlebrown',
         picture: require('../productPicture/ottawa_brown.jpg')
       }
@@ -204,244 +230,162 @@ const products = [
     detail: 'Defined by smooth, rounded edges and a sensual minimalism, the Ottawa dining table creates a serene atmosphere in your dining room. Unique, twig-like legs inspired by nature accentuates the natural beauty of the oval Ottawa dining table. Need extra seats? Just pull out the clever, built-in extension leaf and go from a 4-person family meal to a dinner party seating 14.',
   },
   {
-    id: '12',
-    name: 'Lugo coffee table',
-    price: '29,590,000',
+    id: 12,
+    name: 'Kingston table',
+    price: '36,990,000',
     type: 'Table',
     color: [
       {
-        color_id: '1',
-        color_name: 'bisque',
-        picture: require('../productPicture/lugo_beige.jpg')
+        color_id: 1,
+        color_name: 'brown',
+        picture: require('../productPicture/kingston_table_brown.jpg')
       },
       {
-        color_id: '2',
-        color_name: 'silver',
-        picture: require('../productPicture/lugo_silver.jpg')
-      }
-    ],
-    detail: 'Versatile minimalism that perfectly blends into your living room. The Lugo coffee table’s light look and clean lines will bring a timeless sophistication to your home for years to come. Place the square coffee table alone to accentuate the minimalist style or arrange it above the rectangular Lugo for a dynamic look and extra table space.',
-  },
-  {
-    id: '13',
-    name: 'Billund round table',
-    price: '26,490,000',
-    type: 'Table',
-    color: [
-      {
-        color_id: '1',
-        color_name: 'white',
-        picture: require('../productPicture/billund_white.jpg')
-      }
-    ],
-    detail: 'Billund is design and function coming together in a perfect expression of Scandinavian design. The tabletop makes the table adaptable to your exact needs. Have it down for an intimate meal for two or flip it up and have room for four or five around the table.',
-  },
-  {
-    id: '14',
-    name: 'Fiorentina extendable table',
-    price: '92,690,000',
-    type: 'Table',
-    color: [
-      {
-        color_id: '1',
-        color_name: 'dimgrey',
-        picture: require('../productPicture/fiorentina_grey.jpg')
-      },
-      {
-        color_id: '2',
-        color_name: 'floralwhite',
-        picture: require('../productPicture/fiorentina_white.jpg')
-      }
-    ],
-    detail: 'Take your dining experience to new heights with the sculptural beauty of Fiorentina. The simple, yet expressive base ensures a stunning aesthetic that underlines the stylishness and functionality of the tabletop.',
-  },
-  {
-    id: '15',
-    name: 'Augusta extendable table',
-    price: '118,900,000',
-    type: 'Table',
-    color: [
-      {
-        color_id: '1',
-        color_name: 'black',
-        picture: require('../productPicture/augusta_black.jpg')
-      },
-      {
-        color_id: '2',
+        color_id: 2,
         color_name: 'saddlebrown',
-        picture: require('../productPicture/augusta_brown.jpg')
+        picture: require('../productPicture/kingston_table_sbrown.jpg')
       },
       {
-        color_id: '3',
-        color_name: 'silver',
-        picture: require('../productPicture/augusta_silver.jpg')
+        color_id: 3,
+        color_name: 'lightgrey',
+        picture: require('../productPicture/kingston_table_grey.jpg')
       }
     ],
-    detail: 'The Augusta dining table presents a clear and undisguised play with shapes. The visible construction adds an air of lightness to the exclusive dining table with room for all. Extend it and enjoy a great evening with all your loved ones.',
+    detail: 'A minimalistic look with maximum seating options. The Kingston table has an elegant expression that will be an eye-catcher in your dining room. The slender, conical legs add a playful look while ensuring ample legroom for your guests.',
+  },
+  {
+    id: 13,
+    name: 'Milano table',
+    price: '33,990,000',
+    type: 'Table',
+    color: [
+      {
+        color_id: 1,
+        color_name: 'saddlebrown',
+        picture: require('../productPicture/milano_brown.jpg')
+      }
+    ],
+    detail: 'The soft, curved lines of the Milano table are an elegant and modern interpretation of Scandinavian design. This table will instantly add character to your dining space and make any meal an experience. Thanks to the integrated extension leaf, you’ll have room for a few extra guests whenever you need.',
+  },
+  {
+    id: 14,
+    name: 'Bristol table',
+    price: '15,990,000',
+    type: 'Table',
+    color: [
+      {
+        color_id: 1,
+        color_name: 'black',
+        picture: require('../productPicture/bristol_table_black.jpg')
+      },
+      {
+        color_id: 2,
+        color_name: 'brown',
+        picture: require('../productPicture/bristol_table_brown.jpg')
+      }
+    ],
+    detail: 'With its simple design and beautiful smooth finish, the Bristol table will quickly become the heart of your dining room. The visible structure of the wood offers a natural feel and adds character to your dining area. The option to extend the table makes it both practical and stylish.',
+  },
+  {
+    id: 15,
+    name: 'Lisbon table',
+    price: '10,000,000',
+    type: 'Table',
+    color: [
+      {
+        color_id: 1,
+        color_name: 'lightgrey',
+        picture: require('../productPicture/lisbon_table_grey.jpg')
+      }
+    ],
+    detail: 'Bring family and friends together around the Lisbon table. The unique conical legs add a modern feel and ensure plenty of legroom for everyone. With its slender proportions, this table is ideal for those who love the clean lines of Nordic design and the intimacy of a cosy meal.',
   },
 
   // Chair products
   {
-    id: '16',
-    name: 'Hamilton dining chair',
-    price: '4,751,500',
+    id: 16,
+    name: 'Adelaide chair',
+    price: '9,990,000',
     type: 'Chair',
     color: [
       {
-        color_id: '1',
+        color_id: 1,
         color_name: 'black',
-        picture: require('../productPicture/hamilton_dining_chair_black.jpg')
+        picture: require('../productPicture/adelaide_black.jpg')
+      },
+      {
+        color_id: 2,
+        color_name: 'saddlebrown',
+        picture: require('../productPicture/adelaide_brown.jpg')
       }
     ],
-    detail: 'Classic meets contemporary in the Hamilton dining chair. Designed by Morten Georgsen, organic shapes offer cocooning comfort while a slim waist offers flexible sitting comfort. Enjoy the character of Hamilton and make a statement in your dining room.',
+    detail: 'The iconic Adelaide chair offers exquisite comfort and style. The graceful lines and organic curves are combined with a unique swivel base, giving it a contemporary edge. The fully upholstered seat adds a touch of luxury and is available in a wide range of beautiful colours to match your personal style.',
   },
   {
-    id: '17',
-    name: 'Ottawa chair',
-    price: '5,601,500',
+    id: 17,
+    name: 'Vienna chair',
+    price: '9,990,000',
     type: 'Chair',
     color: [
       {
-        color_id: '1',
+        color_id: 1,
         color_name: 'black',
-        picture: require('../productPicture/ottawa_chair_black.jpg')
+        picture: require('../productPicture/vienna_black.jpg')
       }
     ],
-    detail: 'Visibly inspired by nature with its leaf-shape and curved design, the Ottawa dining chair is truly a unique piece of design furniture. Once you are seated, you will discover that the Ottawa chair is not only characteristic in looks, but also in comfort. The twig-like legs on Ottawa add to the organic chair design, completing its unique look. At the same time, the sculptured seat without upholstery highlights the clean lines and minimal form.',
+    detail: 'The Vienna chair is a modern take on a classic design. Its elegant and simple lines make it a versatile piece that fits perfectly in any dining area. The comfortable seat and backrest are upholstered in high-quality fabric, available in various colours to suit your interior.',
   },
   {
-    id: '18',
-    name: 'Hauge dining chair',
-    price: '6,366,500',
+    id: 18,
+    name: 'Oslo chair',
+    price: '9,990,000',
     type: 'Chair',
     color: [
       {
-        color_id: '1',
+        color_id: 1,
+        color_name: 'black',
+        picture: require('../productPicture/oslo_black.jpg')
+      },
+      {
+        color_id: 2,
         color_name: 'white',
-        picture: require('../productPicture/hauge_dining_chair_white.jpg')
+        picture: require('../productPicture/oslo_white.jpg')
       }
     ],
-    detail: 'Designed to stand with the Hauge dining table as part of a matching set, the Hague dining chair is an elegant, timeless expression. With a soft, organic form, this contemporary yet comfortable chair seamlessly blends into any space.'
+    detail: 'The Oslo chair combines contemporary design with ultimate comfort. Its sleek lines and smooth curves create a stylish look, while the ergonomic design ensures maximum support. Available in various colours, the Oslo chair will be a striking addition to any dining room.',
   },
   {
-    id: '19',
-    name: 'Princeton chair',
-    price: '8,049,500',
+    id: 19,
+    name: 'Athens chair',
+    price: '9,990,000',
     type: 'Chair',
     color: [
       {
-        color_id: '1',
-        color_name: 'beige',
-        picture: require('../productPicture/princeton_chair_beige.jpg')
-      },
-      {
-        color_id: '2',
-        color_name: 'maroon',
-        picture: require('../productPicture/princeton_chair_maroon.jpg')
+        color_id: 1,
+        color_name: 'saddlebrown',
+        picture: require('../productPicture/athens_brown.jpg')
       }
     ],
-    detail: 'Elegance and comfort beautifully combine in the Princeton chair. The visual appeal of the chair invites you to explore how every curve adds both comfort and looks. Enjoy the elegant embrace of Princeton and add a feminine, exquisite touch to your dining space.',
+    detail: 'Inspired by classic designs, the Athens chair features clean lines and a timeless aesthetic. Its solid construction and comfortable seating make it a perfect choice for any dining area. The high-quality upholstery is available in a range of colours to complement your décor.',
   },
   {
-    id: '20',
-    name: 'Seoul dining chair',
-    price: '17,501,500',
+    id: 20,
+    name: 'Berlin chair',
+    price: '9,990,000',
     type: 'Chair',
     color: [
       {
-        color_id: '1',
-        color_name: 'darkblue',
-        picture: require('../productPicture/seoul_dining_chair_blue.jpg')
-      },
-      {
-        color_id: '2',
-        color_name: 'darkolivegreen',
-        picture: require('../productPicture/seoul_dining_chair_green.jpg')
-      }
-    ],
-    detail: 'Grounded in principles of simplicity and craftsmanship, Seoul’s clean lines and understated elegance pay homage to the timeless design traditions that have defined Danish design for generations – yet with a modern and contemporary touch. With its A-frame-style shape, short armrests and angled legs, it invites you to sit back and dine in comfort.',
-  },
-
-  // Storage products
-  {
-    id: '21',
-    name: 'Lund glass cabinet',
-    price: '46,911,500',
-    type: 'Storage',
-    color: [
-      {
-        color_id: '1',
-        color_name: 'brown',
-        picture: require('../productPicture/lund_glass_cabinet.jpg')
-      }
-    ],
-    detail: 'A new interpretation of a classic, the Lund cabinet is a contemporary yet timeless storage solution with a light, airy and personal expression. Designed by Morten Georgsen, this elegant design allows you to showcase your favourite books, ornaments or more in an organised and exclusive manner.',
-  },
-  {
-    id: '22',
-    name: 'Fermo sideboard',
-    price: '33,056,500',
-    type: 'Storage',
-    color: [
-      {
-        color_id: '1',
-        color_name: 'beige',
-        picture: require('../productPicture/fermo_sideboard.jpg')
-      }
-    ],
-    detail: 'Let Fermo work its magic. Watch as the clean lines and minimalist look of the Fermo extend to your entire home, when your clutter is neatly hidden away. Whether you\'re watching the game, listening to music or showing your holiday photos, this TV unit will hide your electronics seamlessly, so you can concentrate on being entertained.',
-  },
-  {
-    id: '23',
-    name: 'Bordeaux console table',
-    price: '14,951,500',
-    type: 'Storage',
-    color: [
-      {
-        color_id: '1',
+        color_id: 1,
         color_name: 'black',
-        picture: require('../productPicture/bordeaux_console_table.jpg')
-      }
-    ],
-    detail: 'The Bordeaux console table - simple, minimalist design with a twist. Characterised by clean lines and a light structure, Bordeaux makes functionality and flexibility a thing of beauty. Utilise the space in your hallway with this console table, place it behind your sofa or let it store your books, papers and devices in your home office.',
-  },
-  {
-    id: '24',
-    name: 'Lugano sideboard',
-    price: '52,181,500',
-    type: 'Storage',
-    color: [
-      {
-        color_id: '1',
-        color_name: 'brown',
-        picture: require('../productPicture/lugano_sideboard_brown.jpg')
+        picture: require('../productPicture/berlin_black.jpg')
       },
       {
-        color_id: '2',
-        color_name: 'white',
-        picture: require('../productPicture/lugano_sideboard_white.jpg')
+        color_id: 2,
+        color_name: 'grey',
+        picture: require('../productPicture/berlin_grey.jpg')
       }
     ],
-    detail: 'Looking sleek, elegant and exclusive, Lugano will solve all your storage needs without breaking a sweat. Low, classy and with great functionality, this stylish sideboard will bring a luxurious look to your home.',
-  },
-  {
-    id: '25',
-    name: 'Bordeaux wall system',
-    price: '15,291,500',
-    type: 'Storage',
-    color: [
-      {
-        color_id: '1',
-        color_name: 'dimgrey',
-        picture: require('../productPicture/bordeaux_wall_system_grey.jpg')
-      },
-      {
-        color_id: '2',
-        color_name: 'floralwhite',
-        picture: require('../productPicture/bordeaux_wall_system_white.jpg')
-      }
-    ],
-    detail: 'Characterised by clean lines and a light structure, Bordeaux makes functionality and flexibility a thing of beauty.',
+    detail: 'The Berlin chair is a blend of modern elegance and superior comfort. Its sleek design and high-quality materials make it a standout piece in any dining room. Choose from a variety of colours to match your personal style and create a cohesive look in your space.',
   }
 ];
 
