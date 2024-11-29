@@ -95,7 +95,7 @@ const reviewScreen = () => {
   );
 }
 
-export default reviewScreen;
+export default ReviewScreen;
 
 const styles = StyleSheet.create({
   container: {
