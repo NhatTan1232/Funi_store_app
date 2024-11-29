@@ -3,7 +3,7 @@ import { Image, StyleSheet, Text, View, TouchableOpacity, ScrollView } from 'rea
 import Icon from 'react-native-vector-icons/Ionicons';
 import { RadioButton } from 'react-native-paper';
 
-const paymentScreen = () => {
+const PaymentScreen = () => {
   const [checked, setChecked] = useState('cod');
 
   return (
