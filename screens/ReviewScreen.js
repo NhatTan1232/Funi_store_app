@@ -26,7 +26,7 @@ const reviews = [
   },
 ];
 
-const reviewScreen = () => {
+const ReviewScreen = () => {
   const renderReviewBars = (stars, percentage) => (
     <View style={styles.reviewRow}>
       <Text style={styles.starText}>{stars} star</Text>
