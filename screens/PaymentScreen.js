@@ -108,7 +108,7 @@ const paymentScreen = () => {
   );
 }
 
-export default paymentScreen;
+export default PaymentScreen;
 
 const styles = StyleSheet.create({
   container: {
