@@ -1,9 +1,11 @@
 import { StyleSheet, Text, TextInput, View, Image, FlatList, TouchableOpacity } from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
 import { useState, useEffect } from 'react';
-import products from './assets/components/storeProduct';
+import { useNavigation } from '@react-navigation/native';  
+import products from '../assets/components/storeProduct';
 
-const cartScreen = () => {
+const CartScreen = () => {
+  const navigation = useNavigation();  
   const [cart, setCart] = useState(products);
   const [subtotal, setSubtotal] = useState(0);
   const [quantities, setQuantities] = useState(products.reduce((acc, item) => ({ ...acc, [item.id]: 1 }), {}));
@@ -32,6 +34,10 @@ const cartScreen = () => {
     const newQuantities = { ...quantities };
     delete newQuantities[id];
     setQuantities(newQuantities);
+  };
+
+  const handleProceedToCheckout = () => {
+    navigation.navigate('PaymentScreen');  
   };
 
   const renderCartItem = ({ item }) => (
@@ -70,7 +76,7 @@ const cartScreen = () => {
         <Text style={styles.subtotalText}>Subtotal:</Text>
         <Text style={styles.subtotalAmount}>đ{subtotal.toLocaleString('vi-VN')}</Text>
       </View>
-      <TouchableOpacity style={styles.checkoutButton}>
+      <TouchableOpacity style={styles.checkoutButton} onPress={handleProceedToCheckout}>
         <Text style={styles.checkoutButtonText}>Proceed to Checkout</Text>
       </TouchableOpacity>
     </View>
@@ -168,6 +174,3 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
   },
 });
-
-
-
