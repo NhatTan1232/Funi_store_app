@@ -111,7 +111,7 @@ const writeReviewScreen = () => {
   );
 }
 
-export default writeReviewScreen;
+export default WriteReviewScreen;
 
 const styles = StyleSheet.create({
   container: {
