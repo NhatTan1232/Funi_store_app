@@ -77,7 +77,7 @@ const cartScreen = () => {
   );
 }
 
-export default cartScreen;
+export default CartScreen;
 
 const styles = StyleSheet.create({
   container: {
