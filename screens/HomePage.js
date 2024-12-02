@@ -3,88 +3,9 @@ import { View, Text, FlatList, TouchableOpacity, StyleSheet, Image, TextInput, S
 import { useNavigation } from '@react-navigation/native';  
 import Header from '../assets/components/Header';  
 import cartIcon from '../assets/icons/cart_icon.png';  
+import products from '../assets/components/storeProduct';
 
-
-const products = [
-  {
-    id: 1,
-    name: 'Bellagio 3 seater sofa',
-    price: '89,950,000',
-    type: 'Sofa',
-    color: [
-      {
-        color_id: 1,
-        color_name: 'brown',
-        picture: require('../assets/productPicture/sofa/bellagio_brown.jpg')
-      },
-      {
-        color_id: 2,
-        color_name: 'green',
-        picture: require('../assets/productPicture/sofa/bellagio_green.jpg')
-      }
-    ],
-    detail: 'The Bellagio 3-seater sofa is a statement piece that commands attention – compelling you to sit and experience its comfort. With its low-back design, clean lines and minimalist aesthetic, this modern sofa offers a tactile experience like no other.',
-  },
-  {
-    id: 5,
-    name: 'Carmo corner sofa',
-    price: '94,490,000',
-    type: 'Sofa',
-    color: [
-      {
-        color_id: 1,
-        color_name: 'lightskyblue',
-        picture: require('../assets/productPicture/sofa/carmo_blue.jpg')
-      },
-      {
-        color_id: 2,
-        color_name: 'saddlebrown',
-        picture: require('../assets/productPicture/sofa/carmo_brown.jpg')
-      },
-      {
-        color_id: 3,
-        color_name: 'darkblue',
-        picture: require('../assets/productPicture/sofa/carmo_dblue.jpg')
-      }
-    ],
-    detail: 'With its cubic Danish design expression, our signature Carmo sofa has been updated for a more refined look and enhanced comfort. Its free-standing design allows you to easily reorganise its modules at any time, for any occasion. Whether you are hosting guests or seeking a quiet moment, Carmo effortlessly adapts to your needs.',
-  },
-  {
-    id: 12,
-    name: 'Lugo coffee table',
-    price: '29,590,000',
-    type: 'Table',
-    color: [
-      {
-        color_id: 1,
-        color_name: 'bisque',
-        picture: require('../assets/productPicture/table/lugo_beige.jpg')
-      },
-      {
-        color_id: 2,
-        color_name: 'silver',
-        picture: require('../assets/productPicture/table/lugo_silver.jpg')
-      }
-    ],
-    detail: 'Versatile minimalism that perfectly blends into your living room. The Lugo coffee table’s light look and clean lines will bring a timeless sophistication to your home for years to come. Place the square coffee table alone to accentuate the minimalist style or arrange it above the rectangular Lugo for a dynamic look and extra table space.',
-  },
-  {
-    id: 17,
-    name: 'Ottawa chair',
-    price: '5,601,500',
-    type: 'Chair',
-    color: [
-      {
-        color_id: 1,
-        color_name: 'black',
-        picture: require('../assets/productPicture/chair/ottawa_chair_black.jpg')
-      }
-    ],
-    detail: 'Visibly inspired by nature with its leaf-shape and curved design, the Ottawa dining chair is truly a unique piece of design furniture. Once you are seated, you will discover that the Ottawa chair is not only characteristic in looks, but also in comfort. The twig-like legs on Ottawa add to the organic chair design, completing its unique look. At the same time, the sculptured seat without upholstery highlights the clean lines and minimal form.',
-  },
-];
-
-
+const topseller = products.filter(product => [1, 5, 12, 17].includes(product.id));
 
 const categories = [
   { id: '1', name: 'Sofa', icon: require('../assets/icons/sofa_icon.png') },
@@ -114,6 +35,7 @@ const HomePage = () => {
 
   const handleCategoryPress = (category) => {
     console.log('Clicked on category:', category.name);
+    navigation.navigate('CategoryScreen', { categoryName: category.name });
   };
 
   const handleCartPress = () => {
@@ -153,14 +75,14 @@ const HomePage = () => {
         />
       </View>
       <View style={styles.topSalerContainer}>
-        <Text style={styles.topSalerTitle}>Top Sellers</Text>đ
-        {products.map((product, index) => {
+        <Text style={styles.topSalerTitle}>Top Sellers</Text>
+        {topseller.map((product, index) => {
           if (index % 2 === 0) {
             return (
               <View style={styles.row} key={index}>
                 <ProductItem product={product} />
-                {products[index + 1] && (
-                  <ProductItem product={products[index + 1]} />
+                {topseller[index + 1] && (
+                  <ProductItem product={topseller[index + 1]} />
                 )}
               </View>
             );
@@ -263,7 +185,6 @@ const styles = StyleSheet.create({
     fontWeight: '500',
     color: '#333',
   },
-  
   topSalerContainer: {
     padding: 15,
     marginTop: 10,
