@@ -13,7 +13,7 @@ const product = {
     {
       color_id: 1,
       color_name: 'saddlebrown',
-      picture: require('./assets/productPicture/ottawa_brown.jpg')
+      picture: require('../assets/productPicture/table/ottawa_brown.jpg')
     }
   ],
   detail: 'Defined by smooth, rounded edges and a sensual minimalism, the Ottawa dining table creates a serene atmosphere in your dining room. Unique, twig-like legs inspired by nature accentuate the natural beauty of the oval Ottawa dining table. Need extra seats? Just pull out the clever, built-in extension leaf and go from a 4-person family meal to a dinner party seating 14.',

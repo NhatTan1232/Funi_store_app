@@ -8,13 +8,6 @@ const PaymentScreen = () => {
 
   return (
     <ScrollView contentContainerStyle={styles.container}>
-      <View style={styles.header}>
-        <TouchableOpacity>
-          <Icon name="arrow-back" size={24} color="#000" />
-        </TouchableOpacity>
-        <Text style={styles.headerTitle}>Checkout</Text>
-      </View>
-
       <View style={styles.stepIndicator}>
         <View style={styles.stepRow}>
           <View style={styles.step}>
@@ -45,7 +38,7 @@ const PaymentScreen = () => {
           </TouchableOpacity>
         </View>
         <View style={styles.paymentInfo}>
-          <Image style={styles.paymentIcon} source={require('./assets/cod.jpg')} resizeMode='contain' />
+          <Image style={styles.paymentIcon} source={require('../assets/cod.jpg')} resizeMode='contain' />
           <Text style={styles.cardDetails}>Cash on delivery</Text>
           <RadioButton
             value="cod"
@@ -55,7 +48,7 @@ const PaymentScreen = () => {
           />
         </View>
         <View style={styles.paymentInfo}>
-          <Image style={styles.paymentIcon} source={require('./assets/momo.png')} resizeMode='contain' />
+          <Image style={styles.paymentIcon} source={require('../assets/momo.png')} resizeMode='contain' />
           <Text style={styles.cardDetails}>MoMo E-Wallet</Text>
           <RadioButton
             value="momo"
@@ -160,8 +153,6 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     marginBottom: 5,
     paddingTop: 15,
-    borderTopWidth: 1,
-    borderColor: '#dbdbdb'
   },
   termsText: {
     fontSize: 16,
