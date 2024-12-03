@@ -7,6 +7,7 @@ import PaymentScreen from '../screens/PaymentScreen';
 import ReviewScreen from '../screens/ReviewScreen';
 import WriteReviewScreen from '../screens/WriteReviewScreen';
 import CategoryScreen from '../screens/CategoryScreen';
+import ProductScreen from '../screens/ProductScreen';
 
 const Stack = createStackNavigator();
 
@@ -42,6 +43,11 @@ export default function AppNavigator() {
         <Stack.Screen
           name="CategoryScreen"
           component={CategoryScreen}
+          options={{ headerShown: false }}
+        />
+        <Stack.Screen
+          name="ProductScreen"
+          component={ProductScreen}
           options={{ headerShown: false }}
         />
       </Stack.Navigator>
