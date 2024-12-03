@@ -5,62 +5,64 @@ import Header from '../assets/components/Header';
 import searchIcon from '../assets/icons/search_icon.png';  
 import products from '../assets/components/storeProduct';
 
-const ProductItem = ({ product }) => (
-  <View style={styles.productItem}>
-    <Image source={product.color[0].picture} style={styles.productImage} />
-    <Text style={styles.productName}>{product.name}</Text>
-    <Text style={styles.productPrice}>{product.price}</Text>
-  </View>
-);
+const ProductItem = ({ product }) => {
+  const navigation = useNavigation();
+  
+  const handleProductPress = () => {
+    navigation.navigate('ProductScreen', { product }); 
+  };
+
+  return (
+    <TouchableOpacity style={styles.productItem} onPress={handleProductPress}>
+      <Image source={product.color[0].picture} style={styles.productImage} />
+      <Text style={styles.productName}>{product.name}</Text>
+      <Text style={styles.productPrice}>{product.price}</Text>
+    </TouchableOpacity>
+  );
+};
 
 const CategoryScreen = () => {
-    const navigation = useNavigation();
-    const route = useRoute();
+  const navigation = useNavigation();
+  const route = useRoute();
   
-    const { categoryName } = route.params;
+  const { categoryName } = route.params;
   
-    const filteredProducts = products.filter(product => product.type === categoryName);
+  const filteredProducts = products.filter(product => product.type === categoryName);
 
-    console.log('CategoryName:', categoryName);  
-    filteredProducts.forEach(product => {
-      console.log('Product type:', product.type);  
-    });
-
-    const handleSearchPress = () => {
-      navigation.navigate('CartScreen');
-    };
-  
-    return (
-      <ScrollView style={styles.container}>
-        <Header />
-        <TouchableOpacity style={styles.searchButton} onPress={handleSearchPress}>
-          <Image source={searchIcon} style={styles.searchIcon} />
-        </TouchableOpacity>
-  
-        <View style={styles.topSalerContainer}>
-          <Text style={styles.topSalerTitle}>{categoryName} Products</Text>
-          {filteredProducts.length === 0 ? (
-            <Text>No products available in this category.</Text>
-          ) : (
-            filteredProducts.map((product, index) => {
-              if (index % 2 === 0) {
-                return (
-                  <View style={styles.row} key={index}>
-                    <ProductItem product={product} />
-                    {filteredProducts[index + 1] && (
-                      <ProductItem product={filteredProducts[index + 1]} />
-                    )}
-                  </View>
-                );
-              }
-              return null;
-            })
-          )}
-        </View>
-      </ScrollView>
-    );
+  const handleSearchPress = () => {
+    navigation.navigate('CartScreen');
   };
-  
+
+  return (
+    <ScrollView style={styles.container}>
+      <Header />
+      <TouchableOpacity style={styles.searchButton} onPress={handleSearchPress}>
+        <Image source={searchIcon} style={styles.searchIcon} />
+      </TouchableOpacity>
+
+      <View style={styles.topSalerContainer}>
+        <Text style={styles.topSalerTitle}>{categoryName} Products</Text>
+        {filteredProducts.length === 0 ? (
+          <Text>No products available in this category.</Text>
+        ) : (
+          filteredProducts.map((product, index) => {
+            if (index % 2 === 0) {
+              return (
+                <View style={styles.row} key={index}>
+                  <ProductItem product={product} />
+                  {filteredProducts[index + 1] && (
+                    <ProductItem product={filteredProducts[index + 1]} />
+                  )}
+                </View>
+              );
+            }
+            return null;
+          })
+        )}
+      </View>
+    </ScrollView>
+  );
+};
 
 const styles = StyleSheet.create({
   container: {
