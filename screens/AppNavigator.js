@@ -103,7 +103,7 @@ function UserStack() {
         name="UserPage"
         component={UserPage}
         options={{
-          title: 'User',
+          title: 'Account',
           headerTitleStyle: {
             fontFamily: 'PlayfairDisplay_700Bold',
             fontSize: 20,
