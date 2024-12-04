@@ -136,7 +136,7 @@ export default function AppNavigator() {
               height: 60,
             },
             tabBarActiveTintColor: '#d36a06', 
-            tabBarInactiveTintColor: 'black',
+            tabBarInactiveTintColor: '#888',
             tabBarLabelStyle: {
               fontFamily: 'PlayfairDisplay_700Bold',
               fontSize: 14,
