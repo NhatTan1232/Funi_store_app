@@ -1,7 +1,16 @@
 import React from 'react';
 import { View, Text, TouchableOpacity, Image, StyleSheet } from 'react-native';
+import { useFonts, PlayfairDisplay_700Bold } from '@expo-google-fonts/playfair-display';
 
 const Header = () => {
+  let [fontsLoaded] = useFonts({
+    PlayfairDisplay_700Bold,
+  });
+
+  if (!fontsLoaded) {
+    return null;
+  }
+
   return (
     <View style={styles.headerContainer}>
       <Text style={styles.storeName}>Home Essence</Text>
@@ -21,11 +30,10 @@ const styles = StyleSheet.create({
   },
   storeName: {
     fontSize: 24,
-    fontWeight: 'bold',
     color: '#000', 
     flex: 1, 
     textAlign: 'center', 
-    fontFamily: 'System', 
+    fontFamily: 'PlayfairDisplay_700Bold', 
   },
   cartIconContainer: {
     width: 30, 

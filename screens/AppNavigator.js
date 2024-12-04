@@ -20,7 +20,6 @@ export default function AppNavigator() {
   });
 
   if (!fontsLoaded) {
-    console.log('ohno')
     return null;
   }
 

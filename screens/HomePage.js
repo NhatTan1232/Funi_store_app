@@ -1,6 +1,7 @@
 import React from 'react';
 import { View, Text, FlatList, TouchableOpacity, StyleSheet, Image, TextInput, ScrollView } from 'react-native';
-import { useNavigation } from '@react-navigation/native';  
+import { useNavigation } from '@react-navigation/native'; 
+
 import Header from '../assets/components/Header';  
 import cartIcon from '../assets/icons/cart_icon.png';  
 import products from '../assets/components/storeProduct';
