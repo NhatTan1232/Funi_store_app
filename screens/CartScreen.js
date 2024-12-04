@@ -72,7 +72,7 @@ const CartScreen = () => {
     return (
       <View style={styles.cartItem}>
         {selectedColor.picture ? (
-          <Image source={selectedColor.picture} style={styles.productImage} />
+          <Image source={selectedColor.picture} style={styles.productImage} resizeMode='contain'/>
         ) : (
           <View style={styles.productImagePlaceholder}></View>
         )}
