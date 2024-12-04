@@ -3,7 +3,7 @@ const products = [
   {
     id: 1,
     name: 'Bellagio 3 seater sofa',
-    price: '89,950,000',
+    price: '22,500,000',
     type: 'Sofa',
     color: [
       {
@@ -22,7 +22,7 @@ const products = [
   {
     id: 2,
     name: 'Amsterdam corner sofa',
-    price: '182,490,000',
+    price: '45,800,000',
     type: 'Sofa',
     color: [
       {
@@ -41,7 +41,7 @@ const products = [
   {
     id: 3,
     name: 'Salamanca corner sofa',
-    price: '188,600,000',
+    price: '47,200,000',
     type: 'Sofa',
     color: [
       {
@@ -60,7 +60,7 @@ const products = [
   {
     id: 4,
     name: 'Southampton 2,5 seater sofa',
-    price: '141,140,000',
+    price: '35,300,000',
     type: 'Sofa',
     color: [
       {
@@ -74,7 +74,7 @@ const products = [
   {
     id: 5,
     name: 'Carmo corner sofa',
-    price: '94,490,000',
+    price: '23,600,000',
     type: 'Sofa',
     color: [
       {
@@ -100,7 +100,7 @@ const products = [
   {
     id: 6,
     name: 'Lugano bed',
-    price: '25,590,000',
+    price: '8,500,000',
     type: 'Bed',
     color: [
       {
@@ -119,7 +119,7 @@ const products = [
   {
     id: 7,
     name: 'Lugano storage bed',
-    price: '38,490,000',
+    price: '12,100,000',
     type: 'Bed',
     color: [
       {
@@ -133,7 +133,7 @@ const products = [
   {
     id: 8,
     name: 'Arlington bed',
-    price: '34,990,000',
+    price: '9,800,000',
     type: 'Bed',
     color: [
       {
@@ -157,7 +157,7 @@ const products = [
   {
     id: 9,
     name: 'Fusion day bed',
-    price: '25,000,000',
+    price: '7,500,000',
     type: 'Bed',
     color: [
       {
@@ -171,7 +171,7 @@ const products = [
   {
     id: 10,
     name: 'Austin bed',
-    price: '56,030,000',
+    price: '15,000,000',
     type: 'Bed',
     color: [
       {
@@ -192,7 +192,7 @@ const products = [
   {
     id: 11,
     name: 'Ottawa table',
-    price: '75,490,000',
+    price: '14,400,000',
     type: 'Table',
     color: [
       {
@@ -206,7 +206,7 @@ const products = [
   {
     id: 12,
     name: 'Lugo coffee table',
-    price: '29,590,000',
+    price: '9,100,000',
     type: 'Table',
     color: [
       {
@@ -225,7 +225,7 @@ const products = [
   {
     id: 13,
     name: 'Billund round table',
-    price: '26,490,000',
+    price: '8,400,000',
     type: 'Table',
     color: [
       {
@@ -239,7 +239,7 @@ const products = [
   {
     id: 14,
     name: 'Fiorentina extendable table',
-    price: '92,690,000',
+    price: '11,230,000',
     type: 'Table',
     color: [
       {
@@ -258,7 +258,7 @@ const products = [
   {
     id: 15,
     name: 'Augusta extendable table',
-    price: '118,900,000',
+    price: '25,610,000',
     type: 'Table',
     color: [
       {
@@ -284,7 +284,7 @@ const products = [
   {
     id: 16,
     name: 'Hamilton dining chair',
-    price: '4,751,500',
+    price: '1,800,000',
     type: 'Chair',
     color: [
       {
@@ -298,7 +298,7 @@ const products = [
   {
     id: 17,
     name: 'Ottawa chair',
-    price: '5,601,500',
+    price: '2,200,000',
     type: 'Chair',
     color: [
       {
@@ -312,7 +312,7 @@ const products = [
   {
     id: 18,
     name: 'Hauge dining chair',
-    price: '6,366,500',
+    price: '2,500,000',
     type: 'Chair',
     color: [
       {
@@ -326,7 +326,7 @@ const products = [
   {
     id: 19,
     name: 'Princeton chair',
-    price: '8,049,500',
+    price: '3,330,000',
     type: 'Chair',
     color: [
       {
@@ -345,7 +345,7 @@ const products = [
   {
     id: 20,
     name: 'Seoul dining chair',
-    price: '17,501,500',
+    price: '4,500,000',
     type: 'Chair',
     color: [
       {
@@ -366,7 +366,7 @@ const products = [
   {
     id: 21,
     name: 'Lund glass cabinet',
-    price: '46,911,500',
+    price: '13,850,000',
     type: 'Storage',
     color: [
       {
@@ -380,7 +380,7 @@ const products = [
   {
     id: 22,
     name: 'Fermo sideboard',
-    price: '33,056,500',
+    price: '10,000,000',
     type: 'Storage',
     color: [
       {
@@ -394,7 +394,7 @@ const products = [
   {
     id: 23,
     name: 'Bordeaux console table',
-    price: '14,951,500',
+    price: '5,020,000',
     type: 'Storage',
     color: [
       {
@@ -408,7 +408,7 @@ const products = [
   {
     id: 24,
     name: 'Lugano sideboard',
-    price: '52,181,500',
+    price: '18,000,000',
     type: 'Storage',
     color: [
       {
@@ -427,7 +427,7 @@ const products = [
   {
     id: 25,
     name: 'Bordeaux wall system',
-    price: '15,291,500',
+    price: '5,300,000',
     type: 'Storage',
     color: [
       {
