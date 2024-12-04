@@ -1,6 +1,7 @@
 import React from 'react';
 import { View, Text, FlatList, TouchableOpacity, StyleSheet, Image, TextInput, ScrollView } from 'react-native';
 import { useNavigation } from '@react-navigation/native'; 
+import { useFonts, PlayfairDisplay_700Bold } from '@expo-google-fonts/playfair-display';
 
 import Header from '../assets/components/Header';  
 import cartIcon from '../assets/icons/cart_icon.png';  
@@ -25,11 +26,20 @@ const CategoryItem = ({ category, onPress }) => (
 
 const ProductItem = ({ product }) => (
   <View style={styles.productItem}>
-    <Image source={product.color[0].picture} style={styles.productImage} resizeMode='contain'/>
+    <View style={styles.colorCirclesContainer}>
+      {product.color.map((colorItem, index) => (
+        <View
+          key={colorItem.color_id}
+          style={[styles.colorCircle, { backgroundColor: colorItem.color_name }]}
+        />
+      ))}
+    </View>
+    <Image source={product.color[0].picture} style={styles.productImage} resizeMode="contain" />
     <Text style={styles.productName}>{product.name}</Text>
     <Text style={styles.productPrice}>{product.price}</Text>
   </View>
 );
+
 
 const HomePage = () => {
   const navigation = useNavigation(); 
@@ -42,6 +52,14 @@ const HomePage = () => {
   const handleCartPress = () => {
     navigation.navigate('CartScreen'); 
   };
+
+  let [fontsLoaded] = useFonts({
+    PlayfairDisplay_700Bold,
+  });
+
+  if (!fontsLoaded) {
+    return null;
+  }
 
   return (
     <ScrollView style={styles.container}>
@@ -153,8 +171,8 @@ const styles = StyleSheet.create({
     elevation: 2,
   },
   categoriesTitle: {
+    fontFamily: 'PlayfairDisplay_700Bold',
     fontSize: 20,
-    fontWeight: 'bold',
     marginBottom: 8,
     color: '#333',
   },
@@ -197,7 +215,7 @@ const styles = StyleSheet.create({
   },
   topSalerTitle: {
     fontSize: 20,
-    fontWeight: 'bold',
+    fontFamily: 'PlayfairDisplay_700Bold',
     marginBottom: 8,
     color: '#333',
   },
@@ -210,11 +228,21 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     width: '48%',  
     marginBottom: 15,
+    position: 'relative',
+    borderRadius: 10,  
+    backgroundColor: '#fff', 
+    padding: 10, 
+    shadowColor: 'grey', 
+    shadowOffset: { width: 1, height: 1 }, 
+    shadowOpacity: 0.9, 
+    shadowRadius: 1,  
+    elevation: 5,  
   },
   productImage: {
     width: '100%',
     height: 120,
     borderRadius: 10,
+    zIndex: 1,  
   },
   productName: {
     fontSize: 14,
@@ -228,6 +256,20 @@ const styles = StyleSheet.create({
     color: '#999',
     marginTop: 3,
     textAlign: 'center',
+  },
+  colorCirclesContainer: {
+    position: 'absolute',
+    top: 10,
+    left: 10,
+    flexDirection: 'row',
+    justifyContent: 'flex-start',
+    zIndex: 2,
+  },
+  colorCircle: {
+    width: 11,
+    height: 11,
+    borderRadius: 5,
+    marginRight: 7,
   },
 });
 
