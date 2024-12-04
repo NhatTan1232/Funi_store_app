@@ -38,7 +38,7 @@ const ProductScreen = ({ navigation }) => {
 
   return (
     <ScrollView style={styles.container}>
-      <View style={styles.header}>
+      {/* <View style={styles.header}>
         <TouchableOpacity style={styles.backButton}>
           <AntDesign name="arrowleft" size={24} color="black" />
         </TouchableOpacity>
@@ -46,7 +46,7 @@ const ProductScreen = ({ navigation }) => {
         <TouchableOpacity style={styles.favoriteButton}>
           <AntDesign name="hearto" size={24} color="black" />
         </TouchableOpacity>
-      </View>
+      </View> */}
 
       <View style={styles.imageContainer}>
         <Image source={selectedColor.picture} style={styles.productImage} />
