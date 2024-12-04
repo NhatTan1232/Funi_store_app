@@ -1,16 +1,35 @@
-import React, { useState } from 'react';
-import { View, Text, Image, StyleSheet, ScrollView, TouchableOpacity } from 'react-native';
+import React, { useState, useContext } from 'react';
+import { View, Text, Image, StyleSheet, ScrollView, TouchableOpacity, Alert } from 'react-native';
 import { useRoute } from '@react-navigation/native';
 import { AntDesign } from '@expo/vector-icons';
+import { CartContext } from '../screens/context/CartContext';  
 
 const ProductScreen = ({ navigation }) => {
   const route = useRoute();
   const { product } = route.params;
 
   const [selectedColor, setSelectedColor] = useState(product.color[0]);
+  const { addToCart } = useContext(CartContext);  
 
   const handleColorSelect = (color) => {
     setSelectedColor(color);
+  };
+
+  const handleAddToCart = () => {
+    const productWithSelectedColor = {
+      ...product,
+      selectedColor,  
+    };
+    addToCart(productWithSelectedColor);  
+    
+    // Hiển thị thông báo pop-up khi sản phẩm được thêm vào giỏ hàng
+    Alert.alert(
+      "Success",
+      "Product added to cart!",
+      [
+        { text: "OK", onPress: () => console.log("OK Pressed") }
+      ]
+    );
   };
 
   const handleNavigateToReviews = () => {
@@ -58,15 +77,15 @@ const ProductScreen = ({ navigation }) => {
           {product.color.map((item, index) => (
             <TouchableOpacity key={index} onPress={() => handleColorSelect(item)}>
               <View
-                style={[
-                  styles.colorCircle,
-                  { backgroundColor: item.color_name },
-                  selectedColor.color_name === item.color_name && styles.selectedColor,
-                ]}
+                style={[styles.colorCircle, { backgroundColor: item.color_name }, selectedColor.color_name === item.color_name && styles.selectedColor]}
               />
             </TouchableOpacity>
           ))}
         </View>
+
+        <TouchableOpacity style={styles.addToCartButton} onPress={handleAddToCart}>
+          <Text style={styles.addToCartText}>Add to Cart</Text>
+        </TouchableOpacity>
       </View>
     </ScrollView>
   );
@@ -163,6 +182,18 @@ const styles = StyleSheet.create({
   selectedColor: {
     borderWidth: 2,
     borderColor: '#000', 
+  },
+  addToCartButton: {
+    backgroundColor: '#d36a06',
+    paddingVertical: 12,
+    borderRadius: 30,
+    marginTop: 20,
+    alignItems: 'center',
+  },
+  addToCartText: {
+    color: '#fff',
+    fontSize: 18,
+    fontWeight: 'bold',
   },
 });
 
