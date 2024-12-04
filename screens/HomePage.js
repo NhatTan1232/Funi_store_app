@@ -24,7 +24,7 @@ const CategoryItem = ({ category, onPress }) => (
 
 const ProductItem = ({ product }) => (
   <View style={styles.productItem}>
-    <Image source={product.color[0].picture} style={styles.productImage} />
+    <Image source={product.color[0].picture} style={styles.productImage} resizeMode='contain'/>
     <Text style={styles.productName}>{product.name}</Text>
     <Text style={styles.productPrice}>{product.price}</Text>
   </View>

@@ -55,8 +55,8 @@ const ProductScreen = ({ navigation }) => {
       <View style={styles.detailsContainer}>
         <Text style={styles.productName}>{product.name}</Text>
         <View style={styles.priceContainer}>
-          <Text style={styles.oldPrice}>${product.oldPrice}</Text>
-          <Text style={styles.currentPrice}>${product.price}</Text>
+          <Text style={styles.oldPrice}>{product.oldPrice}</Text>
+          <Text style={styles.currentPrice}>đ{product.price}</Text>
         </View>
 
         <View style={styles.ratingContainer}>
