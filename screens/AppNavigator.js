@@ -1,5 +1,6 @@
 import React from 'react';
 import { useFonts, PlayfairDisplay_700Bold } from '@expo-google-fonts/playfair-display';
+import Icon from 'react-native-vector-icons/Ionicons';
 
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
@@ -127,15 +128,43 @@ export default function AppNavigator() {
   return (
     <NavigationContainer>
       <CartProvider>
-        <Tab.Navigator>
+        <Tab.Navigator
+          screenOptions={{
+            tabBarStyle: {
+              backgroundColor: '#ffffff',
+              borderTopWidth: 0,
+              height: 60,
+            },
+            tabBarActiveTintColor: '#d36a06', 
+            tabBarInactiveTintColor: 'black',
+            tabBarLabelStyle: {
+              fontFamily: 'PlayfairDisplay_700Bold',
+              fontSize: 14,
+            },
+            tabBarShowLabel: false,
+            tabBarLabelPosition: 'beside-icon'
+          }}
+        >
           <Tab.Screen 
             name="Store" 
             component={StoreStack} 
-            options={{ headerShown: false }}/>
+            options={{
+              headerShown: false,
+              tabBarIcon: ({ color }) => (
+                <Icon name="home-outline" color={color} size={30} />
+              ),
+            }}
+          />
           <Tab.Screen 
             name="User" 
             component={UserStack} 
-            options={{ headerShown: false }}/>
+            options={{
+              headerShown: false,
+              tabBarIcon: ({ color }) => (
+                <Icon name="person-circle-outline" color={color} size={30} />
+              ),
+            }}
+          />
         </Tab.Navigator>
       </CartProvider>
     </NavigationContainer>
