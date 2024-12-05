@@ -11,10 +11,8 @@ import {
   KeyboardAvoidingView,
 } from 'react-native';
 
-// import AsyncStorage from '@react-native-async-storage/async-storage';
-// import Loader from './Components/Loader';
-
-const LoginScreen = ({ navigation }) => {
+const LoginScreen = ({ route, navigation }) => {
+  const { setIsLoggedIn } = route.params;
   const [userEmail, setUserEmail] = useState('');
   const [userPassword, setUserPassword] = useState('');
   const passwordInputRef = createRef();
@@ -25,7 +23,6 @@ const LoginScreen = ({ navigation }) => {
         source={require('../assets/login_background.png')} // Replace with your background image path
         style={styles.imageBackground}
       >
-        {/* <Loader loading={loading} /> */}
         <ScrollView
           keyboardShouldPersistTaps="handled"
           contentContainerStyle={{
@@ -74,14 +71,14 @@ const LoginScreen = ({ navigation }) => {
               <TouchableOpacity
                 style={styles.buttonStyle}
                 activeOpacity={0.5}
-                onPress={() => navigation.navigate('HomePage')}
+                onPress={() => setIsLoggedIn(true)}  
               >
                 <Text style={styles.buttonTextStyle}>LOGIN</Text>
               </TouchableOpacity>
               <TouchableOpacity
                 style={styles.buttonStyleSecondary}
                 activeOpacity={0.5}
-                onPress={() => navigation.navigate('RegisterScreen')}
+                onPress={() => navigation.navigate('SignUp')}
               >
                 <Text style={styles.buttonTextStyle}>SIGNUP</Text>
               </TouchableOpacity>

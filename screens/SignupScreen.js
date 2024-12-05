@@ -11,7 +11,7 @@ import {
   KeyboardAvoidingView,
 } from 'react-native';
 
-const RegisterScreen = ({ navigation }) => {
+const RegisterScreen = ({ navigation, setIsLoggedIn }) => {
   const [userName, setUserName] = useState('');
   const [userEmail, setUserEmail] = useState('');
   const [userAge, setUserAge] = useState('');
@@ -107,14 +107,14 @@ const RegisterScreen = ({ navigation }) => {
               <TouchableOpacity
                 style={styles.buttonStyle}
                 activeOpacity={0.5}
-                onPress={() => console.log('Register button pressed')}
+                onPress={alert('Sign up successfully!')}
               >
                 <Text style={styles.buttonTextStyle}>SIGNUP</Text>
               </TouchableOpacity>
               <TouchableOpacity
                 style={styles.buttonStyleSecondary}
                 activeOpacity={0.5}
-                onPress={() => console.log('Login button pressed')}
+                onPress={() => navigation.navigate('Login')}
               >
                 <Text style={styles.buttonTextStyle}>LOGIN</Text>
               </TouchableOpacity>

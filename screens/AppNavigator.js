@@ -149,47 +149,45 @@ export default function AppNavigator() {
   }
 
   return (
-    <NavigationContainer>
-      <CartProvider>
-        <Tab.Navigator
-          screenOptions={{
-            tabBarStyle: {
-              backgroundColor: '#ffffff',
-              borderTopWidth: 0,
-              height: 60,
-            },
-            tabBarActiveTintColor: '#d36a06', 
-            tabBarInactiveTintColor: '#888',
-            tabBarLabelStyle: {
-              fontFamily: 'PlayfairDisplay_700Bold',
-              fontSize: 14,
-            },
-            tabBarShowLabel: false,
-            tabBarLabelPosition: 'beside-icon'
+    <CartProvider>
+      <Tab.Navigator
+        screenOptions={{
+          tabBarStyle: {
+            backgroundColor: '#ffffff',
+            borderTopWidth: 0,
+            height: 60,
+          },
+          tabBarActiveTintColor: '#d36a06', 
+          tabBarInactiveTintColor: '#888',
+          tabBarLabelStyle: {
+            fontFamily: 'PlayfairDisplay_700Bold',
+            fontSize: 14,
+          },
+          tabBarShowLabel: false,
+          tabBarLabelPosition: 'beside-icon'
+        }}
+      >
+        <Tab.Screen 
+          name="Store" 
+          component={StoreStack} 
+          options={{
+            headerShown: false,
+            tabBarIcon: ({ color }) => (
+              <Icon name="home-outline" color={color} size={30} />
+            ),
           }}
-        >
-          <Tab.Screen 
-            name="Store" 
-            component={StoreStack} 
-            options={{
-              headerShown: false,
-              tabBarIcon: ({ color }) => (
-                <Icon name="home-outline" color={color} size={30} />
-              ),
-            }}
-          />
-          <Tab.Screen 
-            name="User" 
-            component={UserStack} 
-            options={{
-              headerShown: false,
-              tabBarIcon: ({ color }) => (
-                <Icon name="person-circle-outline" color={color} size={30} />
-              ),
-            }}
-          />
-        </Tab.Navigator>
-      </CartProvider>
-    </NavigationContainer>
+        />
+        <Tab.Screen 
+          name="User" 
+          component={UserStack} 
+          options={{
+            headerShown: false,
+            tabBarIcon: ({ color }) => (
+              <Icon name="person-circle-outline" color={color} size={30} />
+            ),
+          }}
+        />
+      </Tab.Navigator>
+    </CartProvider>
   );
 }
