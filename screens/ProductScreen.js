@@ -22,7 +22,6 @@ const ProductScreen = ({ navigation }) => {
     };
     addToCart(productWithSelectedColor);  
     
-    // Hiển thị thông báo pop-up khi sản phẩm được thêm vào giỏ hàng
     Alert.alert(
       "Success",
       "Product added to cart!",
@@ -32,62 +31,58 @@ const ProductScreen = ({ navigation }) => {
     );
   };
 
-  const handleNavigateToReviews = () => {
-    navigation.navigate('ReviewScreen', { productId: product.id });
+  const handleNavigateToCart = () => {
+    navigation.navigate('CartScreen');
   };
 
   return (
-    <ScrollView style={styles.container}>
-      {/* <View style={styles.header}>
-        <TouchableOpacity style={styles.backButton}>
-          <AntDesign name="arrowleft" size={24} color="black" />
-        </TouchableOpacity>
-        <Text style={styles.headerTitle}>Product Detail</Text>
-        <TouchableOpacity style={styles.favoriteButton}>
-          <AntDesign name="hearto" size={24} color="black" />
-        </TouchableOpacity>
-      </View> */}
+    <View style={styles.container}>
+      <TouchableOpacity style={styles.cartButton} onPress={handleNavigateToCart}>
+        <AntDesign name="shoppingcart" size={24} color="black" />
+      </TouchableOpacity>
 
-      <View style={styles.imageContainer}>
-        <Image source={selectedColor.picture} style={styles.productImage} />
-      </View>
-
-      <View style={styles.detailsContainer}>
-        <Text style={styles.productName}>{product.name}</Text>
-        <View style={styles.priceContainer}>
-          <Text style={styles.oldPrice}>{product.oldPrice}</Text>
-          <Text style={styles.currentPrice}>đ{product.price}</Text>
+      <ScrollView>
+        <View style={styles.imageContainer}>
+          <Image source={selectedColor.picture} style={styles.productImage} />
         </View>
 
-        <View style={styles.ratingContainer}>
-          <AntDesign name="star" size={16} color="#FFD700" />
-          <AntDesign name="star" size={16} color="#FFD700" />
-          <AntDesign name="star" size={16} color="#FFD700" />
-          <AntDesign name="star" size={16} color="#FFD700" />
-          <AntDesign name="staro" size={16} color="#FFD700" />
-          <TouchableOpacity onPress={handleNavigateToReviews}>
-            <Text style={styles.reviewText}>4.16 (12 reviews)</Text>
+        <View style={styles.detailsContainer}>
+          <Text style={styles.productName}>{product.name}</Text>
+          <View style={styles.priceContainer}>
+            <Text style={styles.oldPrice}>{product.oldPrice}</Text>
+            <Text style={styles.currentPrice}>đ{product.price}</Text>
+          </View>
+
+          <View style={styles.ratingContainer}>
+            <AntDesign name="star" size={16} color="#FFD700" />
+            <AntDesign name="star" size={16} color="#FFD700" />
+            <AntDesign name="star" size={16} color="#FFD700" />
+            <AntDesign name="star" size={16} color="#FFD700" />
+            <AntDesign name="staro" size={16} color="#FFD700" />
+            <TouchableOpacity>
+              <Text style={styles.reviewText}>4.16 (12 reviews)</Text>
+            </TouchableOpacity>
+          </View>
+
+          <Text style={styles.description}>{product.detail}</Text>
+
+          <Text style={styles.colorTitle}>Colors</Text>
+          <View style={styles.colorOptions}>
+            {product.color.map((item, index) => (
+              <TouchableOpacity key={index} onPress={() => handleColorSelect(item)}>
+                <View
+                  style={[styles.colorCircle, { backgroundColor: item.color_name }, selectedColor.color_name === item.color_name && styles.selectedColor]}
+                />
+              </TouchableOpacity>
+            ))}
+          </View>
+
+          <TouchableOpacity style={styles.addToCartButton} onPress={handleAddToCart}>
+            <Text style={styles.addToCartText}>Add to Cart</Text>
           </TouchableOpacity>
         </View>
-
-        <Text style={styles.description}>{product.detail}</Text>
-
-        <Text style={styles.colorTitle}>Colors</Text>
-        <View style={styles.colorOptions}>
-          {product.color.map((item, index) => (
-            <TouchableOpacity key={index} onPress={() => handleColorSelect(item)}>
-              <View
-                style={[styles.colorCircle, { backgroundColor: item.color_name }, selectedColor.color_name === item.color_name && styles.selectedColor]}
-              />
-            </TouchableOpacity>
-          ))}
-        </View>
-
-        <TouchableOpacity style={styles.addToCartButton} onPress={handleAddToCart}>
-          <Text style={styles.addToCartText}>Add to Cart</Text>
-        </TouchableOpacity>
-      </View>
-    </ScrollView>
+      </ScrollView>
+    </View>
   );
 };
 
@@ -96,23 +91,19 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: '#fff',
   },
-  header: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-    padding: 16,
-    borderBottomWidth: 1,
-    borderBottomColor: '#eee',
-  },
-  backButton: {
-    padding: 8,
-  },
-  favoriteButton: {
-    padding: 8,
-  },
-  headerTitle: {
-    fontSize: 18,
-    fontWeight: 'bold',
+  cartButton: {
+    position: 'absolute',
+    bottom: 10, 
+    right: 10,  
+    zIndex: 10, 
+    backgroundColor: '#fff',
+    padding: 10,
+    borderRadius: 50,
+    shadowColor: '#000',
+    shadowOpacity: 0.2,
+    shadowOffset: { width: 0, height: 2 },
+    shadowRadius: 4,
+    elevation: 5, 
   },
   imageContainer: {
     alignItems: 'center',

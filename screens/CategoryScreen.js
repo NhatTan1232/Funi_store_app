@@ -6,12 +6,13 @@ import { useFonts, PlayfairDisplay_700Bold } from '@expo-google-fonts/playfair-d
 import Header from '../assets/components/Header';  
 import searchIcon from '../assets/icons/search_icon.png';  
 import products from '../assets/components/storeProduct';
+import { AntDesign } from '@expo/vector-icons'; 
 
 const ProductItem = ({ product }) => {
   const navigation = useNavigation();
-  
+
   const handleProductPress = () => {
-    navigation.navigate('ProductScreen', { product }); 
+    navigation.navigate('ProductScreen', { product });
   };
 
   return (
@@ -24,7 +25,7 @@ const ProductItem = ({ product }) => {
           />
         ))}
       </View>
-      <Image source={product.color[0].picture} style={styles.productImage} resizeMode='contain'/>
+      <Image source={product.color[0].picture} style={styles.productImage} resizeMode="contain" />
       <Text style={styles.productName}>{product.name}</Text>
       <Text style={styles.productPrice}>{product.price}</Text>
     </TouchableOpacity>
@@ -34,13 +35,17 @@ const ProductItem = ({ product }) => {
 const CategoryScreen = () => {
   const navigation = useNavigation();
   const route = useRoute();
-  
+
   const { categoryName } = route.params;
-  
-  const filteredProducts = products.filter(product => product.type === categoryName);
+
+  const filteredProducts = products.filter((product) => product.type === categoryName);
 
   const handleSearchPress = () => {
-    navigation.navigate('CartScreen');
+    navigation.navigate('SearchScreen'); 
+  };
+
+  const handleBackPress = () => {
+    navigation.goBack(); 
   };
 
   let [fontsLoaded] = useFonts({
@@ -54,6 +59,9 @@ const CategoryScreen = () => {
   return (
     <ScrollView style={styles.container}>
       <Header />
+      <TouchableOpacity style={styles.backButton} onPress={handleBackPress}>
+        <AntDesign name="arrowleft" size={24} color="black" />
+      </TouchableOpacity>
       <TouchableOpacity style={styles.searchButton} onPress={handleSearchPress}>
         <Image source={searchIcon} style={styles.searchIcon} />
       </TouchableOpacity>
@@ -87,10 +95,17 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: '#f5f5f5',
   },
+  backButton: {
+    position: 'absolute',
+    top: 40,
+    left: 20,
+    zIndex: 1,
+    padding: 5,
+  },
   searchButton: {
-    position: 'absolute', 
-    top: 40, 
-    right: 20, 
+    position: 'absolute',
+    top: 40,
+    right: 20,
     shadowOffset: { width: 0, height: 2 },
     shadowOpacity: 0.2,
     alignItems: 'center',
@@ -123,24 +138,23 @@ const styles = StyleSheet.create({
   },
   productItem: {
     alignItems: 'center',
-    width: '48%',  
+    width: '48%',
     marginBottom: 15,
     position: 'relative',
-    borderRadius: 10,  
-    backgroundColor: '#fff', 
-    padding: 10, 
-    shadowColor: 'grey', 
-    shadowOffset: { width: 1, height: 1 }, 
-    shadowOpacity: 0.9, 
-    shadowRadius: 1,  
-    elevation: 5,  
-
+    borderRadius: 10,
+    backgroundColor: '#fff',
+    padding: 10,
+    shadowColor: 'grey',
+    shadowOffset: { width: 1, height: 1 },
+    shadowOpacity: 0.9,
+    shadowRadius: 1,
+    elevation: 5,
   },
   productImage: {
     width: '100%',
     height: 120,
     borderRadius: 10,
-    zIndex: 1,  
+    zIndex: 1,
   },
   productName: {
     fontSize: 15,

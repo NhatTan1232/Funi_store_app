@@ -61,6 +61,10 @@ const HomePage = () => {
     navigation.navigate('CartScreen');
   };
 
+  const handleSearchPress = () => {
+    navigation.navigate('SearchScreen'); 
+  };
+
   let [fontsLoaded] = useFonts({
     PlayfairDisplay_700Bold,
   });
@@ -76,17 +80,13 @@ const HomePage = () => {
         <Image source={cartIcon} style={styles.cartIcon} />
       </TouchableOpacity>
       <View style={styles.searchHeaderContainer}>
-        <View style={styles.searchBarContainer}>
+        <TouchableOpacity style={styles.searchBarContainer} onPress={handleSearchPress}>
           <Image 
             source={require('../assets/icons/search_icon.png')} 
             style={styles.searchIcon} 
           />
-          <TextInput 
-            style={styles.searchBar} 
-            placeholder="Search..." 
-            placeholderTextColor="#999" 
-          />
-        </View>
+          <Text style={styles.searchBar}>Search...</Text>
+        </TouchableOpacity>
       </View>
       <View style={styles.categoriesContainer}>
         <Text style={styles.categoriesTitle}>Categories</Text>
