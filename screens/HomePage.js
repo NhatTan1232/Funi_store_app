@@ -24,25 +24,33 @@ const CategoryItem = ({ category, onPress }) => (
   </TouchableOpacity>
 );
 
-const ProductItem = ({ product }) => (
-  <View style={styles.productItem}>
-    <View style={styles.colorCirclesContainer}>
-      {product.color.map((colorItem, index) => (
-        <View
-          key={colorItem.color_id}
-          style={[styles.colorCircle, { backgroundColor: colorItem.color_name }]}
-        />
-      ))}
-    </View>
-    <Image source={product.color[0].picture} style={styles.productImage} resizeMode="contain" />
-    <Text style={styles.productName}>{product.name}</Text>
-    <Text style={styles.productPrice}>{product.price}</Text>
-  </View>
-);
+const ProductItem = ({ product }) => {
+  const navigation = useNavigation();
+  
+  const handleProductPress = () => {
+    navigation.navigate('ProductScreen', { product }); 
+  };
+
+  return (
+    <TouchableOpacity style={styles.productItem} onPress={handleProductPress}>
+      <View style={styles.colorCirclesContainer}>
+        {product.color.map((colorItem) => (
+          <View
+            key={colorItem.color_id}
+            style={[styles.colorCircle, { backgroundColor: colorItem.color_name }]}
+          />
+        ))}
+      </View>
+      <Image source={product.color[0].picture} style={styles.productImage} resizeMode='contain'/>
+      <Text style={styles.productName}>{product.name}</Text>
+      <Text style={styles.productPrice}>{product.price}</Text>
+    </TouchableOpacity>
+  );
+};
 
 
 const HomePage = () => {
-  const navigation = useNavigation(); 
+  const navigation = useNavigation();
 
   const handleCategoryPress = (category) => {
     console.log('Clicked on category:', category.name);
@@ -50,7 +58,7 @@ const HomePage = () => {
   };
 
   const handleCartPress = () => {
-    navigation.navigate('CartScreen'); 
+    navigation.navigate('CartScreen');
   };
 
   let [fontsLoaded] = useFonts({
