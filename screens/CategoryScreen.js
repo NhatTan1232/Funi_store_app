@@ -104,7 +104,7 @@ const styles = StyleSheet.create({
   },
   searchButton: {
     position: 'absolute',
-    top: 40,
+    top: 48,
     right: 20,
     shadowOffset: { width: 0, height: 2 },
     shadowOpacity: 0.2,
