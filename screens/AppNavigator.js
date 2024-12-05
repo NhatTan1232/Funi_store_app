@@ -2,7 +2,6 @@ import React from 'react';
 import { useFonts, PlayfairDisplay_700Bold } from '@expo-google-fonts/playfair-display';
 import Icon from 'react-native-vector-icons/Ionicons';
 
-import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { CartProvider } from '../screens/context/CartContext'; 
@@ -119,7 +118,9 @@ function StoreStack() {
   );
 }
 
-function UserStack() {
+function UserStack({navigation, route}) {
+  const { setIsLoggedIn } = route.params;
+  
   return (
     <Stack.Navigator initialRouteName="UserPage">
       <Stack.Screen
@@ -133,13 +134,14 @@ function UserStack() {
           },
           headerTitleAlign: 'center',
         }}
+        initialParams={{ setIsLoggedIn }} 
       />
       {/* Add more screens related to the User tab here */}
     </Stack.Navigator>
   );
 }
 
-export default function AppNavigator() {
+export default function AppNavigator({ setIsLoggedIn }) {
   let [fontsLoaded] = useFonts({
     PlayfairDisplay_700Bold,
   });
@@ -177,15 +179,16 @@ export default function AppNavigator() {
             ),
           }}
         />
-        <Tab.Screen 
-          name="User" 
-          component={UserStack} 
+        <Tab.Screen
+          name="User"
+          component={UserStack}
           options={{
             headerShown: false,
             tabBarIcon: ({ color }) => (
               <Icon name="person-circle-outline" color={color} size={30} />
             ),
           }}
+          initialParams={{ setIsLoggedIn }}
         />
       </Tab.Navigator>
     </CartProvider>

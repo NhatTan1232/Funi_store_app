@@ -2,7 +2,41 @@ import React, { useState, useContext } from 'react';
 import { View, Text, Image, StyleSheet, ScrollView, TouchableOpacity, Alert } from 'react-native';
 import { useRoute } from '@react-navigation/native';
 import { AntDesign } from '@expo/vector-icons';
+import { StarRatingDisplay } from 'react-native-star-rating-widget';
 import { CartContext } from '../screens/context/CartContext';  
+
+const reviews = [
+  // Sofa products
+  {
+    product_id: 1,
+    review: [
+      {
+        review_id: 1,
+        profilePic: 'https://media.wired.com/photos/598e35fb99d76447c4eb1f28/master/pass/phonepicutres-TA.jpg',
+        rating: 4,
+        userName: 'John Doe',
+        date: '30 May, 2022',
+        reviewDetail: 'Great product! Really enjoyed using it.',            
+      },
+      {
+        review_id: 2,
+        profilePic: 'https://png.pngtree.com/thumb_back/fw800/background/20230817/pngtree-lotus-flower-jpg-pink-lotus-flower-image_13023952.jpg',
+        rating: 5,
+        userName: 'Jane Smith',
+        date: '18 Nov, 2022',
+        reviewDetail: 'Absolutely loved it! Highly recommend.',
+      },
+      {
+        review_id: 3,
+        profilePic: 'https://png.pngtree.com/thumb_back/fh260/background/20230519/pngtree-landscape-jpg-wallpapers-free-download-image_2573540.jpg',
+        rating: 4,
+        userName: 'Mike Johnson',
+        date: '17 Nov, 2022',
+        reviewDetail: 'It was okay, could be better.',
+      }
+    ],
+  }
+];
 
 const ProductScreen = ({ navigation }) => {
   const route = useRoute();
@@ -49,16 +83,17 @@ const ProductScreen = ({ navigation }) => {
         <View style={styles.detailsContainer}>
           <Text style={styles.productName}>{product.name}</Text>
           <View style={styles.priceContainer}>
-            <Text style={styles.oldPrice}>{product.oldPrice}</Text>
             <Text style={styles.currentPrice}>đ{product.price}</Text>
+            <Text style={styles.oldPrice}>{product.oldPrice}</Text>
           </View>
 
           <View style={styles.ratingContainer}>
-            <AntDesign name="star" size={16} color="#FFD700" />
-            <AntDesign name="star" size={16} color="#FFD700" />
-            <AntDesign name="star" size={16} color="#FFD700" />
-            <AntDesign name="star" size={16} color="#FFD700" />
-            <AntDesign name="staro" size={16} color="#FFD700" />
+            <StarRatingDisplay
+              rating={4.16}
+              starSize={18}
+              color='#de7006'
+              starStyle={styles.starRating}
+            />
             <TouchableOpacity>
               <Text style={styles.reviewText}>4.16 (12 reviews)</Text>
             </TouchableOpacity>
@@ -118,8 +153,8 @@ const styles = StyleSheet.create({
     paddingHorizontal: 16,
   },
   productName: {
-    fontSize: 24,
-    fontWeight: 'bold',
+    fontSize: 25,
+    fontFamily: 'PlayfairDisplay_700Bold',
     marginBottom: 8,
   },
   priceContainer: {
@@ -143,13 +178,16 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     marginBottom: 8,
   },
+  starRating: {
+    marginHorizontal: 0, // Adjust the space between each star
+  },
   reviewText: {
     marginLeft: 8,
     fontSize: 14,
     color: '#666',
   },
   description: {
-    fontSize: 14,
+    fontSize: 16,
     color: '#333',
     marginBottom: 16,
   },
@@ -172,7 +210,7 @@ const styles = StyleSheet.create({
   },
   selectedColor: {
     borderWidth: 2,
-    borderColor: '#000', 
+    borderColor: '#000',
   },
   addToCartButton: {
     backgroundColor: '#d36a06',

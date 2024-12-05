@@ -3,7 +3,8 @@ import { View, Text, TextInput, StyleSheet, TouchableOpacity, ScrollView } from 
 import * as ImagePicker from 'expo-image-picker';
 import Icon from 'react-native-vector-icons/Ionicons';
 
-export default function UserPage() {
+const UserPage = ({ route }) => {
+  const { setIsLoggedIn } = route.params;
   const [profilePicture, setProfilePicture] = useState(null);
 
   const handleOpenGallery = async () => {
@@ -76,9 +77,15 @@ export default function UserPage() {
       <TouchableOpacity style={styles.button} onPress={console.log('Save clicked')}>
         <Text style={styles.buttonText}>Save</Text>
       </TouchableOpacity>
+
+      <TouchableOpacity style={styles.logoutbutton} onPress={() => setIsLoggedIn(false)}>
+        <Text style={styles.logoutbuttonText}>Log Out</Text>
+      </TouchableOpacity>
     </ScrollView>
   );
 }
+
+export default UserPage;
 
 const styles = StyleSheet.create({
   container: {
@@ -112,6 +119,19 @@ const styles = StyleSheet.create({
   },
   buttonText: {
     color: '#fff',
+    fontSize: 18,
+    fontWeight: '800',
+  },
+  logoutbutton: {
+    backgroundColor: 'transparent',
+    padding: 15,
+    borderRadius: 25,
+    alignItems: 'center',
+    margin: 25,
+    width: '90%'
+  },
+  logoutbuttonText: {
+    color: 'red',
     fontSize: 18,
     fontWeight: '800',
   },

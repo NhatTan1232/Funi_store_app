@@ -11,7 +11,7 @@ export default function App() {
 
   return (
     <NavigationContainer>
-      {isLoggedIn ? <AppNavigator /> : <AuthNavigator setIsLoggedIn={setIsLoggedIn}/>}
+      {isLoggedIn ? <AppNavigator setIsLoggedIn={setIsLoggedIn}/> : <AuthNavigator setIsLoggedIn={setIsLoggedIn}/>}
     </NavigationContainer>
   )
 }
