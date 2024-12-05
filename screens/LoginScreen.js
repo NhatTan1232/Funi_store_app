@@ -9,18 +9,42 @@ import {
   Keyboard,
   TouchableOpacity,
   KeyboardAvoidingView,
+  Alert,
 } from 'react-native';
+import axios from 'axios';
 
 const LoginScreen = ({ route, navigation }) => {
   const { setIsLoggedIn } = route.params;
-  const [userEmail, setUserEmail] = useState('');
+  const [username, setUsername] = useState('');
   const [userPassword, setUserPassword] = useState('');
   const passwordInputRef = createRef();
+
+  const handleLogin = async () => {
+    if (!username || !userPassword) {
+      Alert.alert('Please fill in both username and password');
+      return;
+    }
+
+    try {
+      const response = await axios.post('http://192.168.1.11:8000/login/', { // Replace with host's IP
+        username: username,
+        password: userPassword,
+      });
+
+      if (response.status === 200) {
+        setIsLoggedIn(true);
+        Alert.alert('Login successful');
+      }
+    } catch (error) {
+      console.error('Error logging in', error);
+      Alert.alert('Login failed', 'Invalid username or password');
+    }
+};
 
   return (
     <View style={styles.mainBody}>
       <ImageBackground
-        source={require('../assets/login_background.png')} // Replace with your background image path
+        source={require('../assets/login_background.png')}
         style={styles.imageBackground}
       >
         <ScrollView
@@ -40,11 +64,11 @@ const LoginScreen = ({ route, navigation }) => {
               <View style={styles.SectionStyle}>
                 <TextInput
                   style={styles.inputStyle}
-                  onChangeText={(UserEmail) => setUserEmail(UserEmail)}
-                  placeholder="Enter Email"
+                  onChangeText={(Username) => setUsername(Username)}
+                  placeholder="Enter Username"
                   placeholderTextColor="#8b9cb5"
                   autoCapitalize="none"
-                  keyboardType="email-address"
+                  keyboardType="default"
                   returnKeyType="next"
                   onSubmitEditing={() =>
                     passwordInputRef.current && passwordInputRef.current.focus()
@@ -71,7 +95,7 @@ const LoginScreen = ({ route, navigation }) => {
               <TouchableOpacity
                 style={styles.buttonStyle}
                 activeOpacity={0.5}
-                onPress={() => setIsLoggedIn(true)}  
+                onPress={handleLogin}
               >
                 <Text style={styles.buttonTextStyle}>LOGIN</Text>
               </TouchableOpacity>
