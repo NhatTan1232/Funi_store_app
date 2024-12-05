@@ -2,9 +2,15 @@ import React, { useState } from 'react';
 import { Image, StyleSheet, Text, View, TouchableOpacity, ScrollView } from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
 import { RadioButton } from 'react-native-paper';
+import { useRoute } from '@react-navigation/native';
 
 const PaymentScreen = () => {
   const [checked, setChecked] = useState('cod');
+  const route = useRoute();
+  const { subtotal } = route.params;
+  
+  const shippingPrice = 200000; 
+  const total = subtotal + shippingPrice;
 
   return (
     <ScrollView contentContainerStyle={styles.container}>
@@ -12,12 +18,12 @@ const PaymentScreen = () => {
         <View style={styles.stepRow}>
           <View style={styles.step}>
             <Icon name="checkmark-circle-outline" size={26} color="#de7006" />
-            <Text style={styles.stepLabel}>Shipping</Text>
+            <Text style={styles.stepLabel}>Payment</Text>
           </View>
           <View style={styles.stepLine} />
           <View style={styles.step}>
             <Icon name="checkmark-circle-outline" size={26} color="#de7006" />
-            <Text style={styles.stepLabel}>Payment</Text>
+            <Text style={styles.stepLabel}>Shipping</Text>
           </View>
           <View style={styles.stepLine} />
           <View style={styles.step}>
@@ -82,15 +88,15 @@ const PaymentScreen = () => {
         <Text style={styles.summaryTitle}>Order summary</Text>
         <View style={styles.summaryRow}>
           <Text style={styles.summaryLabel}>Subtotal</Text>
-          <Text style={styles.summaryValue}>đ400</Text>
+          <Text style={styles.summaryAmount}>đ{subtotal.toLocaleString('vi-VN')}</Text>
         </View>
         <View style={styles.summaryRow}>
           <Text style={styles.summaryLabel}>Delivery</Text>
-          <Text style={styles.summaryValue}>Free</Text>
+          <Text style={styles.summaryAmount}>đ200,000</Text>
         </View>
         <View style={styles.summaryRow}>
           <Text style={styles.summaryLabelTotal}>Total</Text>
-          <Text style={styles.summaryValueTotal}>đ400</Text>
+          <Text style={styles.summaryValueTotal}>đ{total.toLocaleString('vi-VN')}</Text>
         </View>
       </View>
 
@@ -108,16 +114,6 @@ const styles = StyleSheet.create({
     flexGrow: 1,
     backgroundColor: '#fff',
     padding: 20,
-  },
-  header: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    marginBottom: 20,
-  },
-  headerTitle: {
-    fontSize: 20,
-    fontWeight: 'bold',
-    marginLeft: 10,
   },
   stepIndicator: {
     marginBottom: 20,

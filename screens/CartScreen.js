@@ -48,7 +48,7 @@ const CartScreen = () => {
   
 
   const handleProceedToCheckout = () => {
-    navigation.navigate('PaymentScreen');
+    navigation.navigate('PaymentScreen', { subtotal });
   };
 
   const handleAddToCart = (item) => {
