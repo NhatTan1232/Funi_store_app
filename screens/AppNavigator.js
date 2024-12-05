@@ -98,7 +98,17 @@ function StoreStack() {
       <Stack.Screen
         name="SearchScreen"
         component={SearchScreen}
-        options={{ headerShown: false }}
+        options={{
+          title: 'Search',
+          headerTitleStyle: {
+            fontFamily: 'PlayfairDisplay_700Bold',
+            fontSize: 24,
+          },
+          headerStyle: {
+            backgroundColor: '#ffe6cf',
+          },      
+          headerTitleAlign: 'center',
+        }}
       />
       <Stack.Screen
         name="ResultScreen"

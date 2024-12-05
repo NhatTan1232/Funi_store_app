@@ -54,18 +54,6 @@ const SearchScreen = ({ navigation }) => {
 
   return (
     <View style={styles.container}>
-      <View style={styles.header}>
-        <TouchableOpacity style={styles.backButton} onPress={handleBack}>
-          <AntDesign name="arrowleft" size={24} color="black" />
-        </TouchableOpacity>
-        <Text style={styles.headerTitle}>Search</Text>
-        <View style={styles.emptySpace} />
-      </View>
-
-      <TouchableOpacity style={styles.resetButton} onPress={handleReset}>
-        <Text style={styles.resetButtonText}>Reset</Text>
-      </TouchableOpacity>
-
       <ScrollView style={styles.scrollView}>
         <View style={styles.contentContainer}>
           <View style={styles.inputGroup}>
@@ -121,6 +109,10 @@ const SearchScreen = ({ navigation }) => {
           </View>
         </View>
       </ScrollView>
+
+      <TouchableOpacity style={styles.resetButton} onPress={handleReset}>
+        <Text style={styles.resetButtonText}>Reset</Text>
+      </TouchableOpacity>
 
       <TouchableOpacity style={styles.searchButton} onPress={handleSearch}>
         <Text style={styles.searchButtonText}>Search</Text>
@@ -265,17 +257,18 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
   },
   resetButton: {
-    position: 'absolute',
-    top: 20,
-    right: 20,
-    backgroundColor: '#d36a06',
-    paddingVertical: 8,
-    paddingHorizontal: 16,
-    borderRadius: 25,
+    backgroundColor: 'transparent',
+    paddingVertical: 12,
+    borderRadius: 30,
+    borderWidth: 2,
+    borderColor: '#d36a06',
+    alignItems: 'center',
+    marginBottom: 20,
+    marginHorizontal: 16,
   },
   resetButtonText: {
-    color: '#fff',
-    fontSize: 14,
+    color: '#d36a06',
+    fontSize: 18,
     fontWeight: 'bold',
   },
 });
