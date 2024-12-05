@@ -15,7 +15,15 @@ const ProductItem = ({ product }) => {
 
   return (
     <TouchableOpacity style={styles.productItem} onPress={handleProductPress}>
-      <Image source={product.color[0].picture} style={styles.productImage} />
+      <View style={styles.colorCirclesContainer}>
+        {product.color.map((colorItem) => (
+          <View
+            key={colorItem.color_id}
+            style={[styles.colorCircle, { backgroundColor: colorItem.color_name }]}
+          />
+        ))}
+      </View>
+      <Image source={product.color[0].picture} style={styles.productImage} resizeMode="contain" />
       <Text style={styles.productName}>{product.name}</Text>
       <Text style={styles.productPrice}>{product.price}</Text>
     </TouchableOpacity>
@@ -117,7 +125,7 @@ const styles = StyleSheet.create({
   },
   topSalerTitle: {
     fontSize: 20,
-    fontWeight: 'bold',
+    fontFamily: 'PlayfairDisplay_700Bold',
     marginBottom: 8,
     color: '#333',
   },
@@ -128,10 +136,17 @@ const styles = StyleSheet.create({
   },
   productItem: {
     alignItems: 'center',
-    width: '48%',  
+    width: '48%',
     marginBottom: 15,
-    backgroundColor: '#fff',
+    position: 'relative',
     borderRadius: 10,
+    backgroundColor: '#fff',
+    padding: 10,
+    shadowColor: 'grey',
+    shadowOffset: { width: 1, height: 1 },
+    shadowOpacity: 0.9,
+    shadowRadius: 1,
+    elevation: 5,
   },
   productImage: {
     width: '100%',
@@ -150,6 +165,20 @@ const styles = StyleSheet.create({
     color: '#999',
     marginTop: 3,
     textAlign: 'center',
+  },
+  colorCirclesContainer: {
+    position: 'absolute',
+    top: 10,
+    left: 10,
+    flexDirection: 'row',
+    justifyContent: 'flex-start',
+    zIndex: 2,
+  },
+  colorCircle: {
+    width: 11,
+    height: 11,
+    borderRadius: 5,
+    marginRight: 7,
   },
 });
 
