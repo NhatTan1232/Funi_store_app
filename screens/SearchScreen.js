@@ -22,6 +22,7 @@ const CategoryItem = ({ category, isSelected, onPress }) => (
 );
 
 const SearchScreen = ({ navigation }) => {
+
   const [productName, setProductName] = useState('');
   const [selectedCategory, setSelectedCategory] = useState(null);
   const [minPrice, setMinPrice] = useState('');
@@ -128,20 +129,8 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: '#fff',
   },
-  header: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-    padding: 16,
-    borderBottomWidth: 1,
-    borderBottomColor: '#eee',
-  },
   backButton: {
     padding: 8,
-  },
-  headerTitle: {
-    fontSize: 18,
-    fontWeight: 'bold',
   },
   emptySpace: {
     width: 24, // Adjust this value if needed to balance the header
@@ -157,9 +146,10 @@ const styles = StyleSheet.create({
     marginBottom: 20,
   },
   label: {
-    fontSize: 16,
-    fontWeight: '500',
-    marginBottom: 5,
+    fontSize: 18,
+    fontFamily: 'PlayfairDisplay_700Bold',
+    marginBottom: 10,
+    marginTop: 10,
   },
   searchBarContainer: {
     flexDirection: 'row',
