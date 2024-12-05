@@ -16,6 +16,9 @@ import CategoryScreen from '../screens/CategoryScreen';
 import ProductScreen from '../screens/ProductScreen';
 import UserPage from '../screens/UserPage';
 
+import SearchScreen from '../screens/SearchScreen'
+import ResultScreen from '../screens/ResultScreen';
+
 const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
 
@@ -91,6 +94,16 @@ function StoreStack() {
           },
           headerTitleAlign: 'center',
         }}
+      />
+      <Stack.Screen
+        name="SearchScreen"
+        component={SearchScreen}
+        options={{ headerShown: false }}
+      />
+      <Stack.Screen
+        name="ResultScreen"
+        component={ResultScreen}
+        options={{ headerShown: false }}
       />
     </Stack.Navigator>
   );
