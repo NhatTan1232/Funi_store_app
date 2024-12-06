@@ -69,3 +69,13 @@ CREATE TABLE order_items (
     FOREIGN KEY (product_id) REFERENCES products(product_id) ON DELETE CASCADE,
     FOREIGN KEY (color_id) REFERENCES product_colors(color_id)
 );
+
+ALTER TABLE users
+ADD COLUMN address VARCHAR(255);
+
+ALTER TABLE users
+ADD COLUMN profile_picture VARCHAR(255);
+
+ALTER TABLE users
+ADD COLUMN age INT;
+
