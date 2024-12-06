@@ -1,4 +1,4 @@
-import React, { useState, createRef } from 'react';
+import React, { useState, createRef, useEffect } from 'react';
 import {
   StyleSheet,
   TextInput,
@@ -9,15 +9,20 @@ import {
   TouchableOpacity,
   KeyboardAvoidingView,
   Alert,
+  Keyboard,
 } from 'react-native';
 import axios from 'axios';
-import AsyncStorage from '@react-native-async-storage/async-storage';  
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const LoginScreen = ({ route, navigation }) => {
   const { setIsLoggedIn } = route.params;
   const [username, setUsername] = useState('');
   const [userPassword, setUserPassword] = useState('');
   const passwordInputRef = createRef();
+
+  useEffect(() => {
+    navigation.setOptions({ setIsLoggedIn });
+  }, [navigation, setIsLoggedIn]);
 
   const handleLogin = async () => {
     if (!username || !userPassword) {
@@ -31,10 +36,19 @@ const LoginScreen = ({ route, navigation }) => {
         password: userPassword,
       });
 
+      console.log(response.data); 
+
       if (response.status === 200) {
-        setIsLoggedIn(true);
-        await AsyncStorage.setItem('user_id', response.data.user_id.toString());
-        Alert.alert('Login successful');
+        const userId = response.data.user_id;
+        const cartId = response.data.cart_id;
+        if (userId && cartId) {
+          setIsLoggedIn(true);
+          Alert.alert('Login successful');
+          await AsyncStorage.setItem('user_id', userId.toString());
+          await AsyncStorage.setItem('cart_id', cartId.toString());
+        } else {
+          Alert.alert('Login failed', 'User ID or Cart ID is missing');
+        }
       }
     } catch (error) {
       console.error('Error logging in', error);
@@ -103,7 +117,7 @@ const LoginScreen = ({ route, navigation }) => {
               <TouchableOpacity
                 style={styles.buttonStyleSecondary}
                 activeOpacity={0.5}
-                onPress={() => navigation.navigate('SignUp', { setIsLoggedIn })}
+                onPress={() => navigation.navigate('SignUp')}
               >
                 <Text style={styles.buttonTextStyle}>SIGNUP</Text>
               </TouchableOpacity>
