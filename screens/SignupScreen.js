@@ -11,6 +11,7 @@ import {
   Alert,
 } from 'react-native';
 import axios from 'axios';
+import { HOST_IP } from '../config';  
 
 const SignupScreen = ({ navigation, setIsLoggedIn }) => {
   const [userName, setUserName] = useState('');
@@ -29,7 +30,7 @@ const SignupScreen = ({ navigation, setIsLoggedIn }) => {
     }
 
     try {
-      const response = await axios.post('http://192.168.1.11:8000/users/', { // Replace with host's IP
+      const response = await axios.post(`${HOST_IP}/users/`, { 
         username: userName,
         email: userEmail,
         password: userPassword,
@@ -58,7 +59,7 @@ const SignupScreen = ({ navigation, setIsLoggedIn }) => {
   return (
     <View style={styles.mainBody}>
       <ImageBackground
-        source={require('../assets/signup_background.png')}  // Replace with your background image path
+        source={require('../assets/signup_background.png')}  // Thay thế bằng đường dẫn đến ảnh nền của bạn
         style={styles.imageBackground}
       >
         <ScrollView
@@ -156,6 +157,8 @@ const SignupScreen = ({ navigation, setIsLoggedIn }) => {
     </View>
   );
 };
+
+
 
 export default SignupScreen;
 

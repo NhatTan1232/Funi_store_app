@@ -6,6 +6,7 @@ import { StarRatingDisplay } from 'react-native-star-rating-widget';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import axios from 'axios';
 import { CartContext } from '../screens/context/CartContext';
+import { HOST_IP } from '../config';  
 
 const reviews = [
   {
@@ -59,7 +60,7 @@ const ProductScreen = ({ navigation }) => {
         return;
       }
 
-      const response = await axios.post('http://192.168.1.11:8000/cart_items/', { // Replace with host's IP
+      const response = await axios.post(`${HOST_IP}/cart_items/`, {  
         cart_id: cartId,
         product_id: product.id,
         quantity: 1,  
