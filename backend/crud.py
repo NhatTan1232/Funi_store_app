@@ -1,16 +1,24 @@
 from sqlalchemy.orm import Session
 from models import User, Product, ProductColor, Cart, CartItem, Order, OrderItem
+import schemas, models
 
-# CRUD cho User
-def create_user(db: Session, username: str, email: str, phone: str, password: str):
-    db_user = User(username=username, email=email, phone=phone, password=password)
+def get_user_by_username(db: Session, username: str):
+    return db.query(models.User).filter(models.User.username == username).first()
+
+def create_user(db: Session, user: schemas.UserCreate):
+    db_user = models.User(
+        username=user.username,
+        email=user.email,
+        phone=user.phone,
+        password=user.password,
+        age=user.age,
+        address=user.address,
+        profile_picture=user.profile_picture
+    )
     db.add(db_user)
     db.commit()
     db.refresh(db_user)
     return db_user
-
-def get_user_by_username(db: Session, username: str):
-    return db.query(User).filter(User.username == username).first()
 
 def get_user_by_email(db: Session, email: str):
     return db.query(User).filter(User.email == email).first()
@@ -45,7 +53,7 @@ def get_product_colors(db: Session, product_id: int):
 
 # CRUD cho Cart
 def create_cart(db: Session, user_id: int):
-    db_cart = Cart(user_id=user_id)
+    db_cart = models.Cart(user_id=user_id)
     db.add(db_cart)
     db.commit()
     db.refresh(db_cart)

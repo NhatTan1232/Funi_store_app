@@ -1,11 +1,13 @@
 from pydantic import BaseModel
 from typing import List, Optional
 
-
 class UserBase(BaseModel):
     username: str
     email: str
     phone: Optional[str] = None
+    age: Optional[int] = None
+    address: Optional[str] = None
+    profile_picture: Optional[str] = None
 
 class UserCreate(UserBase):
     password: str
@@ -36,7 +38,6 @@ class Product(ProductBase):
     class Config:
         orm_mode = True
 
-
 class ProductColorBase(BaseModel):
     color_name: Optional[str] = None
     picture_url: Optional[str] = None
@@ -51,7 +52,6 @@ class ProductColor(ProductColorBase):
     class Config:
         orm_mode = True
 
-
 class CartBase(BaseModel):
     user_id: int
 
@@ -63,7 +63,6 @@ class Cart(CartBase):
 
     class Config:
         orm_mode = True
-
 
 class CartItemBase(BaseModel):
     cart_id: int
@@ -80,7 +79,6 @@ class CartItem(CartItemBase):
     class Config:
         orm_mode = True
 
-
 class OrderBase(BaseModel):
     user_id: int
     cart_id: int
@@ -95,7 +93,6 @@ class Order(OrderBase):
 
     class Config:
         orm_mode = True
-
 
 class OrderItemBase(BaseModel):
     order_id: int

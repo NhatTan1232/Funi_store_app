@@ -2,20 +2,19 @@ from sqlalchemy import Column, Integer, String, DECIMAL, ForeignKey, Text
 from sqlalchemy.orm import relationship
 from database import Base
 
-
 class User(Base):
     __tablename__ = "users"
-
-    user_id = Column(Integer, primary_key=True, autoincrement=True)
-    username = Column(String(255), nullable=False, unique=True)
-    email = Column(String(255), nullable=False, unique=True)
-    phone = Column(String(20), nullable=True)
-    password = Column(String(255), nullable=False)
-
+    
+    user_id = Column(Integer, primary_key=True, index=True)  
+    username = Column(String, unique=True, index=True)
+    email = Column(String, unique=True, index=True)
+    phone = Column(String, nullable=True)
+    password = Column(String)
+    age = Column(Integer, nullable=True)
+    address = Column(String, nullable=True)
+    profile_picture = Column(String, nullable=True)
     carts = relationship("Cart", back_populates="user")
     orders = relationship("Order", back_populates="user")
-
-
 
 class Product(Base):
     __tablename__ = "products"
@@ -31,8 +30,6 @@ class Product(Base):
     order_items = relationship("OrderItem", back_populates="product")
     colors = relationship("ProductColor", back_populates="product")
 
-
-
 class ProductColor(Base):
     __tablename__ = "product_colors"
 
@@ -43,18 +40,14 @@ class ProductColor(Base):
 
     product = relationship("Product", back_populates="colors")
 
-
 class Cart(Base):
     __tablename__ = "carts"
-
+    
     cart_id = Column(Integer, primary_key=True, autoincrement=True)
-    user_id = Column(Integer, ForeignKey("users.user_id"), nullable=False)
-
+    user_id = Column(Integer, ForeignKey('users.user_id'), nullable=False)
     user = relationship("User", back_populates="carts")
     cart_items = relationship("CartItem", back_populates="cart")
-    orders = relationship("Order", back_populates="cart")
-
-
+    orders = relationship("Order", back_populates="cart") 
 
 class CartItem(Base):
     __tablename__ = "cart_items"
@@ -69,8 +62,6 @@ class CartItem(Base):
     product = relationship("Product", back_populates="cart_items")
     color = relationship("ProductColor")
 
-
-
 class Order(Base):
     __tablename__ = "orders"
 
@@ -83,8 +74,6 @@ class Order(Base):
     user = relationship("User", back_populates="orders")
     cart = relationship("Cart", back_populates="orders")
     order_items = relationship("OrderItem", back_populates="order")
-
-
 
 class OrderItem(Base):
     __tablename__ = "order_items"

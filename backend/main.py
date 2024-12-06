@@ -10,10 +10,16 @@ app = FastAPI()
 
 logging.basicConfig(level=logging.DEBUG)
 
-
 @app.middleware("http")
 async def log_requests(request: Request, call_next):
-    logging.info(f"Request: {request.method} {request.url} - Body: {await request.json()}")
+    try:
+        body = await request.body()
+        if body:
+            logging.info(f"Request: {request.method} {request.url} - Body: {await request.json()}")
+        else:
+            logging.info(f"Request: {request.method} {request.url} - No body")
+    except Exception as e:
+        logging.error(f"Error processing request: {e}")
     response = await call_next(request)
     logging.info(f"Response status: {response.status_code}")
     return response
@@ -26,14 +32,12 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-
 def get_db():
     db = SessionLocal()
     try:
         yield db
     finally:
         db.close()
-
 
 @app.post("/login/")
 def login(user: schemas.UserLogin, db: Session = Depends(get_db)):
@@ -44,18 +48,15 @@ def login(user: schemas.UserLogin, db: Session = Depends(get_db)):
         raise HTTPException(status_code=400, detail="Invalid username or password")
     return {"message": "Login successful"}
 
-
-
-
-
-
-
 @app.post("/users/", response_model=schemas.User)
 def create_user(user: schemas.UserCreate, db: Session = Depends(get_db)):
-    db_user = crud.get_user_by_email(db, email=user.email)
+    db_user = crud.get_user_by_username(db, username=user.username)
     if db_user:
-        raise HTTPException(status_code=400, detail="Email đã được sử dụng")
-    return crud.create_user(db=db, username=user.username, email=user.email, phone=user.phone, password=user.password)
+        raise HTTPException(status_code=400, detail="Username đã được sử dụng")
+    
+    db_user = crud.create_user(db=db, user=user)
+    crud.create_cart(db=db, user_id=db_user.user_id)  # Cập nhật để sử dụng user_id
+    return db_user
 
 @app.get("/users/{user_id}", response_model=schemas.User)
 def read_user(user_id: int, db: Session = Depends(get_db)):
@@ -63,7 +64,6 @@ def read_user(user_id: int, db: Session = Depends(get_db)):
     if db_user is None:
         raise HTTPException(status_code=404, detail="Người dùng không tồn tại")
     return db_user
-
 
 @app.post("/products/", response_model=schemas.Product)
 def create_product(product: schemas.ProductCreate, db: Session = Depends(get_db)):
@@ -81,7 +81,6 @@ def read_products(skip: int = 0, limit: int = 100, db: Session = Depends(get_db)
     products = crud.get_all_products(db, skip=skip, limit=limit)
     return products
 
-
 @app.post("/product_colors/", response_model=schemas.ProductColor)
 def create_product_color(color: schemas.ProductColorCreate, db: Session = Depends(get_db)):
     return crud.create_product_color(db=db, **color.dict())
@@ -89,7 +88,6 @@ def create_product_color(color: schemas.ProductColorCreate, db: Session = Depend
 @app.get("/product_colors/{product_id}", response_model=List[schemas.ProductColor])
 def read_product_colors(product_id: int, db: Session = Depends(get_db)):
     return crud.get_product_colors(db, product_id=product_id)
-
 
 @app.post("/carts/", response_model=schemas.Cart)
 def create_cart(cart: schemas.CartCreate, db: Session = Depends(get_db)):
@@ -101,7 +99,6 @@ def read_cart(user_id: int, db: Session = Depends(get_db)):
     if db_cart is None:
         raise HTTPException(status_code=404, detail="Giỏ hàng không tồn tại")
     return db_cart
-
 
 @app.post("/cart_items/", response_model=schemas.CartItem)
 def create_cart_item(cart_item: schemas.CartItemCreate, db: Session = Depends(get_db)):
@@ -118,7 +115,6 @@ def update_cart_item(cart_item_id: int, quantity: int, db: Session = Depends(get
 @app.delete("/cart_items/{cart_item_id}", response_model=schemas.CartItem)
 def delete_cart_item(cart_item_id: int, db: Session = Depends(get_db)):
     return crud.delete_cart_item(db=db, cart_item_id=cart_item_id)
-
 
 @app.post("/orders/", response_model=schemas.Order)
 def create_order(order: schemas.OrderCreate, db: Session = Depends(get_db)):
