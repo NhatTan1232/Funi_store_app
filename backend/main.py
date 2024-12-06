@@ -26,7 +26,7 @@ async def log_requests(request: Request, call_next):
 
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],
+    allow_origins=["*"],  
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
@@ -141,7 +141,42 @@ def delete_cart_item(cart_item_id: int, db: Session = Depends(get_db)):
 
 @app.post("/orders/", response_model=schemas.Order)
 def create_order(order: schemas.OrderCreate, db: Session = Depends(get_db)):
-    return crud.create_order(db=db, user_id=order.user_id, cart_id=order.cart_id, payment_method=order.payment_method)
+    return crud.create_order(
+        db=db,
+        user_id=order.user_id,
+        cart_id=order.cart_id,
+        total_amount=order.total_amount,
+        payment_method=order.payment_method,
+        name=order.name, 
+        address=order.address  
+    )
+
+@app.post("/order_items/")
+def create_order_items(items: List[schemas.OrderItemCreate], db: Session = Depends(get_db)):
+    created_items = []
+    for item in items:
+        existing_item = db.query(models.OrderItem).filter(
+            models.OrderItem.order_id == item.order_id,
+            models.OrderItem.product_id == item.product_id,
+            models.OrderItem.color_id == item.color_id,
+        ).first()
+
+        if existing_item:
+            continue
+
+        new_item = models.OrderItem(
+            order_id=item.order_id,
+            product_id=item.product_id,
+            color_id=item.color_id,
+            quantity=item.quantity,
+            unit_price=item.unit_price,
+            total_price=item.total_price,
+        )
+        db.add(new_item)
+        created_items.append(new_item)
+
+    db.commit()
+    return created_items
 
 @app.get("/orders/{order_id}", response_model=List[schemas.OrderItem])
 def read_order_items(order_id: int, db: Session = Depends(get_db)):

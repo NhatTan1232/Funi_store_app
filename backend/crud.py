@@ -82,7 +82,7 @@ def create_cart_item(db: Session, cart_id: int, product_id: int, quantity: int, 
     return db_cart_item
 
 def get_cart_items(db: Session, cart_id: int):
-    return db.query(CartItem).filter(CartItem.cart_id == cart_id).all()
+    return db.query(CartItem).join(Product).filter(CartItem.cart_id == cart_id).all()
 
 def update_cart_item_quantity(db: Session, cart_item_id: int, quantity: int):
     db_cart_item = db.query(CartItem).filter(CartItem.cart_item_id == cart_item_id).first()
@@ -100,11 +100,17 @@ def delete_cart_item(db: Session, cart_item_id: int):
     return db_cart_item
 
 # CRUD cho Order
-def create_order(db: Session, user_id: int, cart_id: int, payment_method: str):
+def create_order(db: Session, user_id: int, cart_id: int, total_amount: float, payment_method: str, name: str, address: str):
     cart_items = db.query(CartItem).filter(CartItem.cart_id == cart_id).all()
-    total_amount = sum(item.quantity * item.product.price for item in cart_items)
     
-    db_order = Order(user_id=user_id, cart_id=cart_id, total_amount=total_amount, payment_method=payment_method)
+    db_order = Order(
+        user_id=user_id,
+        cart_id=cart_id,
+        total_amount=total_amount,
+        payment_method=payment_method,
+        name=name,  
+        address=address 
+    )
     db.add(db_order)
     db.commit()
     db.refresh(db_order)
@@ -115,9 +121,15 @@ def create_order(db: Session, user_id: int, cart_id: int, payment_method: str):
     
     return db_order
 
-# CRUD cho OrderItem
-def create_order_item(db: Session, order_id: int, product_id: int, quantity: int, unit_price: float, total_price: float, color_id: int):
-    db_order_item = OrderItem(order_id=order_id, product_id=product_id, quantity=quantity, unit_price=unit_price, total_price=total_price, color_id=color_id)
+def create_order_item(db: Session, order_id: int, product_id: int, quantity: int, unit_price: float, total_price: float, color_id: Optional[int]):
+    db_order_item = OrderItem(
+        order_id=order_id,
+        product_id=product_id,
+        quantity=quantity,
+        unit_price=unit_price,
+        total_price=total_price,
+        color_id=color_id
+    )
     db.add(db_order_item)
     db.commit()
     db.refresh(db_order_item)

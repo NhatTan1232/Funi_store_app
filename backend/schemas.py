@@ -92,6 +92,8 @@ class OrderBase(BaseModel):
     cart_id: int
     total_amount: float
     payment_method: Optional[str] = None
+    name: Optional[str] = None
+    address: Optional[str] = None  
 
 class OrderCreate(OrderBase):
     pass
