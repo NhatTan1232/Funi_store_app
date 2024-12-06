@@ -6,12 +6,12 @@ import {
   Text,
   ScrollView,
   ImageBackground,
-  Keyboard,
   TouchableOpacity,
   KeyboardAvoidingView,
   Alert,
 } from 'react-native';
 import axios from 'axios';
+import AsyncStorage from '@react-native-async-storage/async-storage';  
 
 const LoginScreen = ({ route, navigation }) => {
   const { setIsLoggedIn } = route.params;
@@ -33,13 +33,14 @@ const LoginScreen = ({ route, navigation }) => {
 
       if (response.status === 200) {
         setIsLoggedIn(true);
+        await AsyncStorage.setItem('user_id', response.data.user_id.toString());
         Alert.alert('Login successful');
       }
     } catch (error) {
       console.error('Error logging in', error);
       Alert.alert('Login failed', 'Invalid username or password');
     }
-};
+  };
 
   return (
     <View style={styles.mainBody}>
@@ -102,7 +103,7 @@ const LoginScreen = ({ route, navigation }) => {
               <TouchableOpacity
                 style={styles.buttonStyleSecondary}
                 activeOpacity={0.5}
-                onPress={() => navigation.navigate('SignUp')}
+                onPress={() => navigation.navigate('SignUp', { setIsLoggedIn })}
               >
                 <Text style={styles.buttonTextStyle}>SIGNUP</Text>
               </TouchableOpacity>
@@ -186,18 +187,5 @@ const styles = StyleSheet.create({
     borderRadius: 8,
     borderColor: '#dadae8',
     backgroundColor: 'rgba(255, 255, 255, 0.9)',
-  },
-  registerTextStyle: {
-    color: '#FFFFFF',
-    textAlign: 'center',
-    fontWeight: 'bold',
-    fontSize: 14,
-    alignSelf: 'center',
-    padding: 10,
-  },
-  errorTextStyle: {
-    color: 'red',
-    textAlign: 'center',
-    fontSize: 14,
   },
 });
