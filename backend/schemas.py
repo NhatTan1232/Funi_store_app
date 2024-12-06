@@ -16,11 +16,19 @@ class User(UserBase):
     user_id: int
 
     class Config:
-        orm_mode = True
+        from_attributes = True
 
 class UserLogin(BaseModel):
     username: str
     password: str
+
+class UserLoginResponse(BaseModel):
+    user_id: int
+    cart_id: int
+    message: str
+
+    class Config:
+        from_attributes = True
 
 class ProductBase(BaseModel):
     product_name: str
@@ -36,7 +44,7 @@ class Product(ProductBase):
     product_id: int
 
     class Config:
-        orm_mode = True
+        from_attributes = True
 
 class ProductColorBase(BaseModel):
     color_name: Optional[str] = None
@@ -50,7 +58,7 @@ class ProductColor(ProductColorBase):
     product_id: int
 
     class Config:
-        orm_mode = True
+        from_attributes = True
 
 class CartBase(BaseModel):
     user_id: int
@@ -62,7 +70,7 @@ class Cart(CartBase):
     cart_id: int
 
     class Config:
-        orm_mode = True
+        from_attributes = True
 
 class CartItemBase(BaseModel):
     cart_id: int
@@ -77,7 +85,7 @@ class CartItem(CartItemBase):
     cart_item_id: int
 
     class Config:
-        orm_mode = True
+        from_attributes = True
 
 class OrderBase(BaseModel):
     user_id: int
@@ -92,7 +100,7 @@ class Order(OrderBase):
     order_id: int
 
     class Config:
-        orm_mode = True
+        from_attributes = True
 
 class OrderItemBase(BaseModel):
     order_id: int
@@ -109,4 +117,4 @@ class OrderItem(OrderItemBase):
     order_item_id: int
 
     class Config:
-        orm_mode = True
+        from_attributes = True

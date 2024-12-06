@@ -6,13 +6,13 @@ from sqlalchemy.orm import Session
 sys.path.append(path.dirname(path.abspath(__file__)))
 
 from models import Product, ProductColor
-from database import Session
+from database import SessionLocal  
 
 with open('storeProduct.json', 'r') as f:
     products = json.load(f)
 
 def load_data_to_db():
-    db: Session = Session()
+    db: Session = SessionLocal()  
     try:
         for product in products:
             db_product = Product(

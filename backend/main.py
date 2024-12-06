@@ -46,7 +46,12 @@ def login(user: schemas.UserLogin, db: Session = Depends(get_db)):
         raise HTTPException(status_code=400, detail="Invalid username or password")
     if db_user.password != user.password:
         raise HTTPException(status_code=400, detail="Invalid username or password")
-    return {"message": "Login successful"}
+    
+    db_cart = crud.get_cart_by_user_id(db, db_user.user_id)
+    if not db_cart:
+        db_cart = crud.create_cart(db, user_id=db_user.user_id)
+    
+    return {"user_id": db_user.user_id, "cart_id": db_cart.cart_id, "message": "Login successful"}
 
 @app.post("/users/", response_model=schemas.User)
 def create_user(user: schemas.UserCreate, db: Session = Depends(get_db)):
@@ -55,7 +60,7 @@ def create_user(user: schemas.UserCreate, db: Session = Depends(get_db)):
         raise HTTPException(status_code=400, detail="Username đã được sử dụng")
     
     db_user = crud.create_user(db=db, user=user)
-    crud.create_cart(db=db, user_id=db_user.user_id)  # Cập nhật để sử dụng user_id
+    crud.create_cart(db=db, user_id=db_user.user_id)  
     return db_user
 
 @app.get("/users/{user_id}", response_model=schemas.User)
@@ -101,8 +106,26 @@ def read_cart(user_id: int, db: Session = Depends(get_db)):
     return db_cart
 
 @app.post("/cart_items/", response_model=schemas.CartItem)
-def create_cart_item(cart_item: schemas.CartItemCreate, db: Session = Depends(get_db)):
-    return crud.create_cart_item(db=db, **cart_item.dict())
+def create_or_update_cart_item(cart_item: schemas.CartItemCreate, db: Session = Depends(get_db)):
+    existing_cart_item = crud.get_cart_item_by_cart_and_product(db, cart_item.cart_id, cart_item.product_id, cart_item.color_id)
+    if existing_cart_item:
+        existing_cart_item.quantity += cart_item.quantity
+        db.commit()
+        db.refresh(existing_cart_item)
+        return existing_cart_item
+    else:
+        return crud.create_cart_item(db=db, **cart_item.dict())
+
+@app.get("/carts/{user_id}/items", response_model=List[schemas.CartItem])
+def read_cart_items(user_id: int, db: Session = Depends(get_db)):
+    db_cart = crud.get_cart_by_user_id(db, user_id=user_id)
+    if db_cart is None:
+        raise HTTPException(status_code=404, detail="Giỏ hàng không tồn tại")
+    cart_items = crud.get_cart_items(db, cart_id=db_cart.cart_id)
+    for item in cart_items:
+        item.product = crud.get_product_by_id(db, item.product_id)
+        item.color = crud.get_product_color_by_id(db, item.color_id)
+    return cart_items
 
 @app.get("/cart_items/{cart_id}", response_model=List[schemas.CartItem])
 def read_cart_items(cart_id: int, db: Session = Depends(get_db)):

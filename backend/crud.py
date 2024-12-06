@@ -1,3 +1,4 @@
+from typing import Optional
 from sqlalchemy.orm import Session
 from models import User, Product, ProductColor, Cart, CartItem, Order, OrderItem
 import schemas, models
@@ -51,6 +52,9 @@ def create_product_color(db: Session, product_id: int, color_name: str, picture_
 def get_product_colors(db: Session, product_id: int):
     return db.query(ProductColor).filter(ProductColor.product_id == product_id).all()
 
+def get_product_color_by_id(db: Session, color_id: int):
+    return db.query(ProductColor).filter(ProductColor.color_id == color_id).first()
+
 # CRUD cho Cart
 def create_cart(db: Session, user_id: int):
     db_cart = models.Cart(user_id=user_id)
@@ -63,8 +67,15 @@ def get_cart_by_user_id(db: Session, user_id: int):
     return db.query(Cart).filter(Cart.user_id == user_id).first()
 
 # CRUD cho CartItem
-def create_cart_item(db: Session, cart_id: int, product_id: int, quantity: int, color_id: int):
-    db_cart_item = CartItem(cart_id=cart_id, product_id=product_id, quantity=quantity, color_id=color_id)
+def get_cart_item_by_cart_and_product(db: Session, cart_id: int, product_id: int, color_id: Optional[int] = None):
+    return db.query(models.CartItem).filter(
+        models.CartItem.cart_id == cart_id,
+        models.CartItem.product_id == product_id,
+        models.CartItem.color_id == color_id
+    ).first()
+
+def create_cart_item(db: Session, cart_id: int, product_id: int, quantity: int, color_id: Optional[int] = None):
+    db_cart_item = models.CartItem(cart_id=cart_id, product_id=product_id, quantity=quantity, color_id=color_id)
     db.add(db_cart_item)
     db.commit()
     db.refresh(db_cart_item)
