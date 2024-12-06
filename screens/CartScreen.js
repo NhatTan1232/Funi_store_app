@@ -1,24 +1,49 @@
 import React, { useContext, useState, useEffect } from 'react';
-import { View, Text, FlatList, Image, StyleSheet, TextInput, TouchableOpacity } from 'react-native';
-import { CartContext } from '../screens/context/CartContext';
-import Icon from 'react-native-vector-icons/Ionicons';
+import { View, Text, FlatList, Image, StyleSheet, TextInput, TouchableOpacity, Alert } from 'react-native';
+import axios from 'axios';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useNavigation } from '@react-navigation/native';
+import Icon from 'react-native-vector-icons/Ionicons';
+import products from '../assets/components/storeProduct'; 
 
 const CartScreen = () => {
-  const { cart, setCart } = useContext(CartContext);
+  const [cartItems, setCartItems] = useState([]);
+  const [quantities, setQuantities] = useState({});
+  const [subtotal, setSubtotal] = useState(0);
   const navigation = useNavigation();
 
-  const [quantities, setQuantities] = useState(cart.reduce((acc, item) => ({ ...acc, [item.id]: item.quantity || 1 }), {}));
-  const [subtotal, setSubtotal] = useState(0);
+  useEffect(() => {
+    const fetchCartItems = async () => {
+      try {
+        const userId = await AsyncStorage.getItem('user_id');
+        if (!userId) {
+          Alert.alert('No user ID found');
+          return;
+        }
+
+        const response = await axios.get(`http://192.168.1.11:8000/carts/${userId}/items`); // Replace with host's IP
+        setCartItems(response.data);
+        const initialQuantities = response.data.reduce((acc, item) => ({ ...acc, [item.cart_item_id]: item.quantity }), {});
+        setQuantities(initialQuantities);
+
+      } catch (error) {
+        console.error('Error fetching cart items', error);
+        Alert.alert('Failed to fetch cart items');
+      }
+    };
+
+    fetchCartItems();
+  }, []);
 
   useEffect(() => {
     calculateSubtotal();
-  }, [quantities]);
+  }, [quantities, cartItems]);
 
   const calculateSubtotal = () => {
-    const total = cart.reduce((accumulator, item) => {
-      const itemPrice = parseFloat(item.price.replace(/,/g, ''));
-      const quantity = quantities[item.id] || 1;
+    const total = cartItems.reduce((accumulator, item) => {
+      const product = products.find(p => p.id === item.product_id);
+      const itemPrice = product ? parseFloat(product.price.replace(/,/g, '')) : 0;
+      const quantity = quantities[item.cart_item_id] || 1;
       return accumulator + (itemPrice * quantity);
     }, 0);
     setSubtotal(total);
@@ -27,70 +52,52 @@ const CartScreen = () => {
   const handleQuantityChange = (id, value) => {
     const newQuantities = { ...quantities, [id]: parseInt(value) || 1 };
     setQuantities(newQuantities);
-    
-    const newCart = cart.map(item => 
-      item.id === id ? { ...item, quantity: newQuantities[id] } : item
+
+    const newCartItems = cartItems.map(item => 
+      item.cart_item_id === id ? { ...item, quantity: newQuantities[id] } : item
     );
-    setCart(newCart);
+    setCartItems(newCartItems);
   };
 
-  const handleRemoveItem = (id, selectedColor) => {
-    const newCart = cart.filter(item => 
-      !(item.id === id && item.selectedColor.color_name === selectedColor.color_name)
-    );
-  
+  const handleRemoveItem = (id) => {
+    const newCartItems = cartItems.filter(item => item.cart_item_id !== id);
+    setCartItems(newCartItems);
 
     const newQuantities = { ...quantities };
-    delete newQuantities[`${id}-${selectedColor.color_name}`];  
+    delete newQuantities[id];
     setQuantities(newQuantities);
-    setCart(newCart);
   };
-  
 
   const handleProceedToCheckout = () => {
     navigation.navigate('PaymentScreen', { subtotal });
   };
 
-  const handleAddToCart = (item) => {
-    const existingItemIndex = cart.findIndex(cartItem => 
-      cartItem.id === item.id && cartItem.selectedColor.color_name === item.selectedColor.color_name
-    );
-
-    if (existingItemIndex !== -1) {
-      const updatedCart = [...cart];
-      updatedCart[existingItemIndex].quantity += 1;  
-      setCart(updatedCart);
-    } else {
-      const newItem = { ...item, quantity: 1 };
-      setCart([...cart, newItem]);
-    }
-  };
-
   const renderCartItem = ({ item }) => {
-    const selectedColor = item.selectedColor || {};
+    const product = products.find(p => p.id === item.product_id);
+    const color = product ? product.color.find(c => c.color_id === item.color_id) : null;
+
+    if (!product || !color) {
+      return null; 
+    }
 
     return (
       <View style={styles.cartItem}>
-        {selectedColor.picture ? (
-          <Image source={selectedColor.picture} style={styles.productImage} resizeMode='contain'/>
-        ) : (
-          <View style={styles.productImagePlaceholder}></View>
-        )}
+        <Image source={color.picture} style={styles.productImage} resizeMode='contain' />
         <View style={styles.productDetails}>
-          <Text style={styles.productName}>{item.name}</Text>
-          <Text style={styles.productColor}>Color: {selectedColor.color_name || 'Unknown'}</Text>
+          <Text style={styles.productName}>{product.name}</Text>
+          <Text style={styles.productColor}>Color: {color.color_name}</Text>
           <View style={styles.productControls}>
             <Text>Số lượng:</Text>
             <TextInput
               style={styles.quantityInput}
               keyboardType='numeric'
-              value={quantities[item.id].toString()}
-              onChangeText={(value) => handleQuantityChange(item.id, value)}
+              value={quantities[item.cart_item_id].toString()}
+              onChangeText={(value) => handleQuantityChange(item.cart_item_id, value)}
             />
-            <TouchableOpacity style={styles.trashIcon} onPress={() => handleRemoveItem(item.id, selectedColor)}>
+            <TouchableOpacity style={styles.trashIcon} onPress={() => handleRemoveItem(item.cart_item_id)}>
               <Icon name="trash-outline" size={24} color="grey" />
             </TouchableOpacity>
-            <Text style={styles.productPrice}>đ{(parseFloat(item.price.replace(/,/g, '')) * quantities[item.id]).toLocaleString('vi-VN')}</Text>
+            <Text style={styles.productPrice}>đ{(parseFloat(product.price.replace(/,/g, '')) * quantities[item.cart_item_id]).toLocaleString('vi-VN')}</Text>
           </View>
         </View>
       </View>
@@ -100,9 +107,9 @@ const CartScreen = () => {
   return (
     <View style={styles.container}>
       <FlatList
-        data={cart}
+        data={cartItems}
         renderItem={renderCartItem}
-        keyExtractor={(item) => `${item.id}-${item.selectedColor?.color_name || 'default'}`} 
+        keyExtractor={(item) => item.cart_item_id.toString()}
         contentContainerStyle={styles.cartList}
       />
       <View style={styles.subtotalContainer}>

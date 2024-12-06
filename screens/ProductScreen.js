@@ -3,10 +3,11 @@ import { View, Text, Image, StyleSheet, ScrollView, TouchableOpacity, Alert } fr
 import { useRoute } from '@react-navigation/native';
 import { AntDesign } from '@expo/vector-icons';
 import { StarRatingDisplay } from 'react-native-star-rating-widget';
-import { CartContext } from '../screens/context/CartContext';  
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import axios from 'axios';
+import { CartContext } from '../screens/context/CartContext';
 
 const reviews = [
-  // Sofa products
   {
     product_id: 1,
     review: [
@@ -43,26 +44,37 @@ const ProductScreen = ({ navigation }) => {
   const { product } = route.params;
 
   const [selectedColor, setSelectedColor] = useState(product.color[0]);
-  const { addToCart } = useContext(CartContext);  
+  const { addToCart } = useContext(CartContext);
 
   const handleColorSelect = (color) => {
     setSelectedColor(color);
   };
 
-  const handleAddToCart = () => {
-    const productWithSelectedColor = {
-      ...product,
-      selectedColor,  
-    };
-    addToCart(productWithSelectedColor);  
-    
-    Alert.alert(
-      "Success",
-      "Product added to cart!",
-      [
-        { text: "OK", onPress: () => console.log("OK Pressed") }
-      ]
-    );
+  const handleAddToCart = async () => {
+    try {
+      const userId = await AsyncStorage.getItem('user_id');
+      const cartId = await AsyncStorage.getItem('cart_id');
+      if (!cartId) {
+        Alert.alert('No cart found');
+        return;
+      }
+
+      const response = await axios.post('http://192.168.1.11:8000/cart_items/', { // Replace with host's IP
+        cart_id: cartId,
+        product_id: product.id,
+        quantity: 1,  
+        color_id: selectedColor ? selectedColor.color_id : null,
+      });
+
+      if (response.status === 200) {
+        Alert.alert("Success", "Product added to cart!");
+      } else {
+        Alert.alert("Failed", "Could not add product to cart");
+      }
+    } catch (error) {
+      console.error('Error adding to cart', error);
+      Alert.alert('Failed to add product to cart');
+    }
   };
 
   const handleNavigateToCart = () => {
@@ -120,6 +132,7 @@ const ProductScreen = ({ navigation }) => {
     </View>
   );
 };
+
 
 const styles = StyleSheet.create({
   container: {
@@ -179,7 +192,7 @@ const styles = StyleSheet.create({
     marginBottom: 8,
   },
   starRating: {
-    marginHorizontal: 0, // Adjust the space between each star
+    marginHorizontal: 0, 
   },
   reviewText: {
     marginLeft: 8,
