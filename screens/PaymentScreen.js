@@ -1,16 +1,76 @@
 import React, { useState } from 'react';
-import { Image, StyleSheet, Text, View, TouchableOpacity, ScrollView } from 'react-native';
+import { Image, Text, View, TextInput, TouchableOpacity, ScrollView, Alert, StyleSheet } from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
 import { RadioButton } from 'react-native-paper';
-import { useRoute } from '@react-navigation/native';
+import { useRoute, useNavigation } from '@react-navigation/native';
+import axios from 'axios';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import { HOST_IP } from '../config';
 
 const PaymentScreen = () => {
   const [checked, setChecked] = useState('cod');
+  const [isEditing, setIsEditing] = useState(false);
+  const [name, setName] = useState('Maria Le');
+  const [street, setStreet] = useState('Sesame St. 18');
+  const [isSubmitting, setIsSubmitting] = useState(false);
+
   const route = useRoute();
-  const { subtotal } = route.params;
-  
+  const { cartItems, subtotal } = route.params;
+  const navigation = useNavigation();
+
   const shippingPrice = 200000; 
   const total = subtotal + shippingPrice;
+
+  const handleEditToggle = () => setIsEditing(!isEditing);
+
+  const handleOrderSubmit = async () => {
+    if (isSubmitting) return; // Ngăn không cho gửi nếu đang trong quá trình xử lý
+    setIsSubmitting(true);
+  
+    try {
+      const userId = await AsyncStorage.getItem('user_id');
+      if (!userId) throw new Error('User ID not found');
+  
+      const orderData = {
+        user_id: userId,
+        cart_id: cartItems[0]?.cart_id,
+        total_amount: total,
+        payment_method: checked,
+        name,
+        address: street,
+      };
+  
+      const orderResponse = await axios.post(`${HOST_IP}/orders/`, orderData);
+  
+      if (orderResponse.status === 200) {
+        const orderId = orderResponse.data.order_id;
+        const orderItems = cartItems.map(item => {
+          const unitPrice = parseFloat(item.price.replace(/,/g, ''));
+          const totalPrice = unitPrice * item.quantity;
+  
+          return {
+            order_id: orderId,
+            product_id: item.product_id,
+            color_id: item.color_id,
+            quantity: item.quantity,
+            unit_price: unitPrice,
+            total_price: totalPrice,
+          };
+        });
+  
+        await axios.post(`${HOST_IP}/order_items/`, orderItems);
+  
+        Alert.alert('Order placed successfully');
+      } else {
+        throw new Error('Failed to create order');
+      }
+    } catch (error) {
+      Alert.alert('Error', error.message);
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
+  
 
   return (
     <ScrollView contentContainerStyle={styles.container}>
@@ -34,7 +94,9 @@ const PaymentScreen = () => {
       </View>
 
       <Text style={styles.confirmText}>Confirm and submit your order</Text>
-      <Text style={styles.termsText}>By submitting the order, you agree to our Terms of Use and Privacy Policy.</Text>
+      <Text style={styles.termsText}>
+        By submitting the order, you agree to our Terms of Use and Privacy Policy.
+      </Text>
 
       <View style={styles.section}>
         <View style={styles.sectionHeader}>
@@ -44,23 +106,23 @@ const PaymentScreen = () => {
           </TouchableOpacity>
         </View>
         <View style={styles.paymentInfo}>
-          <Image style={styles.paymentIcon} source={require('../assets/cod.jpg')} resizeMode='contain' />
+          <Image style={styles.paymentIcon} source={require('../assets/cod.jpg')} resizeMode="contain" />
           <Text style={styles.cardDetails}>Cash on delivery</Text>
           <RadioButton
             value="cod"
             status={checked === 'cod' ? 'checked' : 'unchecked'}
             onPress={() => setChecked('cod')}
-            color='#de7006'
+            color="#de7006"
           />
         </View>
         <View style={styles.paymentInfo}>
-          <Image style={styles.paymentIcon} source={require('../assets/momo.png')} resizeMode='contain' />
+          <Image style={styles.paymentIcon} source={require('../assets/momo.png')} resizeMode="contain" />
           <Text style={styles.cardDetails}>MoMo E-Wallet</Text>
           <RadioButton
             value="momo"
             status={checked === 'momo' ? 'checked' : 'unchecked'}
             onPress={() => setChecked('momo')}
-            color='#de7006'
+            color="#de7006"
           />
         </View>
       </View>
@@ -68,20 +130,33 @@ const PaymentScreen = () => {
       <View style={styles.section}>
         <View style={styles.sectionHeader}>
           <Text style={styles.sectionTitle}>Shipping address</Text>
-          <TouchableOpacity>
-            <Text style={styles.editText}>Edit</Text>
+          <TouchableOpacity onPress={handleEditToggle}>
+            <Text style={styles.editText}>{isEditing ? 'Save' : 'Edit'}</Text>
           </TouchableOpacity>
         </View>
-        <View style={styles.addressInfo}>
-          <View style={styles.addressRow}>
-            <Text style={styles.addressLabel}>Name:</Text>
-            <Text style={styles.addressDetail}>Maria Le</Text>
+        {isEditing ? (
+          <View style={styles.addressInfo}>
+            <View style={styles.addressRow}>
+              <Text style={styles.addressLabel}>Name:</Text>
+              <TextInput style={styles.addressInput} value={name} onChangeText={setName} />
+            </View>
+            <View style={styles.addressRow}>
+              <Text style={styles.addressLabel}>Street:</Text>
+              <TextInput style={styles.addressInput} value={street} onChangeText={setStreet} />
+            </View>
           </View>
-          <View style={styles.addressRow}>
-            <Text style={styles.addressLabel}>Street:</Text>
-            <Text style={styles.addressDetail}>Sesame St. 18</Text>
+        ) : (
+          <View style={styles.addressInfo}>
+            <View style={styles.addressRow}>
+              <Text style={styles.addressLabel}>Name:</Text>
+              <Text style={styles.addressDetail}>{name}</Text>
+            </View>
+            <View style={styles.addressRow}>
+              <Text style={styles.addressLabel}>Street:</Text>
+              <Text style={styles.addressDetail}>{street}</Text>
+            </View>
           </View>
-        </View>
+        )}
       </View>
 
       <View style={styles.orderSummary}>
@@ -100,14 +175,19 @@ const PaymentScreen = () => {
         </View>
       </View>
 
-      <TouchableOpacity style={styles.submitButton}>
+      <TouchableOpacity style={styles.submitButton} onPress={handleOrderSubmit}>
         <Text style={styles.submitButtonText}>Submit order</Text>
       </TouchableOpacity>
     </ScrollView>
   );
-}
+};
+
+
+
 
 export default PaymentScreen;
+
+
 
 const styles = StyleSheet.create({
   container: {

@@ -1,10 +1,11 @@
-import React, { useContext, useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { View, Text, FlatList, Image, StyleSheet, TextInput, TouchableOpacity, Alert } from 'react-native';
 import axios from 'axios';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useNavigation } from '@react-navigation/native';
 import Icon from 'react-native-vector-icons/Ionicons';
-import products from '../assets/components/storeProduct'; 
+import products from '../assets/components/storeProduct';
+import { HOST_IP } from '../config';  
 
 const CartScreen = () => {
   const [cartItems, setCartItems] = useState([]);
@@ -21,8 +22,9 @@ const CartScreen = () => {
           return;
         }
 
-        const response = await axios.get(`http://192.168.1.11:8000/carts/${userId}/items`); // Replace with host's IP
+        const response = await axios.get(`${HOST_IP}/carts/${userId}/items`);  
         setCartItems(response.data);
+
         const initialQuantities = response.data.reduce((acc, item) => ({ ...acc, [item.cart_item_id]: item.quantity }), {});
         setQuantities(initialQuantities);
 
@@ -69,7 +71,14 @@ const CartScreen = () => {
   };
 
   const handleProceedToCheckout = () => {
-    navigation.navigate('PaymentScreen', { subtotal });
+    const cartItemsWithPrice = cartItems.map(item => {
+      const product = products.find(p => p.id === item.product_id);
+      return {
+        ...item,
+        price: product ? product.price : 0
+      };
+    });
+    navigation.navigate('PaymentScreen', { cartItems: cartItemsWithPrice, subtotal });
   };
 
   const renderCartItem = ({ item }) => {
@@ -122,6 +131,7 @@ const CartScreen = () => {
     </View>
   );
 };
+
 
 const styles = StyleSheet.create({
   container: {
