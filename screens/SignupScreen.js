@@ -6,25 +6,59 @@ import {
   Text,
   ScrollView,
   ImageBackground,
-  Keyboard,
   TouchableOpacity,
   KeyboardAvoidingView,
+  Alert,
 } from 'react-native';
+import axios from 'axios';
 
-const RegisterScreen = ({ navigation, setIsLoggedIn }) => {
+const SignupScreen = ({ navigation, setIsLoggedIn }) => {
   const [userName, setUserName] = useState('');
   const [userEmail, setUserEmail] = useState('');
   const [userAge, setUserAge] = useState('');
   const [userPassword, setUserPassword] = useState('');
-  
+
   const emailInputRef = createRef();
   const ageInputRef = createRef();
   const passwordInputRef = createRef();
 
+  const handleSignUp = async () => {
+    if (!userName || !userEmail || !userPassword || !userAge) {
+      Alert.alert('Please fill in all fields');
+      return;
+    }
+
+    try {
+      const response = await axios.post('http://192.168.1.11:8000/users/', { // Replace with host's IP
+        username: userName,
+        email: userEmail,
+        password: userPassword,
+        age: userAge,
+      });
+
+      if (response.status === 200) {
+        Alert.alert(
+          'Sign up successful!',
+          'Your account has been created successfully. Please login to continue.',
+          [
+            {
+              text: 'OK',
+              onPress: () => navigation.navigate('Login', { fromSignup: true }),
+            },
+          ],
+          { cancelable: false }
+        );
+      }
+    } catch (error) {
+      console.error('Error signing up', error);
+      Alert.alert('Sign up failed', 'Something went wrong. Please try again.');
+    }
+  };
+
   return (
     <View style={styles.mainBody}>
       <ImageBackground
-        source={require('../assets/signup_background.png')} // Replace with your background image path
+        source={require('../assets/signup_background.png')}  // Replace with your background image path
         style={styles.imageBackground}
       >
         <ScrollView
@@ -45,9 +79,9 @@ const RegisterScreen = ({ navigation, setIsLoggedIn }) => {
                 <TextInput
                   style={styles.inputStyle}
                   onChangeText={(UserName) => setUserName(UserName)}
-                  placeholder="Enter Name"
+                  placeholder="Enter Username"
                   placeholderTextColor="#8b9cb5"
-                  autoCapitalize="sentences"
+                  autoCapitalize="none"
                   returnKeyType="next"
                   onSubmitEditing={() =>
                     emailInputRef.current && emailInputRef.current.focus()
@@ -97,9 +131,6 @@ const RegisterScreen = ({ navigation, setIsLoggedIn }) => {
                   keyboardType="numeric"
                   ref={ageInputRef}
                   returnKeyType="next"
-                  onSubmitEditing={() =>
-                    addressInputRef.current && addressInputRef.current.focus()
-                  }
                   underlineColorAndroid="#f000"
                   blurOnSubmit={false}
                 />
@@ -107,7 +138,7 @@ const RegisterScreen = ({ navigation, setIsLoggedIn }) => {
               <TouchableOpacity
                 style={styles.buttonStyle}
                 activeOpacity={0.5}
-                onPress={alert('Sign up successfully!')}
+                onPress={handleSignUp}
               >
                 <Text style={styles.buttonTextStyle}>SIGNUP</Text>
               </TouchableOpacity>
@@ -126,7 +157,7 @@ const RegisterScreen = ({ navigation, setIsLoggedIn }) => {
   );
 };
 
-export default RegisterScreen;
+export default SignupScreen;
 
 const styles = StyleSheet.create({
   mainBody: {
