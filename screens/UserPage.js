@@ -1,11 +1,33 @@
 import React, { useState } from 'react';
-import { View, Text, TextInput, StyleSheet, TouchableOpacity, ScrollView } from 'react-native';
+import { View, Text, TextInput, StyleSheet, TouchableOpacity, ScrollView, Image } from 'react-native';
 import * as ImagePicker from 'expo-image-picker';
 import Icon from 'react-native-vector-icons/Ionicons';
+
+const user = {
+  "user_id": 1,
+  "username": "NhatjtaN",
+  "email": "22521313@gm.uit.edu.vn",
+  "phone": "0944444444",
+  "password": "456",
+  "age": 20,
+  "address": "Mac Dinh Chi Street, Tan Hoa Ward, Dong Hoa District, Di An City, Binh Duong Province",
+  "profile_picture": "https://static.vecteezy.com/system/resources/thumbnails/036/324/708/small_2x/ai-generated-picture-of-a-tiger-walking-in-the-forest-photo.jpg"
+};
 
 const UserPage = ({ route }) => {
   const { setIsLoggedIn } = route.params;
   const [profilePicture, setProfilePicture] = useState(null);
+
+  const [phoneNumber, setPhoneNumber] = useState(user.phone);
+  const [username, setUsername] = useState(user.username);
+  const [age, setAge] = useState(user.age);
+  const [address, setAddress] = useState(user.address);
+  const [mail, setMail] = useState(user.email);
+
+  const [showPasswordForm, setShowPasswordForm] = useState(false);
+  const [oldPassword, setOldPassword] = useState('');
+  const [newPassword, setNewPassword] = useState('');
+  const [confirmNewPassword, setConfirmNewPassword] = useState('');
 
   const handleOpenGallery = async () => {
     // Request permission to access the gallery
@@ -29,50 +51,137 @@ const UserPage = ({ route }) => {
 
   return (
     <ScrollView style={styles.container}>
-      <View style={styles.section}>
-        <Text style={styles.label}>Profile picture</Text>
+      <View style={styles.profilepic_section}>
         <TouchableOpacity onPress={handleOpenGallery} >
-          <Icon name="chevron-forward-outline" color={'#d36a06'} size={25}/>
+          <View style={styles.profileImageContainer}>
+            <Image
+              source={{ uri: user.profile_picture }} // Show selected image or default
+              style={styles.profileImage}
+            />
+          </View>
         </TouchableOpacity>
-        {profilePicture && (
-          <Text style={styles.imagePreview}>Selected Image: {profilePicture}</Text> 
-        )}
       </View>
 
       <View style={styles.section}>
         <Text style={styles.label}>Username</Text>
-        <TextInput 
-          style={styles.transparentInput} 
-          placeholder="vonhat_tan" 
-          placeholderTextColor="#333" 
+        <TextInput
+          style={styles.transparentInput}
+          placeholder="Enter your username"
+          placeholderTextColor="#333"
           textAlign="right"
+          value={username} // Bind the TextInput to the username state
+          onChangeText={(text) => setUsername(text)} // Update the username state
+        />
+      </View>
+
+      <View style={styles.section}>
+        <Text style={styles.label}>Age</Text>
+        <TextInput
+          style={styles.transparentInput}
+          placeholder="Enter your age"
+          placeholderTextColor="#333"
+          inputMode='numeric'
+          textAlign="right"
+          value={age.toString()} // Bind the TextInput to the username state
+          onChangeText={(text) => {
+            const parsedAge = parseInt(text, 10);
+            if (!isNaN(parsedAge)) {
+              setAge(parsedAge);  // Update age state only if it's a valid number
+            }
+          }}
         />
       </View>
 
       <View style={styles.section}>
         <Text style={styles.label}>Phone number</Text>
-        <TextInput 
-          style={styles.transparentInput} 
-          placeholder="*****50" 
+        <TextInput
+          style={styles.transparentInput}
+          placeholder="Enter your phone number"
+          placeholderTextColor="#333"
           textAlign="right"
+          value={phoneNumber}
+          onChangeText={(text) => setPhoneNumber(text)}
+        />
+      </View>
+
+      <View style={styles.section}>
+        <Text style={styles.label}>Address</Text>
+        <TextInput
+          style={[styles.transparentInput, { height: 80 }]}  // Adjust the height for multiline input
+          placeholder="Enter your address"
+          placeholderTextColor="#333"
+          textAlign="right"
+          value={address}  // Bind the TextInput to the address state
+          onChangeText={(text) => setAddress(text)}  // Update the address state
+          multiline={true}  // Allow multiple lines of input
+          numberOfLines={4}  // Optional: set the number of lines to display initially
         />
       </View>
 
       <View style={styles.section}>
         <Text style={styles.label}>Email address</Text>
-        <TextInput 
-          style={styles.transparentInput} 
-          placeholder="v***************8@gmail.com" 
+        <TextInput
+          style={styles.transparentInput}
+          placeholder="Enter your email address"
+          placeholderTextColor="#333"
           textAlign="right"
+          value={mail}
+          onChangeText={(text) => setMail(text)}
         />
       </View>
 
       <View style={styles.section}>
         <Text style={styles.label}>Change password</Text>
-        <TouchableOpacity onPress={console.log('Change pass')} >
-          <Icon name="chevron-forward-outline" color={'#d36a06'} size={25}/>
+        <TouchableOpacity onPress={() => setShowPasswordForm(!showPasswordForm)}>
+          <Icon 
+            name={showPasswordForm ? "chevron-up-outline" : "chevron-down-outline"} 
+            color={'#d36a06'} 
+            size={25}/>
         </TouchableOpacity>
       </View>
+
+      {showPasswordForm && (
+        <>
+          <View style={styles.section}>
+            <Text style={styles.label}>Old Password</Text>
+            <TextInput
+              style={styles.transparentInput}
+              placeholder="Enter old password"
+              placeholderTextColor="#333"
+              secureTextEntry
+              textAlign="right"
+              value={oldPassword}
+              onChangeText={(text) => setOldPassword(text)}
+            />
+          </View>
+
+          <View style={styles.section}>
+            <Text style={styles.label}>New Password</Text>
+            <TextInput
+              style={styles.transparentInput}
+              placeholder="Enter new password"
+              placeholderTextColor="#333"
+              secureTextEntry
+              textAlign="right"
+              value={newPassword}
+              onChangeText={(text) => setNewPassword(text)}
+            />
+          </View>
+
+          <View style={styles.section}>
+            <Text style={[styles.label, { height: 50 , verticalAlign: 'middle'}]}>Confirm New Password</Text>
+            <TextInput
+              style={styles.transparentInput}
+              placeholder="Confirm new password"
+              placeholderTextColor="#333"
+              secureTextEntry
+              textAlign="right"
+              value={confirmNewPassword}
+              onChangeText={(text) => setConfirmNewPassword(text)}
+            />
+          </View>
+        </>
+      )}
 
       <TouchableOpacity style={styles.button} onPress={console.log('Save clicked')}>
         <Text style={styles.buttonText}>Save</Text>
@@ -94,6 +203,15 @@ const styles = StyleSheet.create({
   },
   section: {
     flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    paddingHorizontal: 16,
+    paddingVertical: 12,
+    backgroundColor: '#ffffff',
+    borderBottomWidth: 1,
+    borderBottomColor: '#dddddd',
+  },
+  profilepic_section: {
     alignItems: 'center',
     justifyContent: 'space-between',
     padding: 16,
@@ -164,6 +282,17 @@ const styles = StyleSheet.create({
   arrowText: {
     fontSize: 24,
     color: '#fff',
+  },
+  profileImageContainer: {
+    marginTop: 10,
+    marginBottom: 10,
+  },
+  profileImage: {
+    width: 150, 
+    height: 150, 
+    borderRadius: 80, 
+    borderWidth: 5,
+    borderColor: '#ffe6cf', 
   },
   imagePreview: {
     marginTop: 10,
