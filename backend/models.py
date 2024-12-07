@@ -15,6 +15,7 @@ class User(Base):
     profile_picture = Column(String, nullable=True)
     carts = relationship("Cart", back_populates="user")
     orders = relationship("Order", back_populates="user")
+    reviews = relationship("Review", back_populates="user")
 
 class Product(Base):
     __tablename__ = "products"
@@ -29,6 +30,7 @@ class Product(Base):
     cart_items = relationship("CartItem", back_populates="product")
     order_items = relationship("OrderItem", back_populates="product")
     colors = relationship("ProductColor", back_populates="product")
+    reviews = relationship("Review", back_populates="product")
 
 class ProductColor(Base):
     __tablename__ = "product_colors"
@@ -89,3 +91,16 @@ class OrderItem(Base):
     order = relationship("Order", back_populates="order_items")
     product = relationship("Product", back_populates="order_items")
     color = relationship("ProductColor")
+
+class Review(Base):
+    __tablename__ = "reviews"
+
+    review_id = Column(Integer, primary_key=True, autoincrement=True)
+    product_id = Column(Integer, ForeignKey("products.product_id"), nullable=False)
+    user_id = Column(Integer, ForeignKey("users.user_id"), nullable=False)
+    rating = Column(Integer, nullable=False)
+    detail_review = Column(Text, nullable=True)
+
+    product = relationship("Product", back_populates="reviews")
+    user = relationship("User", back_populates="reviews")
+

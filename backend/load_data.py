@@ -5,11 +5,17 @@ from sqlalchemy.orm import Session
 
 sys.path.append(path.dirname(path.abspath(__file__)))
 
-from models import Product, ProductColor
+from models import Product, ProductColor, Review, User
 from database import SessionLocal  
 
 with open('storeProduct.json', 'r') as f:
     products = json.load(f)
+
+with open('reviews.json', 'r', encoding='utf-8') as f:
+    reviews = json.load(f)
+
+with open('users.json', 'r', encoding='utf-8') as f:
+    users = json.load(f)
 
 def load_data_to_db():
     db: Session = SessionLocal()  
@@ -34,6 +40,31 @@ def load_data_to_db():
                 )
                 db.add(db_product_color)
             db.commit()
+
+        for user in users:
+            db_user = User(
+                username=user['username'],
+                email=user['email'],
+                phone=user['phone'],
+                password=user['password'],
+                age=user['age'],
+                address=user.get('address', ''),
+                profile_picture=user['profile_picture'],
+            )
+            db.add(db_user)
+            db.commit()
+            db.refresh(db_user)
+
+        for rv in reviews:
+            db_review = Review(
+                product_id=rv['product_id'],
+                user_id=rv['user_id'],
+                rating=rv['rating'],
+                detail_review=rv.get('detail_review', '')
+            )
+            db.add(db_review)
+            db.commit()
+            db.refresh(db_review)
 
         print("Dữ liệu đã được nhập thành công!")
     except Exception as e:

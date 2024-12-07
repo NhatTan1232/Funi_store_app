@@ -79,3 +79,14 @@ ADD COLUMN profile_picture VARCHAR(255);
 ALTER TABLE users
 ADD COLUMN age INT;
 
+-- Bảng Reviews
+CREATE TABLE reviews (
+    review_id SERIAL PRIMARY KEY,
+    product_id INT NOT NULL,
+    user_id INT NOT NULL,
+    rating INT NOT NULL,
+    detail_review TEXT,
+    FOREIGN KEY (product_id) REFERENCES products(product_id) ON DELETE CASCADE,
+    FOREIGN KEY (user_id) REFERENCES users(user_id) ON DELETE CASCADE
+);
+

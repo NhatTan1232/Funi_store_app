@@ -1,0 +1,103 @@
+[
+    {
+        "user_id": 1,
+        "username": "NhatjtaN",
+        "email": "22521313@gm.uit.edu.vn",
+        "phone": "0944444444",
+        "password": "456",
+        "age": 20,
+        "address": "Mac Dinh Chi Street, Tan Hoa Ward, Dong Hoa District, Di An City, Binh Duong Province",
+        "profile_picture": "https://static.vecteezy.com/system/resources/thumbnails/036/324/708/small_2x/ai-generated-picture-of-a-tiger-walking-in-the-forest-photo.jpg"
+    },
+    {
+        "user_id": 2,
+        "username": "Jessssi",
+        "email": "bakabaka@gmail.com",
+        "phone": "0784555555",
+        "password": "123",
+        "age": 23,
+        "address": "101 Vo Thi Sau Street, Ninh Kieu District, Can Tho Province",
+        "profile_picture": "https://cdn.pixabay.com/photo/2024/05/26/10/15/bird-8788491_640.jpg"
+    },
+    {
+        "user_id": 3,
+        "username": "NguyenNguyen",
+        "email": "nguyenne@gmail.com",
+        "phone": "0451236444",
+        "password": "456",
+        "age": 22,
+        "address": "Ta Quang Buu Street, Ward 6, Linh Trung District, Thu Duc City",
+        "profile_picture": "https://png.pngtree.com/thumb_back/fw800/background/20230817/pngtree-lotus-flower-jpg-pink-lotus-flower-image_13023952.jpg"
+    },
+    {
+        "user_id": 4,
+        "username": "Alexandra",
+        "email": "alexandra@gmail.com",
+        "phone": "0896777888",
+        "password": "789",
+        "age": 24,
+        "address": "123 Nguyen Trai Street, District 5, Ho Chi Minh City",
+        "profile_picture": "https://upload.wikimedia.org/wikipedia/commons/thumb/3/3a/Cat03.jpg/481px-Cat03.jpg"
+    },
+    {
+        "user_id": 5,
+        "username": "Hungquang1",
+        "email": "quangggh@gmail.com",
+        "phone": "0978442333",
+        "password": "101112",
+        "age": 21,
+        "address": "Hoang Hoa Tham Street, Ba Dinh District, Hanoi",
+        "profile_picture": "https://preetpalk.wordpress.com/wp-content/uploads/2018/08/mini1.jpg"
+    },
+    {
+        "user_id": 6,
+        "username": "Maria",
+        "email": "maria@gmail.com",
+        "phone": "0632456777",
+        "password": "131415",
+        "age": 26,
+        "address": "456 Mai Thi Luu Street, Binh Thanh District, Ho Chi Minh City",
+        "profile_picture": "https://img.lovepik.com/bg/20231212/kawamotoshin-aoyama-yumyum-photoshoot-yellow-flowers-jpg_2451866_wh1200.png"
+    },
+    {
+        "user_id": 7,
+        "username": "HoaTran",
+        "email": "hoatran@gmail.com",
+        "phone": "0909887766",
+        "password": "161718",
+        "age": 28,
+        "address": "58 Le Thanh Ton Street, District 1, Ho Chi Minh City, Vietnam",
+        "profile_picture": "https://t4.ftcdn.net/jpg/09/37/12/73/360_F_937127370_RzigoTq55hhV6TOcnRXbZ2kBjSOgWUMJ.jpg"
+    },
+    {
+        "user_id": 8,
+        "username": "Benjamin",
+        "email": "benjamin@example.com",
+        "phone": "0888776655",
+        "password": "192021",
+        "age": 30,
+        "address": "221 Nguyen Hue Street, District 1, Ho Chi Minh City, Vietnam",
+        "profile_picture": "https://upload.wikimedia.org/wikipedia/commons/thumb/2/22/Avenue_des_Champs-Elys%C3%A9es%2C_Paris_12_December_2020.jpg/750px-Avenue_des_Champs-Elys%C3%A9es%2C_Paris_12_December_2020.jpg"
+    },
+    {
+        "user_id": 9,
+        "username": "PhucLong",
+        "email": "phuclong@gmail.com",
+        "phone": "0988776655",
+        "password": "222324",
+        "age": 22,
+        "address": "12 Cao Thang Street, District 10, Ho Chi Minh City, Vietnam",
+        "profile_picture": "https://upload.wikimedia.org/wikipedia/commons/thumb/b/b6/Sebastiano_Ricci_002.jpg/345px-Sebastiano_Ricci_002.jpg"
+    },
+    {
+        "user_id": 10,
+        "username": "Sophia",
+        "email": "sophia@example.com",
+        "phone": "0765432109",
+        "password": "252627",
+        "age": 27,
+        "address": "45 Hai Ba Trung Street, Hanoi, Vietnam",
+        "profile_picture": "https://upload.wikimedia.org/wikipedia/commons/thumb/2/23/Beijing_opera06.jpg/135px-Beijing_opera06.jpg"
+    }   
+
+]

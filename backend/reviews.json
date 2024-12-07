@@ -1,0 +1,635 @@
+[
+    {
+        "review_id": 1,
+        "product_id": 1,
+        "user_id": 2,
+        "rating": 5,
+        "detail_review": "Great sofa! Really enjoyed using it."
+    },
+    {
+        "review_id": 2,
+        "product_id": 1,
+        "user_id": 4,
+        "rating": 5,
+        "detail_review": "Absolutely loved it! Highly recommend."
+    },
+    {
+        "review_id": 3,
+        "product_id": 1,
+        "user_id": 3,
+        "rating": 4,
+        "detail_review": "Sofa khá tốt, chất lượng tốt và ngồi rất thoải mái. Tuy nhiên, màu sắc không giống hình ảnh trên mạng lắm."
+    },
+    {
+        "review_id": 4,
+        "product_id": 1,
+        "user_id": 1,
+        "rating": 2,
+        "detail_review": "Đệm ngồi bị lún sau một thời gian sử dụng."
+    },
+    {
+        "review_id": 5,
+        "product_id": 1,
+        "user_id": 6,
+        "rating": 5,
+        "detail_review": "This sofa is amazing! The fabric is soft, and the modern design fits perfectly in my living room. Very satisfied!"
+    },
+
+    {
+        "review_id": 6,
+        "product_id": 2,
+        "user_id": 1,
+        "rating": 4,
+        "detail_review": "Sofa đẹp nhưng chất lượng chỉ ở mức trung bình. Đệm hơi cứng."
+    },
+    {
+        "review_id": 7,
+        "product_id": 2,
+        "user_id": 2,
+        "rating": 5,
+        "detail_review": "This sofa is perfect! Comfortable and stylish, great for my living room."
+    },
+    {
+        "review_id": 8,
+        "product_id": 2,
+        "user_id": 3,
+        "rating": 3,
+        "detail_review": "Chất lượng bình thường, không có gì đặc biệt. Giá hơi cao so với chất lượng."
+    },
+    {
+        "review_id": 9,
+        "product_id": 2,
+        "user_id": 4,
+        "rating": 2,
+        "detail_review": "Not impressed with this sofa. The material feels cheap and its not very comfortable."
+    },
+    {
+        "review_id": 10,
+        "product_id": 2,
+        "user_id": 5,
+        "rating": 5,
+        "detail_review": "Tôi rất hài lòng với sofa này. Thiết kế đẹp và ngồi rất thoải mái. Sẽ giới thiệu cho bạn bè."
+    },
+    {
+        "review_id": 11,
+        "product_id": 2,
+        "user_id": 6,
+        "rating": 4,
+        "detail_review": "Good sofa overall. The color was a bit off from the pictures, but still looks nice in my living room."
+    },
+    {
+        "review_id": 12,
+        "product_id": 2,
+        "user_id": 7,
+        "rating": 3,
+        "detail_review": "Sofa có vẻ ngoài đẹp nhưng ngồi không thoải mái lắm. Cần cải thiện chất lượng đệm."
+    },
+
+    {
+        "review_id": 13,
+        "product_id": 3,
+        "user_id": 2,
+        "rating": 5,
+        "detail_review": "The sofa is just perfect for my living room. Its spacious, comfortable, and the color is exactly what I was looking for."
+    },
+    {
+        "review_id": 14,
+        "product_id": 3,
+        "user_id": 3,
+        "rating": 3,
+        "detail_review": "Chất liệu vải của sofa khá mỏng, có cảm giác không bền. Tuy nhiên, thiết kế đẹp và dễ dàng vệ sinh."
+    },
+
+    {
+        "review_id": 15,
+        "product_id": 4,
+        "user_id": 4,
+        "rating": 4,
+        "detail_review": "Im really happy with this sofa. The cushions are soft, and it looks elegant in my living room. A bit firm for my taste, but overall great."
+    },
+    {
+        "review_id": 16,
+        "product_id": 4,
+        "user_id": 5,
+        "rating": 2,
+        "detail_review": "Sofa này không thoải mái chút nào. Sau vài tuần sử dụng, tôi đã cảm thấy đau lưng vì độ cứng của đệm."
+    },
+    {
+        "review_id": 17,
+        "product_id": 4,
+        "user_id": 6,
+        "rating": 5,
+        "detail_review": "I love the sleek and modern design of this sofa. It's perfect for small spaces and incredibly comfortable."
+    },
+
+    {
+        "review_id": 18,
+        "product_id": 5,
+        "user_id": 7,
+        "rating": 3,
+        "detail_review": "Mặc dù thiết kế đẹp nhưng sofa hơi khó chịu khi ngồi lâu. Phần đệm không đủ mềm mại cho tôi."
+    },
+    {
+        "review_id": 19,
+        "product_id": 5,
+        "user_id": 8,
+        "rating": 4,
+        "detail_review": "A solid, affordable sofa that fits well with the rest of my furniture. The only downside is it gets a little too warm when sitting for long periods."
+    },
+    {
+        "review_id": 20,
+        "product_id": 5,
+        "user_id": 9,
+        "rating": 5,
+        "detail_review": "Sofa này rất thoải mái, tôi có thể ngồi lâu mà không cảm thấy mệt mỏi. Màu sắc và chất liệu cũng rất đẹp."
+    },
+    {
+        "review_id": 21,
+        "product_id": 5,
+        "user_id": 10,
+        "rating": 3,
+        "detail_review": "The sofa looks great, but its not the most comfortable for long sittings. Its more for decoration than relaxation."
+    },
+
+
+
+    {
+        "review_id": 22,
+        "product_id": 6,
+        "user_id": 1,
+        "rating": 5,
+        "detail_review": "Giường rất thoải mái và chắc chắn, tôi ngủ rất ngon mỗi đêm. Vật liệu chất lượng tốt và dễ dàng lắp đặt."
+    },
+    {
+        "review_id": 23,
+        "product_id": 6,
+        "user_id": 2,
+        "rating": 4,
+        "detail_review": "Ive been sleeping on this bed for a month now, and I must say, its very comfortable. The frame is sturdy, but the mattress could be a bit softer."
+    },
+
+    {
+        "review_id": 24,
+        "product_id": 7,
+        "user_id": 3,
+        "rating": 3,
+        "detail_review": "Giường đẹp nhưng đệm không đủ mềm. Sau khi sử dụng một thời gian, tôi cảm thấy đau lưng nhẹ."
+    },
+    {
+        "review_id": 25,
+        "product_id": 7,
+        "user_id": 4,
+        "rating": 5,
+        "detail_review": "The bed is fantastic! I love the design, and its very comfortable. Perfect for a good nights sleep. Highly recommend!"
+    },
+    {
+        "review_id": 26,
+        "product_id": 7,
+        "user_id": 5,
+        "rating": 4,
+        "detail_review": "Giường này rất đẹp và dễ lắp đặt. Tuy nhiên, phần đệm có thể cần cải thiện để tốt hơn cho những ai thích sự mềm mại."
+    },
+    {
+        "review_id": 27,
+        "product_id": 7,
+        "user_id": 6,
+        "rating": 5,
+        "detail_review": "This is one of the best beds Ive bought! The mattress is supportive and the wood frame is really solid. I sleep so much better now."
+    },
+    {
+        "review_id": 28,
+        "product_id": 7,
+        "user_id": 7,
+        "rating": 2,
+        "detail_review": "Giường rất đẹp nhưng đệm quá cứng. Tôi không thể ngủ ngon được với loại đệm này."
+    },
+
+    {
+        "review_id": 29,
+        "product_id": 8,
+        "user_id": 8,
+        "rating": 5,
+        "detail_review": "Love this bed! Its super comfortable, and the design fits perfectly in my bedroom. Definitely worth the price!"
+    },
+    {
+        "review_id": 30,
+        "product_id": 8,
+        "user_id": 9,
+        "rating": 3,
+        "detail_review": "The bed is okay, but the mattress feels a little too firm for me. It might work for people who prefer a firmer surface."
+    },
+    {
+        "review_id": 31,
+        "product_id": 8,
+        "user_id": 10,
+        "rating": 4,
+        "detail_review": "Giường này có thiết kế đơn giản nhưng rất đẹp. Chất lượng ổn, chỉ có đệm là hơi cứng so với những gì tôi mong đợi."
+    },
+    {
+        "review_id": 32,
+        "product_id": 8,
+        "user_id": 1,
+        "rating": 5,
+        "detail_review": "The bed is perfect! Ive had no issues with it at all. The mattress is very comfortable, and it looks great in my room."
+    },
+    {
+        "review_id": 33,
+        "product_id": 8,
+        "user_id": 2,
+        "rating": 4,
+        "detail_review": "Im very happy with this bed. Its stylish, and the mattress is firm but comfortable. Its definitely helped improve my sleep."
+    },
+    {
+        "review_id": 34,
+        "product_id": 8,
+        "user_id": 3,
+        "rating": 3,
+        "detail_review": "Giường đẹp nhưng đệm hơi cứng, khiến tôi không thể ngủ ngon trong một thời gian dài. Tuy nhiên, tổng thể là ổn."
+    },
+    {
+        "review_id": 35,
+        "product_id": 8,
+        "user_id": 4,
+        "rating": 5,
+        "detail_review": "Such a great bed! I love how sturdy it is, and the mattress is so comfortable. I feel like Im sleeping on a cloud."
+    },
+    {
+        "review_id": 36,
+        "product_id": 8,
+        "user_id": 5,
+        "rating": 4,
+        "detail_review": "Giường chắc chắn và thiết kế rất đẹp. Đệm hơi cứng một chút, nhưng vẫn ổn đối với tôi."
+    },
+    {
+        "review_id": 37,
+        "product_id": 8,
+        "user_id": 6,
+        "rating": 3,
+        "detail_review": "The bed is okay, but I expected a better mattress. It's a bit too firm for my liking, and I wake up with sore muscles."
+    },
+    {
+        "review_id": 38,
+        "product_id": 8,
+        "user_id": 7,
+        "rating": 5,
+        "detail_review": "This bed exceeded my expectations! The mattress is soft yet supportive, and the design looks amazing in my bedroom."
+    },
+
+    {
+        "review_id": 39,
+        "product_id": 9,
+        "user_id": 8,
+        "rating": 4,
+        "detail_review": "Very comfortable and easy to assemble. The only downside is that the mattress doesnt provide enough support for my back."
+    },
+    {
+        "review_id": 40,
+        "product_id": 9,
+        "user_id": 9,
+        "rating": 2,
+        "detail_review": "Giường này không thoải mái chút nào. Sau vài tuần sử dụng, tôi đã cảm thấy đau lưng vì độ cứng của đệm."
+    },
+
+    {
+        "review_id": 41,
+        "product_id": 10,
+        "user_id": 10,
+        "rating": 4,
+        "detail_review": "The bed frame is solid and the design is elegant. The mattress could use some improvement, but overall, Im satisfied."
+    },
+    {
+        "review_id": 42,
+        "product_id": 10,
+        "user_id": 1,
+        "rating": 3,
+        "detail_review": "Giường này ổn, nhưng đệm không đủ mềm mại và tôi cảm thấy không thoải mái khi nằm lâu."
+    },
+    {
+        "review_id": 43,
+        "product_id": 10,
+        "user_id": 2,
+        "rating": 5,
+        "detail_review": "The bed is extremely comfortable and well built. Its the perfect combination of firmness and softness."
+    },
+
+
+    {
+        "review_id": 44,
+        "product_id": 11,
+        "user_id": 3,
+        "rating": 5,
+        "detail_review": "Bàn này rất đẹp và chắc chắn. Mặt bàn sáng bóng và dễ dàng vệ sinh. Tôi rất hài lòng với chất lượng sản phẩm."
+    },
+    {
+        "review_id": 45,
+        "product_id": 11,
+        "user_id": 6,
+        "rating": 4,
+        "detail_review": "This table is very sturdy and the design is sleek. The assembly process was a bit tricky, but its a great addition to my dining room."
+    },
+    {
+        "review_id": 46,
+        "product_id": 11,
+        "user_id": 1,
+        "rating": 3,
+        "detail_review": "Bàn đẹp nhưng hơi khó khăn khi lắp đặt. Một vài chi tiết chưa hoàn hảo, nhưng vẫn ổn."
+    },
+    {
+        "review_id": 47,
+        "product_id": 11,
+        "user_id": 4,
+        "rating": 5,
+        "detail_review": "I absolutely love this table! Its very well built, and the finish is perfect. It fits perfectly in my kitchen and adds a modern touch."
+    },
+
+    {
+        "review_id": 48,
+        "product_id": 12,
+        "user_id": 7,
+        "rating": 4,
+        "detail_review": "Bàn rất đẹp, tuy nhiên, tôi thấy mặt bàn có thể dễ bị trầy xước nếu không cẩn thận. Nhưng tổng thể rất hài lòng."
+    },
+    {
+        "review_id": 49,
+        "product_id": 12,
+        "user_id": 8,
+        "rating": 5,
+        "detail_review": "This is a fantastic table. Its very stable and has a sleek design that matches my living room perfectly. Im really happy with my purchase."
+    },
+
+    {
+        "review_id": 50,
+        "product_id": 13,
+        "user_id": 9,
+        "rating": 3,
+        "detail_review": "Bàn đẹp nhưng không đủ chắc chắn khi sử dụng lâu dài. Tôi hy vọng nhà sản xuất có thể cải thiện chất lượng."
+    },
+    {
+        "review_id": 51,
+        "product_id": 13,
+        "user_id": 2,
+        "rating": 4,
+        "detail_review": "Im quite pleased with this table. Its functional and stylish, and I appreciate how easy it was to assemble. Some parts were a bit wobbly at first, but it works fine now."
+    },
+    {
+        "review_id": 52,
+        "product_id": 13,
+        "user_id": 5,
+        "rating": 5,
+        "detail_review": "Bàn này rất chắc chắn và có thiết kế hiện đại. Mặt bàn rộng và thoải mái cho các bữa ăn gia đình. Tôi rất hài lòng với lựa chọn này."
+    },
+    {
+        "review_id": 53,
+        "product_id": 13,
+        "user_id": 10,
+        "rating": 4,
+        "detail_review": "The table looks great in my dining room. Its sturdy and the size is perfect for our family dinners. However, the color is slightly different from the photos."
+    },
+    {
+        "review_id": 54,
+        "product_id": 13,
+        "user_id": 3,
+        "rating": 3,
+        "detail_review": "Bàn hơi nhỏ so với mong đợi, nhưng chất lượng gỗ khá tốt. Cần cải thiện một chút về độ bền của chân bàn."
+    },
+
+    {
+        "review_id": 55,
+        "product_id": 14,
+        "user_id": 6,
+        "rating": 5,
+        "detail_review": "Im very happy with this table! Its a perfect fit for my space, and the quality is top-notch. Very sturdy and stylish, highly recommend."
+    },
+    {
+        "review_id": 56,
+        "product_id": 14,
+        "user_id": 1,
+        "rating": 4,
+        "detail_review": "Bàn đẹp, chắc chắn, nhưng tôi nhận thấy bàn hơi nặng khi di chuyển. Tuy nhiên, tôi hài lòng với chất lượng sản phẩm."
+    },
+    {
+        "review_id": 57,
+        "product_id": 14,
+        "user_id": 4,
+        "rating": 5,
+        "detail_review": "This table is fantastic. Its very easy to assemble and the finish is beautiful. I have received many compliments on it from guests."
+    },
+    {
+        "review_id": 58,
+        "product_id": 14,
+        "user_id": 7,
+        "rating": 2,
+        "detail_review": "Bàn này có kiểu dáng đẹp, nhưng chất lượng gỗ không tốt. Sau vài tháng sử dụng, mặt bàn đã bị trầy xước và nứt."
+    },
+    {
+        "review_id": 59,
+        "product_id": 14,
+        "user_id": 8,
+        "rating": 4,
+        "detail_review": "The table is quite solid and looks great, but it does require some care to avoid damage to the surface. Overall, its a good purchase."
+    },
+
+    {
+        "review_id": 60,
+        "product_id": 15,
+        "user_id": 9,
+        "rating": 5,
+        "detail_review": "Bàn rất đẹp và chắc chắn, tôi rất thích kiểu dáng của nó. Rất đáng giá so với số tiền bỏ ra."
+    },
+
+
+
+    {
+        "review_id": 61,
+        "product_id": 16,
+        "user_id": 1,
+        "rating": 5,
+        "detail_review": "Ghế rất thoải mái và chắc chắn. Thiết kế hiện đại và màu sắc rất đẹp. Tôi rất hài lòng với sản phẩm này."
+    },
+    {
+        "review_id": 62,
+        "product_id": 16,
+        "user_id": 2,
+        "rating": 4,
+        "detail_review": "This chair is very comfortable and looks great in my office. The assembly was straightforward, but the instructions could be clearer."
+    },
+
+    {
+        "review_id": 63,
+        "product_id": 17,
+        "user_id": 3,
+        "rating": 3,
+        "detail_review": "Ghế có thiết kế đẹp nhưng hơi cứng. Tôi mong muốn đệm ghế có thể mềm hơn một chút."
+    },
+    {
+        "review_id": 64,
+        "product_id": 17,
+        "user_id": 4,
+        "rating": 5,
+        "detail_review": "Absolutely love this chair! It's very supportive and perfect for long hours of sitting. Highly recommend!"
+    },
+
+    {
+        "review_id": 65,
+        "product_id": 18,
+        "user_id": 5,
+        "rating": 4,
+        "detail_review": "Ghế này khá tốt, nhưng màu sắc thực tế khác một chút so với hình ảnh. Dù sao thì tôi vẫn rất hài lòng với chất lượng."
+    },
+    {
+        "review_id": 66,
+        "product_id": 18,
+        "user_id": 6,
+        "rating": 3,
+        "detail_review": "The chair is okay, but its not as comfortable as I expected. The padding is a bit thin."
+    },
+    {
+        "review_id": 67,
+        "product_id": 18,
+        "user_id": 7,
+        "rating": 5,
+        "detail_review": "Ghế rất thoải mái và chất lượng tốt. Tôi rất thích kiểu dáng hiện đại và màu sắc tươi sáng của nó."
+    },
+    {
+        "review_id": 68,
+        "product_id": 18,
+        "user_id": 8,
+        "rating": 4,
+        "detail_review": "This chair is very stylish and fits perfectly in my living room. Its a bit pricey, but worth it for the design and comfort."
+    },
+
+    {
+        "review_id": 69,
+        "product_id": 19,
+        "user_id": 9,
+        "rating": 2,
+        "detail_review": "Ghế không thoải mái như tôi mong đợi. Sau một thời gian sử dụng, đệm ghế đã bị lún."
+    },
+    {
+        "review_id": 70,
+        "product_id": 19,
+        "user_id": 10,
+        "rating": 5,
+        "detail_review": "Im very happy with this chair. Its comfortable, easy to assemble, and looks great. Perfect for my home office."
+    },
+    {
+        "review_id": 71,
+        "product_id": 19,
+        "user_id": 1,
+        "rating": 4,
+        "detail_review": "Ghế tốt, ngồi thoải mái nhưng hơi khó khi lắp đặt. Tổng thể thì tôi rất hài lòng với sản phẩm."
+    },
+    {
+        "review_id": 72,
+        "product_id": 19,
+        "user_id": 4,
+        "rating": 5,
+        "detail_review": "This chair exceeded my expectations! Its very comfortable and the ergonomic design is great for my back."
+    },
+    {
+        "review_id": 73,
+        "product_id": 19,
+        "user_id": 5,
+        "rating": 3,
+        "detail_review": "Ghế hơi nhỏ so với mong đợi. Chất lượng gỗ tốt nhưng đệm ghế cần cải thiện."
+    },
+
+    {
+        "review_id": 74,
+        "product_id": 20,
+        "user_id": 6,
+        "rating": 4,
+        "detail_review": "The chair is quite good, but the assembly instructions were confusing. Once assembled, its very sturdy and comfortable."
+    },
+    {
+        "review_id": 75,
+        "product_id": 20,
+        "user_id": 7,
+        "rating": 5,
+        "detail_review": "Ghế này rất thoải mái và chắc chắn. Thiết kế hiện đại và màu sắc rất hợp với phòng khách của tôi."
+    },
+
+
+
+    {
+        "review_id": 76,
+        "product_id": 21,
+        "user_id": 1,
+        "rating": 4,
+        "detail_review": "Tủ rất đẹp và chắc chắn. Chất liệu gỗ tốt và thiết kế hiện đại. Tôi rất hài lòng với sản phẩm này."
+    },
+    {
+        "review_id": 77,
+        "product_id": 21,
+        "user_id": 2,
+        "rating": 5,
+        "detail_review": "This cabinet is perfect for my needs. It's spacious and the quality is excellent. Highly recommended!"
+    },
+    {
+        "review_id": 78,
+        "product_id": 21,
+        "user_id": 3,
+        "rating": 3,
+        "detail_review": "Tủ khá tốt, nhưng màu sắc không giống như hình ảnh trên mạng. Tôi hy vọng chất lượng sơn sẽ bền hơn."
+    },
+
+    {
+        "review_id": 79,
+        "product_id": 22,
+        "user_id": 8,
+        "rating": 5,
+        "detail_review": "Great sideboard! Its very sturdy and looks amazing. The storage space is perfect for my needs."
+    },
+
+    {
+        "review_id": 80,
+        "product_id": 23,
+        "user_id": 7,
+        "rating": 2,
+        "detail_review": "Bàn này có kiểu dáng đẹp, nhưng chất lượng gỗ không tốt. Sau vài tháng sử dụng, mặt bàn đã bị trầy xước và nứt."
+    },
+
+    {
+        "review_id": 81,
+        "product_id": 24,
+        "user_id": 4,
+        "rating": 5,
+        "detail_review": "This sideboard is fantastic! Its very stylish and provides a lot of storage space. Easy to assemble as well."
+    },
+    {
+        "review_id": 82,
+        "product_id": 24,
+        "user_id": 5,
+        "rating": 4,
+        "detail_review": "Tủ này khá tốt, nhưng màu sắc không giống như hình ảnh trên mạng. Dù sao thì tôi vẫn rất hài lòng."
+    },
+    {
+        "review_id": 83,
+        "product_id": 24,
+        "user_id": 6,
+        "rating": 3,
+        "detail_review": "The sideboard is decent, but the assembly instructions were unclear. Took some time to put it together."
+    },
+
+    {
+        "review_id": 84,
+        "product_id": 25,
+        "user_id": 8,
+        "rating": 5,
+        "detail_review": "Excellent wall system! Its very sturdy and looks great. The storage space is perfect for my needs."
+    },
+    {
+        "review_id": 85,
+        "product_id": 25,
+        "user_id": 9,
+        "rating": 2,
+        "detail_review": "Hệ thống tường không đạt yêu cầu của tôi. Chất lượng gỗ không tốt và màu sơn không đều."
+    },
+    {
+        "review_id": 86,
+        "product_id": 25,
+        "user_id": 10,
+        "rating": 4,
+        "detail_review": "Good quality wall system. It fits perfectly in my living room and provides plenty of storage space."
+    }
+]
