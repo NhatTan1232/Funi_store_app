@@ -7,11 +7,22 @@ import axios from 'axios';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { HOST_IP } from '../config';
 
+const user = {
+  "user_id": 1,
+  "username": "NhatjtaN",
+  "email": "22521313@gm.uit.edu.vn",
+  "phone": "0944444444",
+  "password": "456",
+  "age": 20,
+  "address": "Mac Dinh Chi Street, Tan Hoa Ward, Dong Hoa District, Di An City, Binh Duong Province",
+  "profile_picture": "https://static.vecteezy.com/system/resources/thumbnails/036/324/708/small_2x/ai-generated-picture-of-a-tiger-walking-in-the-forest-photo.jpg"
+};
+
 const PaymentScreen = () => {
   const [checked, setChecked] = useState('cod');
   const [isEditing, setIsEditing] = useState(false);
-  const [name, setName] = useState('Maria Le');
-  const [street, setStreet] = useState('Sesame St. 18');
+  const [name, setName] = useState(user.username);
+  const [street, setStreet] = useState(user.address);
   const [isSubmitting, setIsSubmitting] = useState(false);
 
   const route = useRoute();
@@ -101,9 +112,6 @@ const PaymentScreen = () => {
       <View style={styles.section}>
         <View style={styles.sectionHeader}>
           <Text style={styles.sectionTitle}>Payment</Text>
-          <TouchableOpacity>
-            <Text style={styles.editText}>Edit</Text>
-          </TouchableOpacity>
         </View>
         <View style={styles.paymentInfo}>
           <Image style={styles.paymentIcon} source={require('../assets/cod.jpg')} resizeMode="contain" />
@@ -129,11 +137,12 @@ const PaymentScreen = () => {
 
       <View style={styles.section}>
         <View style={styles.sectionHeader}>
-          <Text style={styles.sectionTitle}>Shipping address</Text>
+          <Text style={styles.sectionTitle}>Shipping information</Text>
           <TouchableOpacity onPress={handleEditToggle}>
             <Text style={styles.editText}>{isEditing ? 'Save' : 'Edit'}</Text>
           </TouchableOpacity>
         </View>
+
         {isEditing ? (
           <View style={styles.addressInfo}>
             <View style={styles.addressRow}>
@@ -141,19 +150,25 @@ const PaymentScreen = () => {
               <TextInput style={styles.addressInput} value={name} onChangeText={setName} />
             </View>
             <View style={styles.addressRow}>
-              <Text style={styles.addressLabel}>Street:</Text>
-              <TextInput style={styles.addressInput} value={street} onChangeText={setStreet} />
+              <Text style={styles.addressLabel}>Address:</Text>
+              <TextInput 
+                style={styles.addressInput} 
+                value={street}           
+                multiline={true} 
+                numberOfLines={4} 
+                onChangeText={setStreet} 
+              />
             </View>
           </View>
         ) : (
           <View style={styles.addressInfo}>
             <View style={styles.addressRow}>
               <Text style={styles.addressLabel}>Name:</Text>
-              <Text style={styles.addressDetail}>{name}</Text>
+              <Text style={[styles.addressDetail, {height: 43}, {verticalAlign: 'middle'}]}>{name}</Text>
             </View>
             <View style={styles.addressRow}>
-              <Text style={styles.addressLabel}>Street:</Text>
-              <Text style={styles.addressDetail}>{street}</Text>
+              <Text style={styles.addressLabel}>Address:</Text>
+              <Text style={[styles.addressDetail, {height: 97}, {verticalAlign: 'middle'}]}>{street}</Text>
             </View>
           </View>
         )}
@@ -285,6 +300,7 @@ const styles = StyleSheet.create({
     fontSize: 16,
     color: '#555',
     flex: 1,
+    verticalAlign: 'middle'
   },
   addressDetail: {
     fontSize: 16,
@@ -292,6 +308,14 @@ const styles = StyleSheet.create({
     textAlign: 'right',
     fontWeight: '600',
     flex: 1,
+  },
+  addressInput: {
+    fontSize: 16,
+    color: '#555',
+    textAlign: 'right',
+    flex: 1,
+    borderBottomWidth: 1,
+    borderColor: '#dddddd',
   },
   orderSummary: {
     backgroundColor: '#f9f9f9',
