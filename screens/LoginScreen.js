@@ -13,6 +13,7 @@ import {
 } from 'react-native';
 import axios from 'axios';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import { HOST_IP } from '../config';  // Import HOST_IP từ config.js
 
 const LoginScreen = ({ route, navigation }) => {
   const { setIsLoggedIn } = route.params;
@@ -31,7 +32,7 @@ const LoginScreen = ({ route, navigation }) => {
     }
 
     try {
-      const response = await axios.post('http://192.168.1.11:8000/login/', { // Replace with host's IP
+      const response = await axios.post(`${HOST_IP}/login/`, {
         username: username,
         password: userPassword,
       });

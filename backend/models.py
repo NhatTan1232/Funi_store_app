@@ -70,12 +70,15 @@ class Order(Base):
     order_id = Column(Integer, primary_key=True, autoincrement=True)
     user_id = Column(Integer, ForeignKey("users.user_id"), nullable=False)
     cart_id = Column(Integer, ForeignKey("carts.cart_id"), nullable=False)
-    total_amount = Column(DECIMAL(10, 2), nullable=False)
+    total_amount = Column(DECIMAL(12, 2), nullable=False) 
     payment_method = Column(String(50), nullable=True)
+    name = Column(String(255), nullable=True)
+    address = Column(String(255), nullable=True)
 
     user = relationship("User", back_populates="orders")
     cart = relationship("Cart", back_populates="orders")
     order_items = relationship("OrderItem", back_populates="order")
+
 
 class OrderItem(Base):
     __tablename__ = "order_items"
