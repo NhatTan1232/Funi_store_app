@@ -7,7 +7,7 @@ import Header from '../assets/components/Header';
 import cartIcon from '../assets/icons/cart_icon.png';  
 import products from '../assets/components/storeProduct';
 
-const topseller = products.filter(product => [1, 5, 12, 17].includes(product.id));
+const topseller = products.filter(product => [2, 7, 8, 13, 14, 19].includes(product.id));
 
 const categories = [
   { id: '1', name: 'Sofa', icon: require('../assets/icons/sofa_icon.png') },
@@ -100,8 +100,12 @@ const HomePage = () => {
           showsHorizontalScrollIndicator={false}
           contentContainerStyle={styles.categoriesList}
         />
-      </View>
-      <View style={styles.topSalerContainer}>
+        <View style={styles.bannerContainer}>
+          <Text style={styles.bannerTitle}>First time here?</Text>
+          <Text style={styles.bannerDetail}>Find something that fits your aesthetic</Text>
+          <Text style={styles.bannerDetail}>Or look at our most popular products</Text>
+          <Text style={styles.bannerFooter}>Scoll down to see ↓</Text>
+        </View>
         <Text style={styles.topSalerTitle}>Top Sellers</Text>
         {topseller.map((product, index) => {
           if (index % 2 === 0) {
@@ -124,7 +128,7 @@ const HomePage = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#f5f5f5',
+    backgroundColor: '#ffe6cf',
   },
   cartButton: {
     position: 'absolute', 
@@ -170,11 +174,9 @@ const styles = StyleSheet.create({
     color: '#333',
   },
   categoriesContainer: {
-    padding: 15,
-    marginTop: 10,
+    padding: 25,
     backgroundColor: '#fff',
-    borderRadius: 10,
-    marginHorizontal: 10,
+    borderRadius: 25,
     marginBottom: 20,
     elevation: 2,
   },
@@ -212,19 +214,35 @@ const styles = StyleSheet.create({
     fontWeight: '500',
     color: '#333',
   },
-  topSalerContainer: {
+  bannerContainer: {
     padding: 15,
-    marginTop: 10,
-    backgroundColor: '#fff',
-    borderRadius: 10,
-    marginHorizontal: 10,
-    marginBottom: 20,
+    backgroundColor: '#ffe6cf',
+    borderRadius: 20,
+    marginBottom: 10,
+    marginTop: 15,
     elevation: 2,
+  },
+  bannerTitle: {
+    fontFamily: 'PlayfairDisplay_700Bold',
+    fontSize: 25,
+    marginTop: 5,
+    marginBottom: 15,
+    color: '#de7006'
+  },
+  bannerDetail: {
+    fontSize: 18,
+  },
+  bannerFooter: {
+    fontSize: 19,
+    marginTop: 15,
+    fontWeight: '600',
+    marginBottom: 10
   },
   topSalerTitle: {
     fontSize: 20,
     fontFamily: 'PlayfairDisplay_700Bold',
     marginBottom: 8,
+    marginTop: 18,
     color: '#333',
   },
   row: {
