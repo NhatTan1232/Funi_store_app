@@ -133,6 +133,9 @@ function UserStack({navigation, route}) {
             fontSize: 20,
           },
           headerTitleAlign: 'center',
+          headerStyle: {
+            backgroundColor: '#ffe6cf',
+          },     
         }}
         initialParams={{ setIsLoggedIn }} 
       />
