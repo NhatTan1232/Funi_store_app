@@ -12,6 +12,7 @@ import {
   Keyboard,
 } from 'react-native';
 import axios from 'axios';
+import { Ionicons } from '@expo/vector-icons';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { HOST_IP } from '../config';  // Import HOST_IP từ config.js
 
@@ -20,6 +21,7 @@ const LoginScreen = ({ route, navigation }) => {
   const [username, setUsername] = useState('');
   const [userPassword, setUserPassword] = useState('');
   const passwordInputRef = createRef();
+  const [isPasswordVisible, setIsPasswordVisible] = useState(false);
 
   useEffect(() => {
     navigation.setOptions({ setIsLoggedIn });
@@ -93,6 +95,7 @@ const LoginScreen = ({ route, navigation }) => {
                   blurOnSubmit={false}
                 />
               </View>
+
               <View style={styles.SectionStyle}>
                 <TextInput
                   style={styles.inputStyle}
@@ -103,11 +106,22 @@ const LoginScreen = ({ route, navigation }) => {
                   ref={passwordInputRef}
                   onSubmitEditing={Keyboard.dismiss}
                   blurOnSubmit={false}
-                  secureTextEntry={true}
+                  secureTextEntry={!isPasswordVisible} // Conditionally set the secureTextEntry
                   underlineColorAndroid="#f000"
                   returnKeyType="next"
                 />
+                <TouchableOpacity
+                  style={styles.eyeIcon}
+                  onPress={() => setIsPasswordVisible(!isPasswordVisible)}
+                >
+                  <Ionicons
+                    name={isPasswordVisible ? 'eye' : 'eye-off'}
+                    size={24}
+                    color="gray"
+                  />
+                </TouchableOpacity>
               </View>
+
               <TouchableOpacity
                 style={styles.buttonStyle}
                 activeOpacity={0.5}
@@ -162,6 +176,11 @@ const styles = StyleSheet.create({
     marginLeft: 35,
     marginRight: 35,
     margin: 10,
+  },
+  eyeIcon: {
+    position: 'absolute',
+    right: 10,
+    top: 8,
   },
   buttonStyle: {
     backgroundColor: '#d36a06',
