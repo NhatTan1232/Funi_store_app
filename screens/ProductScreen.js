@@ -103,7 +103,7 @@ const ProductScreen = ({ navigation }) => {
           <View style={styles.ratingContainer}>
             <StarRatingDisplay
               rating={4.16}
-              starSize={18}
+              starSize={20}
               color='#de7006'
               starStyle={styles.starRating}
             />
@@ -165,6 +165,7 @@ const styles = StyleSheet.create({
   },
   detailsContainer: {
     paddingHorizontal: 16,
+    marginVertical: 20,
   },
   productName: {
     fontSize: 25,
@@ -190,7 +191,7 @@ const styles = StyleSheet.create({
   ratingContainer: {
     flexDirection: 'row',
     alignItems: 'center',
-    marginBottom: 8,
+    marginVertical: 8,
   },
   starRating: {
     marginHorizontal: 0, 
@@ -203,7 +204,7 @@ const styles = StyleSheet.create({
   description: {
     fontSize: 16,
     color: '#333',
-    marginBottom: 16,
+    marginVertical: 18,
   },
   colorTitle: {
     fontSize: 16,
@@ -223,7 +224,7 @@ const styles = StyleSheet.create({
     borderColor: '#ddd',
   },
   selectedColor: {
-    borderWidth: 2,
+    borderWidth: 3,
     borderColor: '#000',
   },
   addToCartButton: {
