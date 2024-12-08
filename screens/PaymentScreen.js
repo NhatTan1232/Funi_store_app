@@ -24,24 +24,36 @@ const PaymentScreen = () => {
   const [name, setName] = useState(user.username);
   const [street, setStreet] = useState(user.address);
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [discountCode, setDiscountCode] = useState('');
+  const [discountApplied, setDiscountApplied] = useState(false);
 
   const route = useRoute();
   const { cartItems, subtotal } = route.params;
   const navigation = useNavigation();
 
   const shippingPrice = 200000; 
-  const total = subtotal + shippingPrice;
+  const discount = discountApplied ? subtotal * 0.1 : 0;
+  const total = subtotal + shippingPrice - discount;
 
   const handleEditToggle = () => setIsEditing(!isEditing);
 
+  const handleApplyDiscount = () => {
+    if (discountCode === 'GIAMGIA10') {
+      setDiscountApplied(true);
+      Alert.alert('Discount applied successfully!');
+    } else {
+      Alert.alert('Invalid discount code');
+    }
+  };
+
   const handleOrderSubmit = async () => {
-    if (isSubmitting) return; // Ngăn không cho gửi nếu đang trong quá trình xử lý
+    if (isSubmitting) return;
     setIsSubmitting(true);
-  
+
     try {
       const userId = await AsyncStorage.getItem('user_id');
       if (!userId) throw new Error('User ID not found');
-  
+
       const orderData = {
         user_id: userId,
         cart_id: cartItems[0]?.cart_id,
@@ -50,15 +62,15 @@ const PaymentScreen = () => {
         name,
         address: street,
       };
-  
+
       const orderResponse = await axios.post(`${HOST_IP}/orders/`, orderData);
-  
+
       if (orderResponse.status === 200) {
         const orderId = orderResponse.data.order_id;
         const orderItems = cartItems.map(item => {
           const unitPrice = parseFloat(item.price.replace(/,/g, ''));
           const totalPrice = unitPrice * item.quantity;
-  
+
           return {
             order_id: orderId,
             product_id: item.product_id,
@@ -68,9 +80,9 @@ const PaymentScreen = () => {
             total_price: totalPrice,
           };
         });
-  
+
         await axios.post(`${HOST_IP}/order_items/`, orderItems);
-  
+
         Alert.alert('Order placed successfully');
       } else {
         throw new Error('Failed to create order');
@@ -81,7 +93,6 @@ const PaymentScreen = () => {
       setIsSubmitting(false);
     }
   };
-  
 
   return (
     <ScrollView contentContainerStyle={styles.container}>
@@ -185,9 +196,25 @@ const PaymentScreen = () => {
           <Text style={styles.summaryAmount}>đ200,000</Text>
         </View>
         <View style={styles.summaryRow}>
+          <Text style={styles.summaryLabel}>Discount</Text>
+          <Text style={styles.summaryAmount}>-đ{discount.toLocaleString('vi-VN')}</Text>
+        </View>
+        <View style={styles.summaryRow}>
           <Text style={styles.summaryLabelTotal}>Total</Text>
           <Text style={styles.summaryValueTotal}>đ{total.toLocaleString('vi-VN')}</Text>
         </View>
+      </View>
+
+      <View style={styles.section}>
+        <TextInput
+          style={styles.inputStyle}
+          placeholder="Enter discount code"
+          value={discountCode}
+          onChangeText={setDiscountCode}
+        />
+        <TouchableOpacity style={styles.buttonStyle} onPress={handleApplyDiscount}>
+          <Text style={styles.buttonTextStyle}>Apply Discount</Text>
+        </TouchableOpacity>
       </View>
 
       <TouchableOpacity style={styles.submitButton} onPress={handleOrderSubmit}>
@@ -197,12 +224,7 @@ const PaymentScreen = () => {
   );
 };
 
-
-
-
 export default PaymentScreen;
-
-
 
 const styles = StyleSheet.create({
   container: {
@@ -278,7 +300,7 @@ const styles = StyleSheet.create({
     height: 20,
     width: 50,
     marginRight: 10,
-    marginVertical: 10
+    marginVertical: 10,
   },
   cardDetails: {
     flex: 1,
@@ -344,12 +366,12 @@ const styles = StyleSheet.create({
   summaryLabelTotal: {
     fontSize: 18,
     fontWeight: 'bold',
-    marginTop: 15
+    marginTop: 15,
   },
   summaryValueTotal: {
     fontSize: 18,
     fontWeight: 'bold',
-    marginTop: 15
+    marginTop: 15,
   },
   submitButton: {
     backgroundColor: '#de7006',
@@ -362,4 +384,25 @@ const styles = StyleSheet.create({
     fontSize: 18,
     fontWeight: '800',
   },
+  inputStyle: {
+    height: 40,
+    borderColor: '#cccccc',
+    borderWidth: 1,
+    borderRadius: 8,
+    padding: 10,
+    marginVertical: 10,
+  },
+  buttonStyle: {
+    backgroundColor: '#de7006',
+    padding: 10,
+    borderRadius: 8,
+    alignItems: 'center',
+    marginBottom: 20,
+  },
+  buttonTextStyle: {
+    color: '#fff',
+    fontSize: 16,
+    fontWeight: '600',
+  },
 });
+
