@@ -106,7 +106,7 @@ const CartScreen = () => {
             <TouchableOpacity style={styles.trashIcon} onPress={() => handleRemoveItem(item.cart_item_id)}>
               <Icon name="trash-outline" size={24} color="grey" />
             </TouchableOpacity>
-            <Text style={styles.productPrice}>đ{(parseFloat(product.price.replace(/,/g, '')) * quantities[item.cart_item_id]).toLocaleString('vi-VN')}</Text>
+            <Text style={styles.productPrice}>{(parseFloat(product.price.replace(/,/g, '')) * quantities[item.cart_item_id]).toLocaleString('vi-VN')}đ</Text>
           </View>
         </View>
       </View>
@@ -123,7 +123,7 @@ const CartScreen = () => {
       />
       <View style={styles.subtotalContainer}>
         <Text style={styles.subtotalText}>Subtotal:</Text>
-        <Text style={styles.subtotalAmount}>đ{subtotal.toLocaleString('vi-VN')}</Text>
+        <Text style={styles.subtotalAmount}>{subtotal.toLocaleString('vi-VN')}đ</Text>
       </View>
       <TouchableOpacity style={styles.checkoutButton} onPress={handleProceedToCheckout}>
         <Text style={styles.checkoutButtonText}>Proceed to Checkout</Text>

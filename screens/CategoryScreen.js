@@ -27,7 +27,7 @@ const ProductItem = ({ product }) => {
       </View>
       <Image source={product.color[0].picture} style={styles.productImage} resizeMode="contain" />
       <Text style={styles.productName}>{product.name}</Text>
-      <Text style={styles.productPrice}>{product.price}</Text>
+      <Text style={styles.productPrice}>{product.price}đ</Text>
     </TouchableOpacity>
   );
 };

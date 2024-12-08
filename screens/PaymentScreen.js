@@ -189,19 +189,19 @@ const PaymentScreen = () => {
         <Text style={styles.summaryTitle}>Order summary</Text>
         <View style={styles.summaryRow}>
           <Text style={styles.summaryLabel}>Subtotal</Text>
-          <Text style={styles.summaryAmount}>đ{subtotal.toLocaleString('vi-VN')}</Text>
+          <Text style={styles.summaryAmount}>{subtotal.toLocaleString('vi-VN')}đ</Text>
         </View>
         <View style={styles.summaryRow}>
           <Text style={styles.summaryLabel}>Delivery</Text>
-          <Text style={styles.summaryAmount}>đ200,000</Text>
+          <Text style={styles.summaryAmount}>200,000đ</Text>
         </View>
         <View style={styles.summaryRow}>
           <Text style={styles.summaryLabel}>Discount</Text>
-          <Text style={styles.summaryAmount}>-đ{discount.toLocaleString('vi-VN')}</Text>
+          <Text style={styles.summaryAmount}>-{discount.toLocaleString('vi-VN')}đ</Text>
         </View>
         <View style={styles.summaryRow}>
           <Text style={styles.summaryLabelTotal}>Total</Text>
-          <Text style={styles.summaryValueTotal}>đ{total.toLocaleString('vi-VN')}</Text>
+          <Text style={styles.summaryValueTotal}>{total.toLocaleString('vi-VN')}đ</Text>
         </View>
       </View>
 
