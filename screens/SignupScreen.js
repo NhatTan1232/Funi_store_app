@@ -11,6 +11,7 @@ import {
   Alert,
 } from 'react-native';
 import axios from 'axios';
+import { Ionicons } from '@expo/vector-icons';
 import { HOST_IP } from '../config';  
 
 const SignupScreen = ({ navigation, setIsLoggedIn }) => {
@@ -18,14 +19,23 @@ const SignupScreen = ({ navigation, setIsLoggedIn }) => {
   const [userEmail, setUserEmail] = useState('');
   const [userAge, setUserAge] = useState('');
   const [userPassword, setUserPassword] = useState('');
+  const [confirmPass, setconfirmPass] = useState('');
+  const [isPasswordVisible, setIsPasswordVisible] = useState(false);
+  const [isConfirmVisible, setConfirmVisible] = useState(false);
 
   const emailInputRef = createRef();
   const ageInputRef = createRef();
   const passwordInputRef = createRef();
+  const confirmPasswordInputRef = createRef();
 
   const handleSignUp = async () => {
     if (!userName || !userEmail || !userPassword || !userAge) {
       Alert.alert('Please fill in all fields');
+      return;
+    }
+
+    if (userPassword !== confirmPass) {
+      Alert.alert('Password mismatch', 'Passwords do not match');
       return;
     }
 
@@ -76,6 +86,7 @@ const SignupScreen = ({ navigation, setIsLoggedIn }) => {
                 <Text style={styles.headerText}>Sign Up</Text>
                 <Text style={styles.subHeaderText}>Create a new account</Text>
               </View>
+
               <View style={styles.SectionStyle}>
                 <TextInput
                   style={styles.inputStyle}
@@ -84,13 +95,12 @@ const SignupScreen = ({ navigation, setIsLoggedIn }) => {
                   placeholderTextColor="#8b9cb5"
                   autoCapitalize="none"
                   returnKeyType="next"
-                  onSubmitEditing={() =>
-                    emailInputRef.current && emailInputRef.current.focus()
-                  }
+                  onSubmitEditing={() => emailInputRef.current && emailInputRef.current.focus()}
                   underlineColorAndroid="#f000"
                   blurOnSubmit={false}
                 />
               </View>
+
               <View style={styles.SectionStyle}>
                 <TextInput
                   style={styles.inputStyle}
@@ -107,22 +117,7 @@ const SignupScreen = ({ navigation, setIsLoggedIn }) => {
                   blurOnSubmit={false}
                 />
               </View>
-              <View style={styles.SectionStyle}>
-                <TextInput
-                  style={styles.inputStyle}
-                  onChangeText={(UserPassword) => setUserPassword(UserPassword)}
-                  placeholder="Enter Password"
-                  placeholderTextColor="#8b9cb5"
-                  ref={passwordInputRef}
-                  returnKeyType="next"
-                  secureTextEntry={true}
-                  onSubmitEditing={() =>
-                    ageInputRef.current && ageInputRef.current.focus()
-                  }
-                  underlineColorAndroid="#f000"
-                  blurOnSubmit={false}
-                />
-              </View>
+
               <View style={styles.SectionStyle}>
                 <TextInput
                   style={styles.inputStyle}
@@ -132,10 +127,63 @@ const SignupScreen = ({ navigation, setIsLoggedIn }) => {
                   keyboardType="numeric"
                   ref={ageInputRef}
                   returnKeyType="next"
+                  onSubmitEditing={() => ageInputRef.current && ageInputRef.current.focus()}
                   underlineColorAndroid="#f000"
                   blurOnSubmit={false}
                 />
               </View>
+
+              <View style={styles.SectionStyle}>
+                <TextInput
+                  style={styles.inputStyle}
+                  onChangeText={(UserPassword) => setUserPassword(UserPassword)}
+                  placeholder="Enter Password"
+                  placeholderTextColor="#8b9cb5"
+                  ref={passwordInputRef}
+                  returnKeyType="next"
+                  secureTextEntry={!isPasswordVisible}
+                  onSubmitEditing={() =>
+                    passwordInputRef.current && passwordInputRef.current.focus()
+                  }
+                  underlineColorAndroid="#f000"
+                  blurOnSubmit={false}
+                />
+                <TouchableOpacity
+                  style={styles.eyeIcon}
+                  onPress={() => setIsPasswordVisible(!isPasswordVisible)}
+                >
+                  <Ionicons
+                    name={isPasswordVisible ? 'eye' : 'eye-off'}
+                    size={24}
+                    color="gray"
+                  />
+                </TouchableOpacity>
+              </View>
+              
+              <View style={styles.SectionStyle}>
+                <TextInput
+                  style={styles.inputStyle}
+                  onChangeText={(confirmPass) => setconfirmPass(confirmPass)}
+                  placeholder="Confirm Password"
+                  placeholderTextColor="#8b9cb5"
+                  ref={confirmPasswordInputRef}
+                  returnKeyType="next"
+                  secureTextEntry={!isConfirmVisible}
+                  underlineColorAndroid="#f000"
+                  blurOnSubmit={false}
+                />
+                <TouchableOpacity
+                  style={styles.eyeIcon}
+                  onPress={() => setConfirmVisible(!isConfirmVisible)}
+                >
+                  <Ionicons
+                    name={isConfirmVisible ? 'eye' : 'eye-off'}
+                    size={24}
+                    color="gray"
+                  />
+                </TouchableOpacity>
+              </View>
+
               <TouchableOpacity
                 style={styles.buttonStyle}
                 activeOpacity={0.5}
@@ -190,6 +238,11 @@ const styles = StyleSheet.create({
     marginLeft: 35,
     marginRight: 35,
     margin: 10,
+  },
+  eyeIcon: {
+    position: 'absolute',
+    right: 10,
+    top: 8,
   },
   buttonStyle: {
     backgroundColor: '#d36a06',
