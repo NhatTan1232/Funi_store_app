@@ -183,8 +183,10 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     backgroundColor: '#fff',
     paddingVertical: 6,
-    paddingHorizontal: 6,
+    paddingHorizontal: 12,
     borderRadius: 50,
+    borderWidth: 1,
+    borderColor: '#dddddd',
     marginRight: 8,
     shadowColor: '#000',
     shadowOffset: { width: 0, height: 1 },
@@ -192,7 +194,7 @@ const styles = StyleSheet.create({
     elevation: 1,
   },
   selectedCategory: {
-    backgroundColor: '#d36a06',
+    borderColor: '#d36a06',
   },
   categoryIcon: {
     width: 24,
@@ -201,12 +203,12 @@ const styles = StyleSheet.create({
     borderRadius: 12,
   },
   categoryName: {
-    fontSize: 10,
+    fontSize: 17,
     fontWeight: '500',
     color: '#333',
   },
   selectedCategoryName: {
-    color: '#fff',
+    color: '#d36a06',
   },
   priceRangeContainer: {
     flexDirection: 'row',
