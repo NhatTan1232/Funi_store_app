@@ -2,11 +2,11 @@ import React, { useState, useContext } from 'react';
 import { View, Text, Image, StyleSheet, ScrollView, TouchableOpacity, Alert } from 'react-native';
 import { useRoute } from '@react-navigation/native';
 import { AntDesign } from '@expo/vector-icons';
-import { StarRatingDisplay } from 'react-native-star-rating-widget';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import axios from 'axios';
 import { CartContext } from '../screens/context/CartContext';
-import { HOST_IP } from '../config';  
+import { HOST_IP } from '../config';
+import Icon from 'react-native-vector-icons/FontAwesome';
 
 const reviews = [
   {
@@ -82,6 +82,10 @@ const ProductScreen = ({ navigation }) => {
     navigation.navigate('CartScreen');
   };
 
+  const handleNavigateToReview = () => {
+    navigation.navigate('ReviewScreen', { product_id: product.id });
+  };
+
   return (
     <View style={styles.container}>
       <TouchableOpacity style={styles.cartButton} onPress={handleNavigateToCart}>
@@ -101,14 +105,11 @@ const ProductScreen = ({ navigation }) => {
           </View>
 
           <View style={styles.ratingContainer}>
-            <StarRatingDisplay
-              rating={4.16}
-              starSize={20}
-              color='#de7006'
-              starStyle={styles.starRating}
-            />
-            <TouchableOpacity>
-              <Text style={styles.reviewText}>4.16 (12 reviews)</Text>
+            <TouchableOpacity onPress={handleNavigateToReview}>
+              <View style={styles.reviewContainer}>
+                <Icon name="arrow-right" size={20} color="#de7006" style={styles.arrowIcon} />
+                <Text style={styles.reviewText}>See reviews here</Text>
+              </View>
             </TouchableOpacity>
           </View>
 
@@ -133,7 +134,6 @@ const ProductScreen = ({ navigation }) => {
     </View>
   );
 };
-
 
 const styles = StyleSheet.create({
   container: {
@@ -193,11 +193,14 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     marginVertical: 8,
   },
-  starRating: {
-    marginHorizontal: 0, 
+  reviewContainer: {
+    flexDirection: 'row', 
+    alignItems: 'center',
+  },
+  arrowIcon: {
+    marginRight: 8, 
   },
   reviewText: {
-    marginLeft: 8,
     fontSize: 14,
     color: '#666',
   },

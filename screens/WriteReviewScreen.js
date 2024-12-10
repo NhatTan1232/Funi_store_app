@@ -1,23 +1,10 @@
 import React, { useState } from 'react';
-import { StyleSheet, Text, View, Image, TextInput, TouchableOpacity, ScrollView } from 'react-native';
+import { StyleSheet, Text, View, Image, TextInput, TouchableOpacity, ScrollView, Alert } from 'react-native';
 import StarRating from 'react-native-star-rating-widget';
 import * as ImagePicker from 'expo-image-picker';
 import Icon from 'react-native-vector-icons/Ionicons';
 
-const product = {
-  id: 11,
-  name: 'Ottawa table',
-  price: '75,490,000',
-  type: 'Table',
-  color: [
-    {
-      color_id: 1,
-      color_name: 'saddlebrown',
-      picture: require('../assets/productPicture/table/ottawa_brown.jpg')
-    }
-  ],
-  detail: 'Defined by smooth, rounded edges and a sensual minimalism, the Ottawa dining table creates a serene atmosphere in your dining room. Unique, twig-like legs inspired by nature accentuate the natural beauty of the oval Ottawa dining table. Need extra seats? Just pull out the clever, built-in extension leaf and go from a 4-person family meal to a dinner party seating 14.',
-};
+
 
 const WriteReviewScreen = () => {
   const [rating, setRating] = useState(0.0);
@@ -43,7 +30,10 @@ const WriteReviewScreen = () => {
   };
 
   const handleSubmit = () => {
-    // Handle submit logic here
+
+    Alert.alert('Success', 'Your review has been submitted successfully!');
+    
+
     console.log('Rating:', rating);
     console.log('Review:', review);
     console.log('Images:', images);
@@ -51,13 +41,6 @@ const WriteReviewScreen = () => {
 
   return (
     <ScrollView contentContainerStyle={styles.container}>
-      <View style={styles.productInfo}>
-        <Image source={product.color[0].picture} style={styles.productImage} resizeMode='contain' />
-        <View style={styles.productDetails}>
-          <Text style={styles.productName}>{product.name}</Text>
-          <Text style={styles.productColor}>Color: {product.color[0].color_name}</Text>
-        </View>
-      </View>
       <StarRating
         rating={rating}
         onChange={setRating}

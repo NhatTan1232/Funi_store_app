@@ -1,32 +1,61 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { StyleSheet, Text, View, Image, TouchableOpacity, ScrollView } from 'react-native';
 import { StarRatingDisplay } from 'react-native-star-rating-widget';
-
-const reviews = [
-  {
-    profilePic: 'https://media.wired.com/photos/598e35fb99d76447c4eb1f28/master/pass/phonepicutres-TA.jpg',
-    rating: 4,
-    userName: 'John Doe',
-    date: '30 May, 2022',
-    reviewDetail: 'Great product! Really enjoyed using it.',
-  },
-  {
-    profilePic: 'https://png.pngtree.com/thumb_back/fw800/background/20230817/pngtree-lotus-flower-jpg-pink-lotus-flower-image_13023952.jpg',
-    rating: 5,
-    userName: 'Jane Smith',
-    date: '18 Nov, 2022',
-    reviewDetail: 'Absolutely loved it! Highly recommend.',
-  },
-  {
-    profilePic: 'https://png.pngtree.com/thumb_back/fh260/background/20230519/pngtree-landscape-jpg-wallpapers-free-download-image_2573540.jpg',
-    rating: 4,
-    userName: 'Mike Johnson',
-    date: '17 Nov, 2022',
-    reviewDetail: 'It was okay, could be better.',
-  },
-];
+import axios from 'axios';
+import { useRoute, useNavigation } from '@react-navigation/native';
+import { HOST_IP } from '../config';
 
 const ReviewScreen = () => {
+  const route = useRoute();
+  const { product_id } = route.params;
+  const [reviews, setReviews] = useState([]);
+  const [userDetails, setUserDetails] = useState({});
+  const [averageRating, setAverageRating] = useState(0);
+  const [loading, setLoading] = useState(true);
+  const navigation = useNavigation();
+
+  useEffect(() => {
+    axios.get(`${HOST_IP}/reviews/${product_id}`)
+      .then((response) => {
+        const reviewsData = response.data || [];
+        setReviews(reviewsData);
+
+        if (reviewsData.length > 0) {
+          const totalRating = reviewsData.reduce((sum, review) => sum + review.rating, 0);
+          const avgRating = totalRating / reviewsData.length;
+          setAverageRating(avgRating.toFixed(2));
+        }
+      })
+      .catch((error) => {
+        console.error('Error fetching reviews:', error);
+      });
+  }, [product_id]);
+
+  useEffect(() => {
+    const fetchUserDetails = async () => {
+      const users = {};
+      for (const review of reviews) {
+        if (!users[review.user_id]) {
+          try {
+            const response = await axios.get(`${HOST_IP}/users/${review.user_id}`);
+            users[review.user_id] = {
+              username: response.data.username,
+              profilePic: response.data.profile_picture,
+            };
+          } catch (error) {
+            console.error(`Error fetching user data for user_id ${review.user_id}:`, error);
+          }
+        }
+      }
+      setUserDetails(users);
+      setLoading(false);
+    };
+
+    if (reviews.length > 0) {
+      fetchUserDetails();
+    }
+  }, [reviews]);
+
   const renderReviewBars = (stars, percentage) => (
     <View style={styles.reviewRow}>
       <Text style={styles.starText}>{stars} star</Text>
@@ -40,10 +69,10 @@ const ReviewScreen = () => {
   const renderReviews = () => (
     reviews.map((review, index) => (
       <View key={index} style={styles.reviewContainer}>
-        <Image source={{ uri: review.profilePic }} style={styles.profilePic} />
+        <Image source={{ uri: userDetails[review.user_id]?.profilePic || 'https://via.placeholder.com/50' }} style={styles.profilePic} />
         <View style={styles.reviewContent}>
           <View style={styles.reviewHeader}>
-            <Text style={styles.userName}>{review.userName}</Text>
+            <Text style={styles.userName}>{userDetails[review.user_id]?.username || 'Unknown User'}</Text>
             <StarRatingDisplay
               rating={review.rating}
               starSize={16}
@@ -51,27 +80,35 @@ const ReviewScreen = () => {
               style={styles.starRating}
             />
           </View>
-          <Text style={styles.reviewDate}>{review.date}</Text>
-          <Text style={styles.reviewDetail}>{review.reviewDetail}</Text>
+          <Text style={styles.reviewDate}>{new Date().toLocaleDateString()}</Text>
+          <Text style={styles.reviewDetail}>{review.detail_review}</Text>
         </View>
       </View>
     ))
   );
 
+  if (loading) {
+    return (
+      <View style={styles.container}>
+        <Text>Loading...</Text>
+      </View>
+    );
+  }
+
   return (
     <ScrollView>
       <View style={styles.container}>
         <View style={styles.overallScore}>
-          <Text style={styles.scoreText}>4.16</Text>
+          <Text style={styles.scoreText}>{averageRating}</Text>
           <Text style={styles.outOfText}>/5</Text>
         </View>
         <StarRatingDisplay
-          rating={4.5}
+          rating={parseFloat(averageRating)}
           starSize={25}
           color='#de7006'
-          style={{ alignSelf: 'center', marginVertical: 10}}
+          style={{ alignSelf: 'center', marginVertical: 10 }}
         />
-        <Text style={styles.reviewCount}>12 reviews</Text>
+        <Text style={styles.reviewCount}>{reviews.length} reviews</Text>
         
         {renderReviewBars(5, 58)}
         {renderReviewBars(4, 25)}
@@ -86,16 +123,16 @@ const ReviewScreen = () => {
         
         {renderReviews()}
 
-        <TouchableOpacity style={styles.reviewButton}>
+        <TouchableOpacity 
+          style={styles.reviewButton} 
+          onPress={() => navigation.navigate('WriteReviewScreen', { product_id })}
+        >
           <Text style={styles.reviewButtonText}>Write a review</Text>
         </TouchableOpacity>
-
       </View>
     </ScrollView>
   );
-}
-
-export default ReviewScreen;
+};
 
 const styles = StyleSheet.create({
   container: {
@@ -214,3 +251,5 @@ const styles = StyleSheet.create({
     fontWeight: '800',
   },
 });
+
+export default ReviewScreen;
