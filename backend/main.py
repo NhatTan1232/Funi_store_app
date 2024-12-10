@@ -181,3 +181,28 @@ def create_order_items(items: List[schemas.OrderItemCreate], db: Session = Depen
 @app.get("/orders/{order_id}", response_model=List[schemas.OrderItem])
 def read_order_items(order_id: int, db: Session = Depends(get_db)):
     return crud.get_order_items(db=db, order_id=order_id)
+
+
+
+@app.post("/reviews/", response_model=schemas.Review)
+def create_review(review: schemas.ReviewCreate, db: Session = Depends(get_db)):
+    new_review = models.Review(**review.dict())
+    db.add(new_review)
+    db.commit()
+    db.refresh(new_review)
+    return new_review
+
+
+@app.get("/reviews/{product_id}", response_model=List[schemas.Review])
+def read_reviews(product_id: int, db: Session = Depends(get_db)):
+    return db.query(models.Review).filter(models.Review.product_id == product_id).all()
+
+
+@app.delete("/reviews/{review_id}", response_model=schemas.Review)
+def delete_review(review_id: int, db: Session = Depends(get_db)):
+    db_review = db.query(models.Review).filter(models.Review.review_id == review_id).first()
+    if not db_review:
+        raise HTTPException(status_code=404, detail="Review không tồn tại")
+    db.delete(db_review)
+    db.commit()
+    return db_review

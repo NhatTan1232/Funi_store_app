@@ -120,3 +120,19 @@ class OrderItem(OrderItemBase):
 
     class Config:
         from_attributes = True
+        
+class ReviewBase(BaseModel):
+    product_id: int
+    user_id: int
+    rating: int
+    detail_review: Optional[str] = None
+
+class ReviewCreate(ReviewBase):
+    pass
+
+class Review(ReviewBase):
+    review_id: int
+
+    class Config:
+        from_attributes = True
+

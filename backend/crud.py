@@ -140,3 +140,6 @@ def get_order_items(db: Session, order_id: int):
 
 def get_order_by_id(db: Session, order_id: int):
     return db.query(Order).filter(Order.order_id == order_id).first()
+
+def get_reviews_by_product_id(db: Session, product_id: int):
+    return db.query(models.Review).filter(models.Review.product_id == product_id).all()
